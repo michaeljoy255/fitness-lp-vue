@@ -4,11 +4,17 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODOs
 
-- Research a way to include pug that will have syntax highlighting
-- Include Vue Material
-- Basic design and routes for the app
 - Basic idea of state needed for different sections of the app
 - Basic idea of backend data
+
+# Design
+
+- Routes
+  - Home (app name and workout buttons)
+  - Workout (break down into each exercise for that workout)
+  - About
+  - NotFound
+  - \*Routes for CRUD operations later (use dummy data for now)
 
 # Table of Contents
 
