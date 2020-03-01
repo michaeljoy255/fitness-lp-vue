@@ -13,11 +13,11 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 1. [Development](#Development)
    1. [Project setup](#Project-setup)
-   2. [Compiles and hot-reloads for development](#Compiles-and-hot-reloads-for-development)
-   3. [Compiles and minifies for production](#Compiles-and-minifies-for-production)
-   4. [Run your unit tests](#Run-your-unit-tests)
-   5. [Lints and fixes files](#Lints-and-fixes-files)
-   6. [Customize configuration](#Customize-configuration)
+   1. [Compiles and hot-reloads for development](#Compiles-and-hot-reloads-for-development)
+   1. [Compiles and minifies for production](#Compiles-and-minifies-for-production)
+   1. [Run your unit tests](#Run-your-unit-tests)
+   1. [Lints and fixes files](#Lints-and-fixes-files)
+   1. [Customize configuration](#Customize-configuration)
 
 # Development
 
