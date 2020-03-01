@@ -2,6 +2,13 @@
 
 Web app that helps you keep track of your exercise performances so you can improve.
 
+# TODOs
+
+- Research a way to include pug that will include syntax highlighting.
+- Basic design and routes for the app
+- Basic idea of state needed for different sections of the app
+- Basic idea of backend data
+
 # Table of Contents
 
 1. [Development](#Development)
