@@ -1,4 +1,4 @@
-# Fitness Linear Progression
+# Fitness Linear Progression - VUE
 
 Web app that helps you keep track of your exercise performances so you can improve.
 
@@ -8,6 +8,10 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Basic idea of backend data
 
 # Design
+
+- How to compose the app
+
+  - Pages (may not use) -> Layouts -> Views -> Components -> Sub-components
 
 - Routes
   - Home (app name and workout buttons)
