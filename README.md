@@ -4,21 +4,36 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODOs
 
+- General design of the MVP (so you can build it with fake data)
+- What layouts and components do you need? (base components, route layouts, etc)
 - Basic idea of state needed for different sections of the app
 - Basic idea of backend data
 
 # Design
 
-- How to compose the app
+**Routes and App Composition**
 
-  - Pages (may not use) -> Layouts -> Views -> Components -> Sub-components
-
-- Routes
-  - Home (app name and workout buttons)
-  - Workout (break down into each exercise for that workout)
-  - About
-  - NotFound
-  - \*Routes for CRUD operations later (use dummy data for now)
+- Pages (SSR) > Layouts > Views > Components > Sub-components
+- Home
+  - App Title
+  - Workout buttons
+  - About page link
+- Workout
+  - Tabs or stepper for each exercise
+  - Warmup confirmation page
+  - Stretch confirmation page
+  - Local storage of app state?
+- About
+  - Information about me
+  - Link to github repo?
+  - Link to website?
+- NotFound
+  - 404 error page (can be creative with this one)
+- Advanced (stretch goals)
+  - Routes for CRUD operations (exercises, routines, etc)
+  - Data graphs (try using Apex Charts or another library versus D3)
+  - Profile route with basic measurments
+  - Signup / Login routes
 
 # Table of Contents
 
