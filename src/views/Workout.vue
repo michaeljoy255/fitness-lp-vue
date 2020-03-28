@@ -1,11 +1,11 @@
 <template lang="pug">
   v-container(fluid)
-    h1 About
+    h1 Workout
 </template>
 
 <script>
 export default {
-  name: "About"
+  name: "Workout"
 };
 </script>
 

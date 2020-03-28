@@ -1,17 +1,21 @@
 <template lang="pug">
-  .home
-    img(alt="Vue Logo" src="../assets/logo.png")
-    HelloWorld(msg="Welcome to this Vue.js App")
+  v-container(fluid)
+    v-row
+      WorkoutCard(v-for="(card, i) in cards" :key="i")
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import WorkoutCard from "../components/WorkoutCard";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    WorkoutCard
+  },
+  data() {
+    return {
+      cards: 7 // Number of test cards to create
+    };
   }
 };
 </script>

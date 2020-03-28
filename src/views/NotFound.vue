@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container(fluid)
-    h1 About
+    h1 404 Page Not Found
 </template>
 
 <script>
