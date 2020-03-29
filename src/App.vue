@@ -12,7 +12,16 @@ import AppBar from "./components/AppBar";
 
 export default {
   name: "App",
-  components: { AppBar, NavDrawer }
+  components: {
+    AppBar,
+    NavDrawer
+  },
+  created() {
+    // Get data for the app
+    /**
+     * @todo
+     */
+  }
 };
 </script>
 
