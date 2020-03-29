@@ -5,8 +5,9 @@
       div
         v-card-title Workout Name
         v-card-subtitle {{ new Date().toDateString() }}
-        v-btn.ml-3.mb-3(color="secondary") Start Workout
-          v-icon play_arrow
+        v-btn.mb-3(to="/workout" color="primary" rounded)
+          span Start Workout
+          v-icon(right) play_arrow
       v-spacer
       div(align="center")
         v-card-title Time

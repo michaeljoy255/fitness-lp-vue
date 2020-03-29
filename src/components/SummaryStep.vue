@@ -7,7 +7,9 @@
         v-container
           div Summary of workout: Progress image, timestamp, etc...
           v-spacer.mb-3
-          <v-btn color="success" @click="submit">Submit</v-btn>
+          v-btn(color="success" @click="submit" rounded)
+            span Submit
+            v-icon(right) done
 </template>
 
 <script>

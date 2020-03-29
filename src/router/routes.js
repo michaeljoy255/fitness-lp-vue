@@ -14,7 +14,7 @@ const routes = [
     component: () => import("../views/Home.vue")
   },
   {
-    path: "/workout",
+    path: "/workout/:id",
     name: "Workout",
     component: () => import("../views/Workout.vue")
   },
@@ -22,6 +22,26 @@ const routes = [
     path: "/about",
     name: "About",
     component: () => import("../views/About.vue")
+  },
+  {
+    path: "/workouts",
+    name: "Workouts",
+    component: () => import("../views/Workouts.vue")
+  },
+  {
+    path: "/exercises",
+    name: "Exercises",
+    component: () => import("../views/Exercises.vue")
+  },
+  {
+    path: "/measurements",
+    name: "Measurements",
+    component: () => import("../views/Measurements.vue")
+  },
+  {
+    path: "/records",
+    name: "Records",
+    component: () => import("../views/Records.vue")
   },
   {
     path: "*",

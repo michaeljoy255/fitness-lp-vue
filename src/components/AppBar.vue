@@ -1,7 +1,8 @@
 <template lang="pug">
   v-app-bar(app clipped-left color="secondary")
     v-app-bar-nav-icon(@click="toggleNavDrawer")
-    v-toolbar-title Fitness LP
+    v-toolbar-title.d-sm-none Fitness LP
+    v-toolbar-title.d-none.d-sm-flex Fitness Linear Progression
     v-spacer
     span {{ new Date().toDateString() }} &nbsp;
 </template>
