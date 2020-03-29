@@ -4,7 +4,7 @@
     v-toolbar-title.d-sm-none Fitness LP
     v-toolbar-title.d-none.d-sm-flex Fitness Linear Progression
     v-spacer
-    span {{ new Date().toDateString() }} &nbsp;
+    span {{ new Date().toDateString() }}
 </template>
 
 <script>

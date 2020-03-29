@@ -35,6 +35,11 @@
         v-list-item-action
           v-icon sd_card
         v-list-item-content Records
+
+      v-list-item(@click="test")
+        v-list-item-action
+          v-icon speed
+        v-list-item-content TESTING
 </template>
 
 <script>
@@ -50,6 +55,11 @@ export default {
           this.$store.dispatch("setNavDrawer", payload);
         }
       }
+    }
+  },
+  methods: {
+    test() {
+      this.$store.dispatch("initDefaults");
     }
   }
 };

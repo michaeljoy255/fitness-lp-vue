@@ -1,23 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import ExerciseService from "../services/exercise.service";
+import WorkoutService from "../services/workout.service";
 
 Vue.use(Vuex);
-
-/**
- * Fake data
- * @todo implement fake data to use in the app as you build it
- */
-let data = {
-  exercises: [],
-  workouts: []
-};
 
 export default new Vuex.Store({
   state: {
     timer: null,
     navDrawerActive: false,
-    workouts: data.workouts, // temp data
-    exercises: data.exercises, // temp data
+    workouts: null,
+    exercises: null,
     workout: {
       name: null,
       step: null,
@@ -26,7 +19,14 @@ export default new Vuex.Store({
   },
   //############################################################################
   mutations: {
+    // Exercise
+    SET_EXERCISES(state, exercises) {
+      state.exercises = exercises;
+    },
     // Workout
+    SET_WORKOUTS(state, workouts) {
+      state.workouts = workouts;
+    },
     SET_WORKOUT_STEP(state, step) {
       state.workout.step = step;
     },
@@ -65,6 +65,20 @@ export default new Vuex.Store({
   },
   //############################################################################
   actions: {
+    // Defaults
+    async initDefaults({ commit }) {
+      const exerciseService = new ExerciseService();
+      const workoutService = new WorkoutService();
+      const exercises = await exerciseService.initDefaultExercises();
+      const workouts = await workoutService.initDefaultWorkouts();
+
+      console.log("State - E:", exercises);
+      console.log("State - W:", workouts);
+
+      commit("SET_EXERCISES", exercises);
+      commit("SET_WORKOUTS", workouts);
+    },
+    // Exercise
     // Workout
     setWorkoutStep({ commit }, step) {
       commit("SET_WORKOUT_STEP", step);
