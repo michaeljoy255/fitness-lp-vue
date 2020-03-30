@@ -24,7 +24,7 @@ export default {
   methods: {
     submit() {
       console.log("Submit Workout!");
-      this.$store.dispatch("setWorkoutStep", 1);
+      this.$store.dispatch("setActiveWorkoutStep", 1);
     }
   }
 };

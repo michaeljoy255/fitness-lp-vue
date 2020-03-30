@@ -1,11 +1,6 @@
-import store from "../store/store";
 import { getStorageByKey } from "../helpers";
 
-export default class RecordService {
-  constructor() {
-    this.$store = store;
-  }
-
+export default {
   /**
    * Fetches record data from storage
    * @returns {Promise<Array>} Record data
@@ -14,58 +9,39 @@ export default class RecordService {
    * let example = await recordService.getRecords();
    */
   getRecords() {
+    console.log(this.$store);
     return new Promise(resolve => {
       resolve(getStorageByKey("records"));
     });
-  }
+  },
 
   addRecords() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   deleteRecords() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   updateRecords() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   clearAllRecords() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   clearAllData() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
   }
-}
+};

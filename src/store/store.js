@@ -2,80 +2,38 @@ import Vue from "vue";
 import Vuex from "vuex";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
-import MeasurementService from "../services/measurement.service";
+// import MeasurementService from "../services/measurement.service";
 import RecordService from "../services/record.service";
+import { Records, Selected, Available, ActiveWorkout } from "../helpers";
 
 Vue.use(Vuex);
 
-const exerciseService = new ExerciseService();
-const workoutService = new WorkoutService();
-const measurementService = new MeasurementService();
-const recordService = new RecordService();
-
 export default new Vuex.Store({
   state: {
-    navDrawerActive: false,
-    // Core Data
-    records: null,
-    measurements: null,
-    workouts: null,
-    exercises: null,
-    // Current Workout
-    workout: {
-      id: null,
-      name: null,
-      step: null,
-      exercises: null,
-      startTime: null,
-      endTime: null
-    }
+    records: new Records(), // Saved records of data
+    selected: new Selected(), // Selected for creating, editing, or deleting data
+    available: new Available(), // Available exercises and workouts
+    activeWorkout: new ActiveWorkout(), // In progress workout
+    // Component state vars
+    navDrawerActive: false
   },
   //############################################################################
   mutations: {
-    // Records
-    SET_RECORDS(state, records) {
-      state.exercises = records;
+    // Full object sets
+    SET_RECORDS_OBJ(state, recordsObject) {
+      state.records = recordsObject;
     },
-    // Measurements
-    SET_MEASUREMENTS(state, measurements) {
-      state.exercises = measurements;
+    SET_SELECTED_OBJ(state, selectedObject) {
+      state.selected = selectedObject;
     },
-    // Exercises
-    SET_EXERCISES(state, exercises) {
-      state.exercises = exercises;
+    SET_AVAILABLE_OBJ(state, availableObject) {
+      state.available = availableObject;
     },
-    // Workouts
-    SET_WORKOUTS(state, workouts) {
-      state.workouts = workouts;
+    SET_ACTIVE_WORKOUT_OBJ(state, activeWorkoutObject) {
+      state.activeWorkout = activeWorkoutObject;
     },
     SET_WORKOUT_STEP(state, step) {
-      state.workout.step = step;
-    },
-    SET_WORKOUT_EXERCISES(state, exercises) {
-      state.workout.exercises = exercises;
-    },
-    SET_WORKOUT_ID(state, id) {
-      state.workout.id = id;
-    },
-    SET_WORKOUT_NAME(state, name) {
-      state.workout.name = name;
-    },
-    RESUME_WORKOUT() {
-      /**
-       * @todo
-       */
-    },
-    SUBMIT_WORKOUT() {
-      /**
-       * @todo
-       */
-    },
-    // Timer
-    SET_START_TIME(state, time) {
-      state.workout.startTime = time;
-    },
-    SET_STOP_TIME(state, time) {
-      state.workout.endTime = time;
+      state.activeWorkout.step = step;
     },
     // Nav Drawer
     TOGGLE_ON_NAV_DRAWER(state) {
@@ -90,70 +48,86 @@ export default new Vuex.Store({
   },
   //############################################################################
   actions: {
-    // App
     async initApp({ commit }) {
-      const exercises = await exerciseService.getExercises();
-      const workouts = await workoutService.getWorkouts();
-      const measurements = await measurementService.getMeasurements();
-      const records = await recordService.getRecords();
+      // Promise all with async / await
+      const records = RecordService.getRecords();
+      const allExercises = ExerciseService.getExercises();
+      const allWorkouts = WorkoutService.getWorkouts();
+      const activeWorkout = WorkoutService.getActiveWorkout();
 
-      commit("SET_EXERCISES", exercises);
-      commit("SET_WORKOUTS", workouts);
-      commit("SET_MEASUREMENTS", measurements);
-      commit("SET_RECORDS", records);
-    },
-    // Defaults
-    async setDefaults({ commit }) {
-      const exercises = await exerciseService.initDefaultExercises();
-      const workouts = await workoutService.initDefaultWorkouts();
+      const recRes = await records;
+      const allExerRes = await allExercises;
+      const allWorkRes = await allWorkouts;
+      const actWorkRes = await activeWorkout;
 
-      commit("SET_EXERCISES", exercises);
-      commit("SET_WORKOUTS", workouts);
+      if (recRes) {
+        commit("SET_RECORDS_OBJ", new Records(records));
+      } else {
+        commit("SET_RECORDS_OBJ", new Records());
+      }
+
+      if (allExerRes && allWorkRes) {
+        commit(
+          "SET_AVAILABLE_OBJ",
+          new Available({
+            exercises: allExercises,
+            workouts: allWorkouts
+          })
+        );
+      } else {
+        commit("SET_AVAILABLE_OBJ", new Available());
+      }
+
+      if (actWorkRes) {
+        commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout(activeWorkout));
+      } else {
+        commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout());
+      }
     },
-    // Exercises
-    // Workouts
-    setWorkoutStep({ commit }, step) {
+    async setAvailableDefaults({ commit }) {
+      // Promise all with async / await
+      const defaultExercises = ExerciseService.initDefaultExercises();
+      const defaultWorkouts = WorkoutService.initDefaultWorkouts();
+
+      const defExerRes = await defaultExercises;
+      const defWorkRes = await defaultWorkouts;
+
+      if (defExerRes && defWorkRes) {
+        commit(
+          "SET_AVAILABLE_OBJ",
+          new Available({
+            exercises: defExerRes,
+            workouts: defWorkRes
+          })
+        );
+      } else {
+        commit("SET_AVAILABLE_OBJ", new Available());
+      }
+    },
+    setActiveWorkoutStep({ commit }, step) {
       commit("SET_WORKOUT_STEP", step);
     },
-    submitWorkout({ commit }) {
-      /**
-       * @todo Save records of the workout and each exercise
-       */
-      commit("SUBMIT_WORKOUT");
-    },
-    resumeWorkout({ commit }) {
-      /**
-       * @todo Maybe a resume workout card on the home page (if valid workout)?
-       */
-      commit("RESUME_WORKOUT");
-    },
     cancelWorkout({ commit }) {
-      commit("SET_WORKOUT_ID", null);
-      commit("SET_WORKOUT_NAME", null);
-      commit("SET_WORKOUT_STEP", null);
-      commit("SET_EXERCISES", null);
-      commit("SET_START_TIME", null);
-      commit("SET_STOP_TIME", null);
+      commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout());
     },
     startWorkout({ commit }, workout) {
-      // Get workout exercises by exercise ids
       /**
-       * @todo workout.exerciseIds
+       * @todo workout.exerciseIds and records
        */
-      commit("SET_WORKOUT_ID", workout.id);
-      commit("SET_WORKOUT_NAME", workout.name);
-      commit("SET_WORKOUT_STEP", 1);
-      commit("SET_START_TIME", new Date().getTime());
-      commit("SET_STOP_TIME", null);
+      commit(
+        "SET_ACTIVE_WORKOUT_OBJ",
+        new ActiveWorkout({
+          id: workout.id,
+          name: workout.name,
+          step: 1,
+          beginTime: new Date().getTime(),
+          endTime: null,
+          exercises: null,
+          records: null
+        })
+      );
     },
-    // Timer
-    setStopTime({ commit }) {
-      commit("SET_STOP_TIME");
-    },
-    setStartTime({ commit }) {
-      commit("SET_START_TIME");
-    },
-    // Nav Drawer
+    // Component state actions
     setNavDrawer({ commit }, drawerState) {
       commit("SET_NAV_DRAWER", drawerState);
     },

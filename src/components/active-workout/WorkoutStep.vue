@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ExerciseCard from "../components/ExerciseCard";
+import ExerciseCard from "./ExerciseCard";
 
 export default {
   name: "WorkoutStep",
@@ -27,11 +27,11 @@ export default {
   computed: {
     getStep: {
       get() {
-        return this.$store.state.workout.step;
+        return this.$store.state.activeWorkout.step;
       },
       set(step) {
-        if (step !== this.$store.state.workout.step) {
-          this.$store.dispatch("setWorkoutStep", step);
+        if (step !== this.$store.state.activeWorkout.step) {
+          this.$store.dispatch("setActiveWorkoutStep", step);
         }
       }
     }

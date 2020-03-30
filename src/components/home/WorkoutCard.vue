@@ -5,7 +5,7 @@
       div
         v-card-title {{ name }}
         v-card-subtitle {{ new Date().toDateString() }}
-        v-btn.mb-3(:to="`/workout/${id}`" color="primary" rounded)
+        v-btn.mb-3(:to="`/active-workout/${id}`" color="primary" rounded)
           span Start Workout
           v-icon(right) play_arrow
       v-spacer
@@ -18,6 +18,9 @@
 
 <script>
 export default {
+  /**
+   * @todo fix hard coded route path in card
+   */
   name: "WorkoutCard",
   props: {
     id: {

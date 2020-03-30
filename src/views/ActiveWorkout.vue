@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import WorkoutStep from "../components/WorkoutStep";
-import SummaryStep from "../components/SummaryStep";
+import WorkoutStep from "../components/active-workout/WorkoutStep";
+import SummaryStep from "../components/active-workout/SummaryStep";
 
 export default {
-  name: "WorkoutStepper",
+  name: "ActiveWorkout",
   components: {
     WorkoutStep,
     SummaryStep
@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("setWorkoutStep", 1);
+    this.$store.dispatch("setActiveWorkoutStep", 1);
 
     console.log(this.$route.params.id);
     /**
@@ -40,11 +40,11 @@ export default {
   computed: {
     getStep: {
       get() {
-        return this.$store.state.workout.step;
+        return this.$store.state.activeWorkout.step;
       },
       set(step) {
-        if (step !== this.$store.state.workout.step) {
-          this.$store.dispatch("setWorkoutStep", step);
+        if (step !== this.$store.state.activeWorkout.step) {
+          this.$store.dispatch("setActiveWorkoutStep", step);
         }
       }
     }

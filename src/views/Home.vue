@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import DefaultCard from "../components/DefaultCard";
-import WorkoutCard from "../components/WorkoutCard";
+import DefaultCard from "../components/home/DefaultCard";
+import WorkoutCard from "../components/home/WorkoutCard";
 
 export default {
   name: "Home",
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     workouts() {
-      return this.$store.state.workouts;
+      return this.$store.state.available.workouts;
     }
   }
 };

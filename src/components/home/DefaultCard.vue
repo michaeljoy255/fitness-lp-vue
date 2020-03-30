@@ -13,10 +13,10 @@
 
 <script>
 export default {
-  name: "DefaultCards",
+  name: "DefaultCard",
   methods: {
     setDefaults() {
-      this.$store.dispatch("setDefaults");
+      this.$store.dispatch("setAvailableDefaults");
     }
   }
 };

@@ -17,7 +17,7 @@ export default {
     AppBar,
     NavDrawer
   },
-  mounted() {
+  created() {
     this.$store.dispatch("initApp");
   }
 };

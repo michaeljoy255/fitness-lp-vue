@@ -1,12 +1,7 @@
-import store from "../store/store";
 import { DefaultExercises } from "../constants";
 import { getStorageByKey } from "../helpers";
 
-export default class ExerciseService {
-  constructor() {
-    this.$store = store;
-  }
-
+export default {
   /**
    * Fetches exercise data from storage
    * @returns {Promise<Array>} Exercise data
@@ -18,37 +13,25 @@ export default class ExerciseService {
     return new Promise(resolve => {
       resolve(getStorageByKey("exercises"));
     });
-  }
+  },
 
   addExercises() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   deleteExercises() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   updateExercises() {
     return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+      resolve() || reject(); // not implemented
     });
-  }
+  },
 
   /**
    * Initializes default exercises if no exercise data is present
@@ -74,4 +57,4 @@ export default class ExerciseService {
       }
     });
   }
-}
+};
