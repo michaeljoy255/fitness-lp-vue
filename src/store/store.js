@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
-// import MeasurementService from "../services/measurement.service";
 import RecordService from "../services/record.service";
 import { Records, Selected, Available, ActiveWorkout } from "../helpers";
 
@@ -52,7 +51,7 @@ export default new Vuex.Store({
       // Promise all with async / await
       const records = RecordService.getRecords();
       const allExercises = ExerciseService.getExercises();
-      const allWorkouts = WorkoutService.getWorkouts();
+      const allWorkouts = WorkoutService.getAvailableWorkouts();
       const activeWorkout = WorkoutService.getActiveWorkout();
 
       const recRes = await records;

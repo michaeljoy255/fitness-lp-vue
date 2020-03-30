@@ -1,8 +1,9 @@
 <template lang="pug">
-  v-stepper(v-model="getStep" vertical non-linear)
-    div(v-for="(exercise, i) in exercises" :key="i")
-      WorkoutStep(:step="i+1" :name="exercise.name")
-    SummaryStep(:step="exercises.length+1")
+  v-container.mx-auto.mt-5
+    v-stepper(v-model="getStep" vertical non-linear)
+      div(v-for="(exercise, i) in exercises" :key="i")
+        WorkoutStep(:step="i+1" :name="exercise.name")
+      SummaryStep(:step="exercises.length+1")
 </template>
 
 <script>

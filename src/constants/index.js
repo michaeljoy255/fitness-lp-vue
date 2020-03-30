@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 /**
  * Constant workout categories this app recognizes
  * @example
- * let example = Category.LEGS; // "Legs"
+ * let ex = Category.LEGS; // "Legs"
  */
 export const Category = Object.freeze({
   BACK: "Back",
@@ -264,7 +264,7 @@ export const DefaultWorkouts = Object.freeze({
  * @param {string} args Exercise name(s)
  * @returns {Array<string>} Exercise ids
  * @example
- * let example = getWorkoutExerciseIds("Warmup", "Cooldown", "Stretching");
+ * let ex = getWorkoutExerciseIds("Warmup", "Cooldown", "Stretching");
  */
 function getWorkoutExerciseIds(...args) {
   return args.map(arg => getExerciseIdByName(arg));
@@ -275,7 +275,7 @@ function getWorkoutExerciseIds(...args) {
  * @param {string} name Name of a default exercise
  * @returns {string} Exercise id
  * @example
- * let example = getExerciseIdByName("Warmup");
+ * let ex = getExerciseIdByName("Warmup");
  */
 function getExerciseIdByName(name) {
   const exerciseId = DefaultExercises.exercises.find(

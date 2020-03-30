@@ -6,18 +6,23 @@ export default {
    * Fetches workout data from storage
    * @returns {Promise<Array>} Workout data
    * @example
-   * const workoutService = new WorkoutService();
-   * let example = await workoutService.getWorkouts();
+   * let ex = await WorkoutService.getWorkouts();
    */
-  getWorkouts() {
+  getAvailableWorkouts() {
     return new Promise(resolve => {
       resolve(getStorageByKey("workouts"));
     });
   },
 
+  /**
+   * Fetches active workout data from storage
+   * @returns {Promise{<Object>}} Active workout data
+   * @example
+   * let ex = await WorkoutService.getActiveWorkout();
+   */
   getActiveWorkout() {
     return new Promise(resolve => {
-      resolve(getStorageByKey("workouts"));
+      resolve(getStorageByKey("activeWorkout"));
     });
   },
 
@@ -43,8 +48,7 @@ export default {
    * Initializes default workouts if no workout data is present
    * @returns {Promise<Array>} Default workout data
    * @example
-   * const workoutService = new WorkoutService();
-   * let example = await workoutService.initDefaultWorkouts();
+   * let ex = await WorkoutService.initDefaultWorkouts();
    */
   initDefaultWorkouts() {
     return new Promise((resolve, reject) => {
@@ -52,6 +56,9 @@ export default {
 
       if (!data) {
         // Workouts data is empty, fill with defaults
+        /**
+         * @todo Save the defaults to local storage now
+         */
         resolve(DefaultWorkouts.workouts);
       } else {
         // Workouts data already exists!

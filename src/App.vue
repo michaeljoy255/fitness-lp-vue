@@ -3,8 +3,7 @@
     NavDrawer
     AppBar
     v-content
-      v-container(fluid)
-        router-view
+      router-view
 </template>
 
 <script>

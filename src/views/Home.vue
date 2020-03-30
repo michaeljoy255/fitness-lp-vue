@@ -1,10 +1,12 @@
 <template lang="pug">
-  DefaultCard(v-if="!workouts")
-  v-row(v-else)
-    WorkoutCard(v-for="workout in workouts"
-    :key="workout.id"
-    :name="workout.name"
-    :id="workout.id")
+  v-container.mx-auto.mt-5(v-if="!workouts")
+    DefaultCard
+  v-container(v-else fluid)
+    v-row
+      WorkoutCard(v-for="workout in workouts"
+      :key="workout.id"
+      :name="workout.name"
+      :id="workout.id")
 </template>
 
 <script>

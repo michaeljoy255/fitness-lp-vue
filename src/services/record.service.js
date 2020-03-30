@@ -5,8 +5,7 @@ export default {
    * Fetches record data from storage
    * @returns {Promise<Array>} Record data
    * @example
-   * const recordService = new RecordService();
-   * let example = await recordService.getRecords();
+   * let ex = await RecordService.getRecords();
    */
   getRecords() {
     console.log(this.$store);

@@ -5,8 +5,7 @@ export default {
    * Fetches measurement data from storage
    * @returns {Promise<Array>} Measurement data
    * @example
-   * const measurementService = new MeasurementService();
-   * let example = await measurementService.getMeasurements();
+   * let ex = await MeasurementService.getMeasurements();
    */
   getMeasurements() {
     console.log(this.$store);

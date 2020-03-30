@@ -11,7 +11,7 @@
  * @param {string} key
  * @returns {?Array} Null, [], or array with data
  * @example
- * let example = getStorageByKey("workouts");
+ * let ex = getStorageByKey("workouts");
  */
 export function getStorageByKey(key) {
   if (!localStorage.getItem(key)) {
@@ -36,8 +36,8 @@ export function getStorageByKey(key) {
  * @param {?Array} workouts
  * @returns {Object} New Records object
  * @example
- * let example1 = new Records();
- * let example2 = new Records({exercises: myExercisesArray});
+ * let ex1 = new Records();
+ * let ex2 = new Records({exercises: myExercisesArray});
  */
 export function Records({
   measurements = null,
@@ -57,8 +57,8 @@ export function Records({
  * @param {?Object} record
  * @returns {Object} New Selected object
  * @example
- * let example1 = new Selected();
- * let example2 = new Selected({record: selectedRecord});
+ * let ex1 = new Selected();
+ * let ex2 = new Selected({record: selectedRecord});
  */
 export function Selected({
   measurement = null,
@@ -78,8 +78,8 @@ export function Selected({
  * @param {?Array} workouts
  * @returns {Object} New Available object
  * @example
- * let example1 = new Available();
- * let example2 = new Available({exercises: allExercises});
+ * let ex1 = new Available();
+ * let ex2 = new Available({exercises: allExercises});
  */
 export function Available({ exercises = null, workouts = null } = {}) {
   this.exercises = exercises;
@@ -97,8 +97,8 @@ export function Available({ exercises = null, workouts = null } = {}) {
  * @param {?Array} records
  * @returns {Object} New ActiveWorkout object
  * @example
- * let example1 = new ActiveWorkout();
- * let example2 = new ActiveWorkout({name: workoutName});
+ * let ex1 = new ActiveWorkout();
+ * let ex2 = new ActiveWorkout({name: workoutName});
  */
 export function ActiveWorkout({
   id = null,

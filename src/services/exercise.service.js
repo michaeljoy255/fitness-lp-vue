@@ -6,8 +6,7 @@ export default {
    * Fetches exercise data from storage
    * @returns {Promise<Array>} Exercise data
    * @example
-   * const exerciseService = new ExerciseService();
-   * let example = await exerciseService.getExercises();
+   * let ex = await ExerciseService.getExercises();
    */
   getExercises() {
     return new Promise(resolve => {
@@ -37,8 +36,7 @@ export default {
    * Initializes default exercises if no exercise data is present
    * @returns {Promise<Array>} Default exercise data
    * @example
-   * const exerciseService = new ExerciseService();
-   * let example = await exerciseService.initDefaultExercises();
+   * let ex = await ExerciseService.initDefaultExercises();
    */
   initDefaultExercises() {
     return new Promise((resolve, reject) => {
@@ -46,6 +44,9 @@ export default {
 
       if (!exercises) {
         // Exercise data is empty, fill with defaults
+        /**
+         * @todo Save the defaults to local storage now
+         */
         resolve(DefaultExercises.exercises);
       } else {
         // Exercises data already exists!
