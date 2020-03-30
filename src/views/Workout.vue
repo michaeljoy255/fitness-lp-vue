@@ -1,9 +1,8 @@
 <template lang="pug">
-  v-container(fluid)
-    v-stepper(v-model="getStep" vertical non-linear)
-      div(v-for="(exercise, i) in exercises" :key="i")
-        WorkoutStep(:step="i+1" :name="exercise.name")
-      SummaryStep(:step="exercises.length+1")
+  v-stepper(v-model="getStep" vertical non-linear)
+    div(v-for="(exercise, i) in exercises" :key="i")
+      WorkoutStep(:step="i+1" :name="exercise.name")
+    SummaryStep(:step="exercises.length+1")
 </template>
 
 <script>
@@ -19,6 +18,9 @@ export default {
   data() {
     return {
       // Test Stepper Data - more to state
+      /**
+       * @todo
+       */
       exercises: [
         { name: "Warmup" },
         { name: "Exercise" },
@@ -26,13 +28,14 @@ export default {
       ]
     };
   },
-  /**
-   * Set the state to reflect the current workout
-   * @todo
-   */
   mounted() {
-    // more
     this.$store.dispatch("setWorkoutStep", 1);
+
+    console.log(this.$route.params.id);
+    /**
+     * @todo Make getWorkoutById so you can get the exerciseIds from it
+     */
+    // this.$store.dispatch();
   },
   computed: {
     getStep: {

@@ -3,7 +3,8 @@
     NavDrawer
     AppBar
     v-content
-      router-view
+      v-container(fluid)
+        router-view
 </template>
 
 <script>
@@ -16,11 +17,8 @@ export default {
     AppBar,
     NavDrawer
   },
-  created() {
-    // Get data for the app
-    /**
-     * @todo
-     */
+  mounted() {
+    this.$store.dispatch("initApp");
   }
 };
 </script>

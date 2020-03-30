@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     test() {
-      this.$store.dispatch("initDefaults");
+      console.log("---For Testing---");
     }
   }
 };

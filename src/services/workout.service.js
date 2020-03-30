@@ -7,13 +7,16 @@ export default class WorkoutService {
     this.$store = store;
   }
 
+  /**
+   * Fetches workout data from storage
+   * @returns {Promise<Array>} Workout data
+   * @example
+   * const workoutService = new WorkoutService();
+   * let example = await workoutService.getWorkouts();
+   */
   getWorkouts() {
-    return new Promise((resolve, reject) => {
-      if (this.$store) {
-        resolve();
-      } else {
-        reject();
-      }
+    return new Promise(resolve => {
+      resolve(getStorageByKey("workouts"));
     });
   }
 
@@ -47,6 +50,13 @@ export default class WorkoutService {
     });
   }
 
+  /**
+   * Initializes default workouts if no workout data is present
+   * @returns {Promise<Array>} Default workout data
+   * @example
+   * const workoutService = new WorkoutService();
+   * let example = await workoutService.initDefaultWorkouts();
+   */
   initDefaultWorkouts() {
     return new Promise((resolve, reject) => {
       const data = getStorageByKey("workouts");

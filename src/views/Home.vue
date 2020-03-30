@@ -1,21 +1,26 @@
 <template lang="pug">
-  v-container(fluid)
-    v-row
-      WorkoutCard(v-for="(card, i) in cards" :key="i")
+  DefaultCard(v-if="!workouts")
+  v-row(v-else)
+    WorkoutCard(v-for="workout in workouts"
+    :key="workout.id"
+    :name="workout.name"
+    :id="workout.id")
 </template>
 
 <script>
+import DefaultCard from "../components/DefaultCard";
 import WorkoutCard from "../components/WorkoutCard";
 
 export default {
   name: "Home",
   components: {
+    DefaultCard,
     WorkoutCard
   },
-  data() {
-    return {
-      cards: 7 // Number of test cards to create
-    };
+  computed: {
+    workouts() {
+      return this.$store.state.workouts;
+    }
   }
 };
 </script>
