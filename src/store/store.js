@@ -15,9 +15,14 @@ const recordService = new RecordService();
 export default new Vuex.Store({
   state: {
     navDrawerActive: false,
+    // Core Data
+    records: null,
+    measurements: null,
     workouts: null,
     exercises: null,
+    // Current Workout
     workout: {
+      id: null,
       name: null,
       step: null,
       exercises: null,
@@ -46,28 +51,31 @@ export default new Vuex.Store({
     SET_WORKOUT_STEP(state, step) {
       state.workout.step = step;
     },
-    RESUME_WORKOUT(state) {
-      state.workout = null; // not implemented
+    SET_WORKOUT_EXERCISES(state, exercises) {
+      state.workout.exercises = exercises;
     },
-    CANCEL_WORKOUT(state) {
-      state.workout = null; // not implemented
+    SET_WORKOUT_ID(state, id) {
+      state.workout.id = id;
     },
-    SUBMIT_WORKOUT(state) {
-      state.workout = null; // not implemented
+    SET_WORKOUT_NAME(state, name) {
+      state.workout.name = name;
     },
-    START_WORKOUT(state) {
-      state.workout = null; // not implemented
+    RESUME_WORKOUT() {
+      /**
+       * @todo
+       */
+    },
+    SUBMIT_WORKOUT() {
+      /**
+       * @todo
+       */
     },
     // Timer
-    CLEAR_TIMES(state) {
-      state.workout.startTime = null;
-      state.workout.endTime = null;
+    SET_START_TIME(state, time) {
+      state.workout.startTime = time;
     },
-    SET_START_TIME(state) {
-      state.workout.startTime = new Date().getTime();
-    },
-    SET_STOP_TIME(state) {
-      state.workout.endTime = new Date().getTime();
+    SET_STOP_TIME(state, time) {
+      state.workout.endTime = time;
     },
     // Nav Drawer
     TOGGLE_ON_NAV_DRAWER(state) {
@@ -107,17 +115,36 @@ export default new Vuex.Store({
     setWorkoutStep({ commit }, step) {
       commit("SET_WORKOUT_STEP", step);
     },
+    submitWorkout({ commit }) {
+      /**
+       * @todo Save records of the workout and each exercise
+       */
+      commit("SUBMIT_WORKOUT");
+    },
     resumeWorkout({ commit }) {
+      /**
+       * @todo Maybe a resume workout card on the home page (if valid workout)?
+       */
       commit("RESUME_WORKOUT");
     },
     cancelWorkout({ commit }) {
-      commit("CANCEL_WORKOUT");
-    },
-    submitWorkout({ commit }) {
-      commit("SUBMIT_WORKOUT");
+      commit("SET_WORKOUT_ID", null);
+      commit("SET_WORKOUT_NAME", null);
+      commit("SET_WORKOUT_STEP", null);
+      commit("SET_EXERCISES", null);
+      commit("SET_START_TIME", null);
+      commit("SET_STOP_TIME", null);
     },
     startWorkout({ commit }, workout) {
-      commit("START_WORKOUT", workout);
+      // Get workout exercises by exercise ids
+      /**
+       * @todo workout.exerciseIds
+       */
+      commit("SET_WORKOUT_ID", workout.id);
+      commit("SET_WORKOUT_NAME", workout.name);
+      commit("SET_WORKOUT_STEP", 1);
+      commit("SET_START_TIME", new Date().getTime());
+      commit("SET_STOP_TIME", null);
     },
     // Timer
     setStopTime({ commit }) {
@@ -125,9 +152,6 @@ export default new Vuex.Store({
     },
     setStartTime({ commit }) {
       commit("SET_START_TIME");
-    },
-    clearTimes({ commit }) {
-      commit("CLEAR_TIMES");
     },
     // Nav Drawer
     setNavDrawer({ commit }, drawerState) {
