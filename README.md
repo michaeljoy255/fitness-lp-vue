@@ -4,13 +4,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**How to break up local storage data for speedy access and readablility:**
-- exercises: []
-- workouts: []
-- workout: {}
-- measurements: []
-- workoutRecords: []
-- exerciseRecords: []
+**WIP**
 
 # Table of Contents
 

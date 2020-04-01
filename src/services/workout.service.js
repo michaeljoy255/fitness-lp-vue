@@ -1,54 +1,13 @@
 import { DefaultWorkouts } from "../constants";
 import { getStorageByKey } from "../helpers";
 
+/**
+ * WorkoutService
+ */
 export default {
   /**
-   * Fetches workout data from storage
-   * @returns {Promise<Array>} Workout data
-   * @example
-   * let ex = await WorkoutService.getWorkouts();
-   */
-  getAvailableWorkouts() {
-    return new Promise(resolve => {
-      resolve(getStorageByKey("workouts"));
-    });
-  },
-
-  /**
-   * Fetches active workout data from storage
-   * @returns {Promise{<Object>}} Active workout data
-   * @example
-   * let ex = await WorkoutService.getActiveWorkout();
-   */
-  getActiveWorkout() {
-    return new Promise(resolve => {
-      resolve(getStorageByKey("activeWorkout"));
-    });
-  },
-
-  addWorkouts() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  deleteWorkouts() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  updateWorkouts() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  /**
    * Initializes default workouts if no workout data is present
-   * @returns {Promise<Array>} Default workout data
-   * @example
-   * let ex = await WorkoutService.initDefaultWorkouts();
+   * @returns {?Promise<Array>} Default workout data
    */
   initDefaultWorkouts() {
     return new Promise((resolve, reject) => {
@@ -68,6 +27,16 @@ export default {
           )
         );
       }
+    });
+  },
+
+  /**
+   * Fetches workout data from storage
+   * @returns {?Promise<Array>} Workout data
+   */
+  getWorkouts() {
+    return new Promise(resolve => {
+      resolve(getStorageByKey("workouts"));
     });
   }
 };

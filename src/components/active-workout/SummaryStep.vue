@@ -23,8 +23,8 @@ export default {
   },
   methods: {
     submit() {
-      console.log("Submit Workout!");
-      this.$store.dispatch("setActiveWorkoutStep", 1);
+      this.$router.push("/home");
+      this.$store.dispatch("workout/submitWorkout");
     }
   }
 };

@@ -1,39 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import selected from "./modules/selected";
+import available from "./modules/available";
+import records from "./modules/records";
+import workout from "./modules/workout";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
 import RecordService from "../services/record.service";
-import { Records, Selected, Available, ActiveWorkout } from "../helpers";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    records: new Records(), // Saved records of data
-    selected: new Selected(), // Selected for creating, editing, or deleting data
-    available: new Available(), // Available exercises and workouts
-    activeWorkout: new ActiveWorkout(), // In progress workout
-    // Component state vars
     navDrawerActive: false
   },
   //############################################################################
   mutations: {
-    // Full object sets
-    SET_RECORDS_OBJ(state, recordsObject) {
-      state.records = recordsObject;
-    },
-    SET_SELECTED_OBJ(state, selectedObject) {
-      state.selected = selectedObject;
-    },
-    SET_AVAILABLE_OBJ(state, availableObject) {
-      state.available = availableObject;
-    },
-    SET_ACTIVE_WORKOUT_OBJ(state, activeWorkoutObject) {
-      state.activeWorkout = activeWorkoutObject;
-    },
-    SET_WORKOUT_STEP(state, step) {
-      state.activeWorkout.step = step;
-    },
     // Nav Drawer
     TOGGLE_ON_NAV_DRAWER(state) {
       state.navDrawerActive = true;
@@ -47,84 +29,54 @@ export default new Vuex.Store({
   },
   //############################################################################
   actions: {
-    async initApp({ commit }) {
+    async initApp({ dispatch }) {
+      console.info("Initializing App Data");
+      const servMeasurementRecs = RecordService.getMeasurements();
+      const servExerciseRecs = RecordService.getExercises();
+      const servWorkoutRecs = RecordService.getWorkouts();
+
+      const servExercises = ExerciseService.getExercises();
+      const servWorkouts = WorkoutService.getWorkouts();
+
       // Promise all with async / await
-      const records = RecordService.getRecords();
-      const allExercises = ExerciseService.getExercises();
-      const allWorkouts = WorkoutService.getAvailableWorkouts();
-      const activeWorkout = WorkoutService.getActiveWorkout();
+      const measurementRecords = await servMeasurementRecs;
+      const exerciseRecords = await servExerciseRecs;
+      const workoutRecords = await servWorkoutRecs;
 
-      const recRes = await records;
-      const allExerRes = await allExercises;
-      const allWorkRes = await allWorkouts;
-      const actWorkRes = await activeWorkout;
+      const exercises = await servExercises;
+      const workouts = await servWorkouts;
 
-      if (recRes) {
-        commit("SET_RECORDS_OBJ", new Records(records));
-      } else {
-        commit("SET_RECORDS_OBJ", new Records());
-      }
+      measurementRecords
+        ? dispatch("records/setMeasurements", measurementRecords)
+        : dispatch("records/setMeasurements", null);
+      exerciseRecords
+        ? dispatch("records/setExercises", exerciseRecords)
+        : dispatch("records/setExercises", null);
+      workoutRecords
+        ? dispatch("records/setWorkouts", workoutRecords)
+        : dispatch("records/setWorkouts", null);
 
-      if (allExerRes && allWorkRes) {
-        commit(
-          "SET_AVAILABLE_OBJ",
-          new Available({
-            exercises: allExercises,
-            workouts: allWorkouts
-          })
-        );
-      } else {
-        commit("SET_AVAILABLE_OBJ", new Available());
-      }
-
-      if (actWorkRes) {
-        commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout(activeWorkout));
-      } else {
-        commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout());
-      }
+      exercises
+        ? dispatch("available/setExercises", exercises)
+        : dispatch("available/setExercises", null);
+      workouts
+        ? dispatch("available/setWorkouts", workouts)
+        : dispatch("available/setWorkouts", null);
     },
-    async setAvailableDefaults({ commit }) {
+    async setDefaults({ dispatch }) {
+      const servExercises = ExerciseService.initDefaultExercises();
+      const servWorkouts = WorkoutService.initDefaultWorkouts();
+
       // Promise all with async / await
-      const defaultExercises = ExerciseService.initDefaultExercises();
-      const defaultWorkouts = WorkoutService.initDefaultWorkouts();
+      const exercises = await servExercises;
+      const workouts = await servWorkouts;
 
-      const defExerRes = await defaultExercises;
-      const defWorkRes = await defaultWorkouts;
-
-      if (defExerRes && defWorkRes) {
-        commit(
-          "SET_AVAILABLE_OBJ",
-          new Available({
-            exercises: defExerRes,
-            workouts: defWorkRes
-          })
-        );
+      if (exercises && workouts) {
+        dispatch("available/setExercises", exercises);
+        dispatch("available/setWorkouts", workouts);
       } else {
-        commit("SET_AVAILABLE_OBJ", new Available());
+        console.error("Problem getting defaults!");
       }
-    },
-    setActiveWorkoutStep({ commit }, step) {
-      commit("SET_WORKOUT_STEP", step);
-    },
-    cancelWorkout({ commit }) {
-      commit("SET_ACTIVE_WORKOUT_OBJ", new ActiveWorkout());
-    },
-    startWorkout({ commit }, workout) {
-      /**
-       * @todo workout.exerciseIds and records
-       */
-      commit(
-        "SET_ACTIVE_WORKOUT_OBJ",
-        new ActiveWorkout({
-          id: workout.id,
-          name: workout.name,
-          step: 1,
-          beginTime: new Date().getTime(),
-          endTime: null,
-          exercises: null,
-          records: null
-        })
-      );
     },
     // Component state actions
     setNavDrawer({ commit }, drawerState) {
@@ -140,5 +92,10 @@ export default new Vuex.Store({
   },
   //############################################################################
   getters: {},
-  modules: {}
+  modules: {
+    selected,
+    available,
+    records,
+    workout
+  }
 });

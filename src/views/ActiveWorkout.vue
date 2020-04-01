@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("setActiveWorkoutStep", 1);
+    this.$store.dispatch("workout/setStep", 1);
 
     console.log(this.$route.params.id);
     /**
@@ -41,11 +41,11 @@ export default {
   computed: {
     getStep: {
       get() {
-        return this.$store.state.activeWorkout.step;
+        return this.$store.state.workout.step;
       },
       set(step) {
-        if (step !== this.$store.state.activeWorkout.step) {
-          this.$store.dispatch("setActiveWorkoutStep", step);
+        if (step !== this.$store.state.workout.step) {
+          this.$store.dispatch("workout/setStep", step);
         }
       }
     }

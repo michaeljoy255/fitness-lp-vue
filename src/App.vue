@@ -17,6 +17,7 @@ export default {
     NavDrawer
   },
   created() {
+    // Get all data for app ASAP
     this.$store.dispatch("initApp");
   }
 };

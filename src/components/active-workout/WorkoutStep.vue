@@ -27,11 +27,11 @@ export default {
   computed: {
     getStep: {
       get() {
-        return this.$store.state.activeWorkout.step;
+        return this.$store.state.workout.step;
       },
       set(step) {
-        if (step !== this.$store.state.activeWorkout.step) {
-          this.$store.dispatch("setActiveWorkoutStep", step);
+        if (step !== this.$store.state.workout.step) {
+          this.$store.dispatch("workout/setStep", step);
         }
       }
     }

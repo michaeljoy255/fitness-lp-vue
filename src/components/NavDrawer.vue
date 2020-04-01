@@ -7,10 +7,10 @@
           v-icon home
         v-list-item-content Home
 
-      v-list-item(link to="/about")
+      v-list-item(link to="/charts")
         v-list-item-action
-          v-icon info
-        v-list-item-content About
+          v-icon timeline
+        v-list-item-content Charts
 
       v-divider
 
@@ -29,16 +29,21 @@
           v-icon straighten
         v-list-item-content Measurements
 
-      v-divider
-
       v-list-item(link to="/records")
         v-list-item-action
           v-icon sd_card
         v-list-item-content Records
 
+      v-divider
+
+      v-list-item(link to="/about")
+        v-list-item-action
+          v-icon info
+        v-list-item-content About
+
       v-list-item(@click="test")
         v-list-item-action
-          v-icon speed
+          v-icon announcement
         v-list-item-content TESTING
 </template>
 

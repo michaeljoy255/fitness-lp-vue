@@ -16,7 +16,7 @@ export default {
   name: "DefaultCard",
   methods: {
     setDefaults() {
-      this.$store.dispatch("setAvailableDefaults");
+      this.$store.dispatch("setDefaults");
     }
   }
 };

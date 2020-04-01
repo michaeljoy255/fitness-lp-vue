@@ -1,46 +1,36 @@
 import { getStorageByKey } from "../helpers";
 
+/**
+ * RecordService
+ */
 export default {
   /**
-   * Fetches record data from storage
-   * @returns {Promise<Array>} Record data
-   * @example
-   * let ex = await RecordService.getRecords();
+   * Fetches measurement records from storage
+   * @returns {?Promise<Array>} Measurement records
    */
-  getRecords() {
-    console.log(this.$store);
+  getMeasurements() {
     return new Promise(resolve => {
-      resolve(getStorageByKey("records"));
+      resolve(getStorageByKey("measurements"));
     });
   },
 
-  addRecords() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
+  /**
+   * Fetches exercise records from storage
+   * @returns {?Promise<Array>} Exercise records
+   */
+  getExercises() {
+    return new Promise(resolve => {
+      resolve(getStorageByKey("exercises"));
     });
   },
 
-  deleteRecords() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  updateRecords() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  clearAllRecords() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
-    });
-  },
-
-  clearAllData() {
-    return new Promise((resolve, reject) => {
-      resolve() || reject(); // not implemented
+  /**
+   * Fetches workout records from storage
+   * @returns {?Promise<Array>} Workout records
+   */
+  getWorkouts() {
+    return new Promise(resolve => {
+      resolve(getStorageByKey("workouts"));
     });
   }
 };
