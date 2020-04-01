@@ -4,7 +4,21 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**WIP**
+**Process when activating a workout:**
+- Commit close action for Nav Drawer
+- Swap in Workout Toolbar for the App Bar (Can be done with router)
+- Replace the following for Toolbar
+    - Date >>> Live workout timer
+    - App Name >>> Workout Name
+    - Menu Btn >>> Cancel button for workout (X)
+
+**Needed Modals:**
+- Canceling a workout (X)
+- Using home defaults button
+
+**Corrections:**
+- Hardcoded workout path (/workout/xxxxx) should be using router to help build
+- Update README
 
 # Table of Contents
 
