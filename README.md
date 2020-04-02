@@ -5,20 +5,26 @@ Web app that helps you keep track of your exercise performances so you can impro
 # TODO
 
 **Process when activating a workout:**
-- Commit close action for Nav Drawer
+- Commit close action for Nav Drawer when loading in Workout Toolbar
 - Swap in Workout Toolbar for the App Bar (Can be done with router)
 - Replace the following for Toolbar
-    - Date >>> Live workout timer
-    - App Name >>> Workout Name
-    - Menu Btn >>> Cancel button for workout (X)
+    - Date -> Live workout timer
+    - App Name -> Workout Name
+    - Menu Btn -> Workout cancel btn (X)
 
 **Needed Modals:**
-- Canceling a workout (X)
-- Using home defaults button
+- Finish implementing ModalParent code (dynamic components)
+- ModalParent Tasks:
+    - Confirm canceling a workout (X)
+    - Confirm using defaults
 
-**Corrections:**
-- Hardcoded workout path (/workout/xxxxx) should be using router to help build
-- Update README
+**Helpers**
+- Formatter for live workout timer (00:22:34 or 22M 34S)
+- Constants, Helpers, or Mixins for these tasks
+- Converter for Datetime to readable workout duration with styling (1H 46M 39S)
+- Converter for Datetime to readable App Bar date
+    - Most devices = Wednesday April 1, 2020 (need custom formatter for this)
+    - Small devices = 4/1/2020 (toLocalStringTime())
 
 # Table of Contents
 

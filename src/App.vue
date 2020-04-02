@@ -1,5 +1,6 @@
 <template lang="pug">
   v-app
+    ModalParent
     NavDrawer
     AppBar
     v-content
@@ -9,12 +10,14 @@
 <script>
 import NavDrawer from "./components/NavDrawer";
 import AppBar from "./components/AppBar";
+import ModalParent from "./components/modals/ModalParent";
 
 export default {
   name: "App",
   components: {
     AppBar,
-    NavDrawer
+    NavDrawer,
+    ModalParent
   },
   created() {
     // Get all data for app ASAP

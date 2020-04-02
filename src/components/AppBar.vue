@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app-bar(app clipped-left color="secondary")
-    v-app-bar-nav-icon(@click="toggleNavDrawer")
+    v-app-bar-nav-icon(@click="toggleDrawer")
     v-toolbar-title.d-sm-none Fitness LP
     v-toolbar-title.d-none.d-sm-flex Fitness Linear Progression
     v-spacer
@@ -11,8 +11,8 @@
 export default {
   name: "AppBar",
   methods: {
-    toggleNavDrawer() {
-      this.$store.dispatch("toggleNavDrawer");
+    toggleDrawer() {
+      this.$store.dispatch("toggleDrawer");
     }
   }
 };

@@ -12,19 +12,23 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    navDrawerActive: false
+    drawerActive: false,
+    modalActive: false
   },
   //############################################################################
   mutations: {
     // Nav Drawer
-    TOGGLE_ON_NAV_DRAWER(state) {
-      state.navDrawerActive = true;
+    TOGGLE_ON_DRAWER(state) {
+      state.drawerActive = true;
     },
-    TOGGLE_OFF_NAV_DRAWER(state) {
-      state.navDrawerActive = false;
+    TOGGLE_OFF_DRAWER(state) {
+      state.drawerActive = false;
     },
-    SET_NAV_DRAWER(state, drawerState) {
-      state.navDrawerActive = drawerState;
+    SET_DRAWER(state, drawerState) {
+      state.drawerActive = drawerState;
+    },
+    SET_MODAL(state, bool) {
+      state.modalActive = bool;
     }
   },
   //############################################################################
@@ -79,15 +83,18 @@ export default new Vuex.Store({
       }
     },
     // Component state actions
-    setNavDrawer({ commit }, drawerState) {
-      commit("SET_NAV_DRAWER", drawerState);
+    setDrawer({ commit }, drawerState) {
+      commit("SET_DRAWER", drawerState);
     },
-    toggleNavDrawer({ state, commit }) {
-      if (state.navDrawerActive) {
-        commit("TOGGLE_OFF_NAV_DRAWER");
+    toggleDrawer({ state, commit }) {
+      if (state.drawerActive) {
+        commit("TOGGLE_OFF_DRAWER");
       } else {
-        commit("TOGGLE_ON_NAV_DRAWER");
+        commit("TOGGLE_ON_DRAWER");
       }
+    },
+    setModal({ commit }, bool) {
+      commit("SET_MODAL", bool);
     }
   },
   //############################################################################

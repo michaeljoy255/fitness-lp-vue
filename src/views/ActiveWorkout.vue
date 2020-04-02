@@ -31,8 +31,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("workout/setStep", 1);
-
-    console.log(this.$route.params.id);
     /**
      * @todo Make getWorkoutById so you can get the exerciseIds from it
      */

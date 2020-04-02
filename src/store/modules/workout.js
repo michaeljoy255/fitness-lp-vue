@@ -24,6 +24,15 @@ export default {
       state.exercises = workout.exercises;
       state.records = workout.records;
     },
+    CLEAR_WORKOUT(state) {
+      state.id = null;
+      state.name = null;
+      state.step = null;
+      state.beginTime = null;
+      state.endTime = null;
+      state.exercises = null;
+      state.records = null;
+    },
     SET_STEP(state, step) {
       state.step = step;
     }
@@ -45,29 +54,13 @@ export default {
       });
     },
     cancelWorkout({ commit }) {
-      commit("SET_WORKOUT", {
-        id: null,
-        name: null,
-        step: null,
-        beginTime: null,
-        endTime: null,
-        exercises: null,
-        records: null
-      });
+      commit("CLEAR_WORKOUT");
     },
     submitWorkout({ commit }) {
       /**
        * @todo Save workout results to local records and local storage
        */
-      commit("SET_WORKOUT", {
-        id: null,
-        name: null,
-        step: null,
-        beginTime: null,
-        endTime: null,
-        exercises: null,
-        records: null
-      });
+      commit("CLEAR_WORKOUT");
     },
     setStep({ commit }, step) {
       commit("SET_STEP", step);

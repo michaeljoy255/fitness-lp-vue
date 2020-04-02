@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-navigation-drawer(v-model="drawerState" app clipped)
+  v-navigation-drawer(v-model="drawerActive" app clipped)
     v-list
 
       v-list-item(link to="/home")
@@ -41,30 +41,40 @@
           v-icon info
         v-list-item-content About
 
-      v-list-item(@click="test")
+      v-list-item(@click="testON")
         v-list-item-action
           v-icon announcement
-        v-list-item-content TESTING
+        v-list-item-content TESTING ON
+      v-list-item(@click="testOFF")
+        v-list-item-action
+          v-icon announcement
+        v-list-item-content TESTING OFF
 </template>
 
 <script>
 export default {
-  name: "NavDrawer",
+  name: "Drawer",
   computed: {
-    drawerState: {
+    drawerActive: {
       get() {
-        return this.$store.state.navDrawerActive;
+        return this.$store.state.drawerActive;
       },
       set(payload) {
-        if (payload !== this.$store.state.navDrawerActive) {
-          this.$store.dispatch("setNavDrawer", payload);
+        // If condition stops redundent state mutations between toggles and sets
+        if (payload !== this.$store.state.drawerActive) {
+          this.$store.dispatch("setDrawer", payload);
         }
       }
     }
   },
   methods: {
-    test() {
+    testON() {
       console.log("---For Testing---");
+      this.$store.dispatch("setModal", true);
+    },
+    testOFF() {
+      console.log("---For Testing---");
+      this.$store.dispatch("setModal", false);
     }
   }
 };
