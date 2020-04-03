@@ -60,7 +60,7 @@ export default {
         return this.$store.state.drawerActive;
       },
       set(payload) {
-        // If condition stops redundent state mutations between toggles and sets
+        // This stops redundent state mutations between toggles and sets
         if (payload !== this.$store.state.drawerActive) {
           this.$store.dispatch("setDrawer", payload);
         }
@@ -69,12 +69,11 @@ export default {
   },
   methods: {
     testON() {
-      console.log("---For Testing---");
-      this.$store.dispatch("setModal", true);
+      console.log("-----Testing 1");
+      this.$store.dispatch("openModal", "ConfirmAction");
     },
     testOFF() {
-      console.log("---For Testing---");
-      this.$store.dispatch("setModal", false);
+      console.log("-----Testing 2");
     }
   }
 };

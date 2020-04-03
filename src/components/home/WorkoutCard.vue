@@ -5,20 +5,22 @@
         p.title.text--primary.mb-0 {{ name }}
         p.text--secondary {{ new Date().toDateString() }}
         p.text--primary
-          //- Design a method/mixin to handle converting times to these (with html/classes)
           v-icon timer
-          span &nbsp; 1
-          span.overline h
-          span &nbsp; 46
-          span.overline m
+          span(v-html="this.getWorkoutTime(1, new Date())")
         v-btn(:to="{name: 'ActiveWorkout', params: {id: this.id}}" color="primary" rounded)
           span Begin
           v-icon(right) play_arrow
 </template>
 
 <script>
+import { formattersMixin } from "../../mixins/FormattersMixin";
+/**
+ * @todo Remember to un-hardcode the time for workout cards
+ */
+
 export default {
   name: "WorkoutCard",
+  mixins: [formattersMixin],
   props: {
     id: {
       type: String,

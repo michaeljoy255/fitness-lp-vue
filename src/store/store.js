@@ -13,22 +13,31 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     drawerActive: false,
-    modalActive: false
+    modalActive: false,
+    modalComponent: null
   },
   //############################################################################
   mutations: {
-    // Nav Drawer
-    TOGGLE_ON_DRAWER(state) {
-      state.drawerActive = true;
-    },
-    TOGGLE_OFF_DRAWER(state) {
-      state.drawerActive = false;
-    },
     SET_DRAWER(state, drawerState) {
       state.drawerActive = drawerState;
     },
-    SET_MODAL(state, bool) {
-      state.modalActive = bool;
+    DRAWER_ACTIVE_TRUE(state) {
+      state.drawerActive = true;
+    },
+    DRAWER_ACTIVE_FALSE(state) {
+      state.drawerActive = false;
+    },
+    SET_MODAL_COMPONENT(state, componentName) {
+      state.modalComponent = componentName;
+    },
+    CLEAR_MODAL_COMPONENT(state) {
+      state.modalComponent = null;
+    },
+    MODAL_ACTIVE_TRUE(state) {
+      state.modalActive = true;
+    },
+    MODAL_ACTIVE_FALSE(state) {
+      state.modalActive = false;
     }
   },
   //############################################################################
@@ -82,19 +91,27 @@ export default new Vuex.Store({
         console.error("Problem getting defaults!");
       }
     },
-    // Component state actions
     setDrawer({ commit }, drawerState) {
       commit("SET_DRAWER", drawerState);
     },
     toggleDrawer({ state, commit }) {
       if (state.drawerActive) {
-        commit("TOGGLE_OFF_DRAWER");
+        commit("DRAWER_ACTIVE_FALSE");
       } else {
-        commit("TOGGLE_ON_DRAWER");
+        commit("DRAWER_ACTIVE_TRUE");
       }
     },
-    setModal({ commit }, bool) {
-      commit("SET_MODAL", bool);
+    openModal({ commit }, componentName) {
+      if (componentName) {
+        commit("SET_MODAL_COMPONENT", componentName);
+        commit("MODAL_ACTIVE_TRUE");
+      } else {
+        console.error(`Can't open modal with ${componentName} component!`);
+      }
+    },
+    closeModal({ commit }) {
+      commit("MODAL_ACTIVE_FALSE");
+      commit("CLEAR_MODAL_COMPONENT");
     }
   },
   //############################################################################
