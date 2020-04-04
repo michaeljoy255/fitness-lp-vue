@@ -7,16 +7,16 @@
         p.text--primary
           v-icon timer
           span(v-html="this.getWorkoutTime(1, new Date())")
-        v-btn(:to="{name: 'ActiveWorkout', params: {id: this.id}}" color="primary" rounded)
+        v-btn(@click="routeFunc" :to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" rounded)
           span Begin
           v-icon(right) play_arrow
 </template>
 
 <script>
-import { formattersMixin } from "../../mixins/FormattersMixin";
 /**
  * @todo Remember to un-hardcode the time for workout cards
  */
+import { formattersMixin } from "../../mixins/FormattersMixin";
 
 export default {
   name: "WorkoutCard",
@@ -29,6 +29,27 @@ export default {
     name: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    routeFunc() {
+      console.log("ROUTE FUNC");
+      // Set active workout state
+      /**
+       * @todo Need exercises(ids?) and records
+       */
+      this.$store.dispatch("workout/startWorkout", {
+        id: this.id,
+        name: this.name,
+        step: 1,
+        exercises: [
+          { name: "Warmup" },
+          { name: "Exercise" },
+          { name: "Cooldown" },
+          { name: "Stretching" }
+        ],
+        records: []
+      });
     }
   }
 };

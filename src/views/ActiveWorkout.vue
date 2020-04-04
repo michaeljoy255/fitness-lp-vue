@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container.mx-auto.mt-5
-    v-stepper(v-model="getStep" vertical non-linear)
+    v-stepper(v-model="step" vertical non-linear)
       div(v-for="(exercise, i) in exercises" :key="i")
         WorkoutStep(:step="i+1" :name="exercise.name")
       SummaryStep(:step="exercises.length+1")
@@ -18,26 +18,17 @@ export default {
   },
   data() {
     return {
-      // Test Stepper Data - more to state
-      /**
-       * @todo
-       */
+      workout: null,
       exercises: [
         { name: "Warmup" },
         { name: "Exercise" },
-        { name: "Cooldown" }
+        { name: "Cooldown" },
+        { name: "Stretching" }
       ]
     };
   },
-  mounted() {
-    this.$store.dispatch("workout/setStep", 1);
-    /**
-     * @todo Make getWorkoutById so you can get the exerciseIds from it
-     */
-    // this.$store.dispatch();
-  },
   computed: {
-    getStep: {
+    step: {
       get() {
         return this.$store.state.workout.step;
       },

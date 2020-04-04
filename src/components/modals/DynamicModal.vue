@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-dialog(v-model="modalActive")
+  v-dialog(v-model="modalActive" width="500" light)
     component(:is="modalComponent")
 </template>
 
@@ -17,14 +17,14 @@ export default {
   computed: {
     modalActive: {
       get() {
-        return this.$store.state.modalActive;
+        return this.$store.state.modal.isActive;
       },
       set() {
-        this.$store.dispatch("closeModal");
+        this.$store.dispatch("modal/close");
       }
     },
     modalComponent() {
-      return this.$store.state.modalComponent;
+      return this.$store.state.modal.component;
     }
   }
 };

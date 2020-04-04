@@ -16,7 +16,14 @@ export default {
   name: "DefaultCard",
   methods: {
     setDefaults() {
-      this.$store.dispatch("setDefaults");
+      this.$store.dispatch("modal/open", {
+        component: "ConfirmAction",
+        title: "Generate Default Exercises and Workouts?",
+        content: `Using defaults will overwrite any existing exercises or
+                  workouts you have created. Click Confirm to generate the
+                  defaults.`,
+        action: "available/setDefaults"
+      });
     }
   }
 };

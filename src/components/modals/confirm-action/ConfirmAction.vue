@@ -1,16 +1,25 @@
 <template lang="pug">
   v-card
-    v-card-title Modal Parent
-    v-card-subtitle Want to do some kind of dynamic components in the modal...
-    v-btn.ml-3.mb-3(color="secondary" rounded)
+    v-card-title {{ $store.state.modal.title }}
+    v-card-text {{ $store.state.modal.content }}
+    v-btn.ml-3.mb-3(@click="modalConfirmed()" color="warning" rounded)
       span Confirm
-    v-btn.ml-3.mb-3(@click="$store.dispatch('closeModal')" text rounded)
+    v-btn.ml-3.mb-3(@click="closeModal()" text rounded)
       span Cancel
 </template>
 
 <script>
 export default {
-  name: "ConfirmAction"
+  name: "ConfirmAction",
+  methods: {
+    modalConfirmed() {
+      this.$store.dispatch(this.$store.state.modal.action);
+      this.$store.dispatch("modal/close");
+    },
+    closeModal() {
+      this.$store.dispatch("modal/close");
+    }
+  }
 };
 </script>
 

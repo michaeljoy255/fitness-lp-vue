@@ -17,7 +17,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 **Needed Modals:**
 - DynamicModal Tasks:
     - Confirm canceling a workout (X)
-    - Confirm using defaults
 
 # Table of Contents
 

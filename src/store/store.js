@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import selected from "./modules/selected";
-import available from "./modules/available";
-import records from "./modules/records";
-import workout from "./modules/workout";
+import * as selected from "./modules/selected";
+import * as available from "./modules/available";
+import * as records from "./modules/records";
+import * as workout from "./modules/workout";
+import * as modal from "./modules/modal";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
 import RecordService from "../services/record.service";
@@ -12,9 +13,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawerActive: false,
-    modalActive: false,
-    modalComponent: null
+    drawerActive: false
   },
   //############################################################################
   mutations: {
@@ -26,18 +25,6 @@ export default new Vuex.Store({
     },
     DRAWER_ACTIVE_FALSE(state) {
       state.drawerActive = false;
-    },
-    SET_MODAL_COMPONENT(state, componentName) {
-      state.modalComponent = componentName;
-    },
-    CLEAR_MODAL_COMPONENT(state) {
-      state.modalComponent = null;
-    },
-    MODAL_ACTIVE_TRUE(state) {
-      state.modalActive = true;
-    },
-    MODAL_ACTIVE_FALSE(state) {
-      state.modalActive = false;
     }
   },
   //############################################################################
@@ -59,36 +46,20 @@ export default new Vuex.Store({
       const exercises = await servExercises;
       const workouts = await servWorkouts;
 
-      measurementRecords
-        ? dispatch("records/setMeasurements", measurementRecords)
-        : dispatch("records/setMeasurements", null);
-      exerciseRecords
-        ? dispatch("records/setExercises", exerciseRecords)
-        : dispatch("records/setExercises", null);
-      workoutRecords
-        ? dispatch("records/setWorkouts", workoutRecords)
-        : dispatch("records/setWorkouts", null);
-
-      exercises
-        ? dispatch("available/setExercises", exercises)
-        : dispatch("available/setExercises", null);
-      workouts
-        ? dispatch("available/setWorkouts", workouts)
-        : dispatch("available/setWorkouts", null);
-    },
-    async setDefaults({ dispatch }) {
-      const servExercises = ExerciseService.initDefaultExercises();
-      const servWorkouts = WorkoutService.initDefaultWorkouts();
-
-      // Promise all with async / await
-      const exercises = await servExercises;
-      const workouts = await servWorkouts;
-
-      if (exercises && workouts) {
+      if (measurementRecords) {
+        dispatch("records/setMeasurements", measurementRecords);
+      }
+      if (exerciseRecords) {
+        dispatch("records/setExercises", exerciseRecords);
+      }
+      if (workoutRecords) {
+        dispatch("records/setWorkouts", workoutRecords);
+      }
+      if (exercises) {
         dispatch("available/setExercises", exercises);
+      }
+      if (workouts) {
         dispatch("available/setWorkouts", workouts);
-      } else {
-        console.error("Problem getting defaults!");
       }
     },
     setDrawer({ commit }, drawerState) {
@@ -100,18 +71,6 @@ export default new Vuex.Store({
       } else {
         commit("DRAWER_ACTIVE_TRUE");
       }
-    },
-    openModal({ commit }, componentName) {
-      if (componentName) {
-        commit("SET_MODAL_COMPONENT", componentName);
-        commit("MODAL_ACTIVE_TRUE");
-      } else {
-        console.error(`Can't open modal with ${componentName} component!`);
-      }
-    },
-    closeModal({ commit }) {
-      commit("MODAL_ACTIVE_FALSE");
-      commit("CLEAR_MODAL_COMPONENT");
     }
   },
   //############################################################################
@@ -120,6 +79,7 @@ export default new Vuex.Store({
     selected,
     available,
     records,
-    workout
+    workout,
+    modal
   }
 });
