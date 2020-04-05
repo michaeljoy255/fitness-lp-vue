@@ -28,13 +28,7 @@ const ExerciseService = {
    */
   getExercises() {
     return new Promise(resolve => {
-      const exercises = localStorage.getItem("exercises");
-
-      if (isArrayWithData(exercises)) {
-        resolve(exercises);
-      } else {
-        resolve([]);
-      }
+      resolve(localStorage.getItem("exercises"));
     });
   }
 };

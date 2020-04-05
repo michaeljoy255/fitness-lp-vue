@@ -5,10 +5,10 @@
 export const namespaced = true;
 
 export const state = {
-  measurement: {},
-  exercise: {},
-  workout: {},
-  record: {}
+  measurement: null,
+  exercise: null,
+  workout: null,
+  record: null
 };
 
 export const mutations = {};

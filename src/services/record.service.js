@@ -1,5 +1,3 @@
-import { isArrayWithData } from "../helpers";
-
 const RecordService = {
   /**
    * Fetches measurement records from storage
@@ -7,13 +5,7 @@ const RecordService = {
    */
   getMeasurements() {
     return new Promise(resolve => {
-      const measurements = localStorage.getItem("measurements");
-
-      if (isArrayWithData(measurements)) {
-        resolve(measurements);
-      } else {
-        resolve([]);
-      }
+      resolve(localStorage.getItem("measurements"));
     });
   },
 
@@ -23,13 +15,7 @@ const RecordService = {
    */
   getExercises() {
     return new Promise(resolve => {
-      const exercises = localStorage.getItem("exercises");
-
-      if (isArrayWithData(exercises)) {
-        resolve(exercises);
-      } else {
-        resolve([]);
-      }
+      resolve(localStorage.getItem("exercises"));
     });
   },
 
@@ -39,13 +25,7 @@ const RecordService = {
    */
   getWorkouts() {
     return new Promise(resolve => {
-      const workouts = localStorage.getItem("workouts");
-
-      if (isArrayWithData(workouts)) {
-        resolve(workouts);
-      } else {
-        resolve([]);
-      }
+      resolve(localStorage.getItem("workouts"));
     });
   }
 };

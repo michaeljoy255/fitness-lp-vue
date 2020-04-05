@@ -4,10 +4,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-- Get proper data into workout state when starting a workout
-- Explore using routes to determine which Topbar is loaded: AppBar or WorkoutBar
-    - As an alternate you could have it swapped out when state workout is started
-- Commit close action for Nav Drawer when loading in WorkoutBar
+- Need solution to modal and state. May need to try dynamic modal again (check animation)
 - Implement live workout timer with your new formatted time function (1H 7M)
 - Replace the following for Toolbar
     - Date -> Live workout timer

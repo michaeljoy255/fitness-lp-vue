@@ -27,13 +27,17 @@ const WorkoutService = {
    */
   getWorkouts() {
     return new Promise(resolve => {
-      const workouts = localStorage.getItem("workouts");
+      resolve(localStorage.getItem("workouts"));
+    });
+  },
 
-      if (isArrayWithData(workouts)) {
-        resolve(workouts);
-      } else {
-        resolve([]);
-      }
+  /**
+   * Fetches active workout data from storage
+   * @returns {Promise<Array>} Active workout data
+   */
+  getActiveWorkout() {
+    return new Promise(resolve => {
+      resolve(localStorage.getItem("workout"));
     });
   }
 };

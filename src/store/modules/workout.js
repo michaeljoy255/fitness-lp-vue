@@ -1,4 +1,5 @@
 import EventBusService from "../../services/event-bus.service";
+import { isObjectWithData } from "../../helpers";
 
 /**
  * Workout module for the store is for active workouts
@@ -8,12 +9,12 @@ export const namespaced = true;
 
 export const state = {
   id: null,
-  name: "",
-  step: 1, // 1 is the lowest valid step
+  name: null,
+  step: null,
   beginTime: null,
   endTime: null,
-  exercises: [],
-  records: []
+  exercises: null,
+  records: null
 };
 
 export const mutations = {
@@ -27,9 +28,9 @@ export const mutations = {
     state.records = workout.records;
   },
   CLEAR_WORKOUT(state) {
-    state.id = null;
+    state.id = "";
     state.name = "";
-    state.step = 1;
+    state.step = 1; // 1 is the lowest valid step for steppers
     state.beginTime = null;
     state.endTime = null;
     state.exercises = [];
@@ -41,28 +42,47 @@ export const mutations = {
 };
 
 export const actions = {
-  startWorkout({ commit }, { id, name, step, exercises, records }) {
+  setWorkout({ commit }, workout) {
+    if (isObjectWithData(workout)) {
+      commit("SET_WORKOUT", {
+        id: workout.id,
+        name: workout.name,
+        step: workout.step,
+        beginTime: workout.beginTime,
+        endTime: workout.endTime,
+        exercises: workout.exercises,
+        records: workout.records
+      });
+    } else {
+      commit("CLEAR_WORKOUT");
+    }
+  },
+
+  start({ commit }, { id, name, exercises, records }) {
     commit("SET_WORKOUT", {
       id,
       name,
-      step,
+      step: 1,
       beginTime: new Date().getTime(),
       endTime: null,
       exercises,
       records
     });
   },
-  cancelWorkout({ commit }) {
+
+  cancel({ commit }) {
     EventBusService.$emit("storeChangedRoute", "/home");
     commit("CLEAR_WORKOUT");
   },
-  submitWorkout({ commit }) {
+
+  submit({ commit }) {
     EventBusService.$emit("storeChangedRoute", "/home");
     /**
      * @todo Save workout results to local records and local storage
      */
     commit("CLEAR_WORKOUT");
   },
+
   setStep({ commit }, step) {
     commit("SET_STEP", step);
   }

@@ -4,10 +4,13 @@
     
   v-container(v-else fluid)
     v-row
-      WorkoutCard(v-for="workout in workouts"
-      :key="workout.id"
-      :name="workout.name"
-      :id="workout.id")
+      WorkoutCard(
+        v-for="workout in workouts"
+        :key="workout.id"
+        :id="workout.id"
+        :name="workout.name"
+        :exerciseIds="workout.exerciseIds"
+      )
 </template>
 
 <script>

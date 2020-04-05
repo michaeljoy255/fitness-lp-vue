@@ -10,17 +10,15 @@
       | options in the menu in the top left of the screen.
       
     v-card-actions
-      v-container
-        ConfirmAction(
-          :rounded="true"
-          :block="true"
-          :color="'success'"
-          :buttonText="'Use Defaults'"
-          :buttonIcon="'system_update_alt'"
-          :title="'Generate Default Exercises and Workouts?'"
-          :content="'Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.'"
-          :action="'available/setDefaults'"
-        )
+        v-container
+          v-btn(@click.stop="$store.dispatch('setModalActive', true)" rounded color="success" block)
+            span Use Defaults
+            v-icon(right) system_update_alt
+          ConfirmAction(
+            :title="'Generate Default Exercises and Workouts?'"
+            :content="'Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.'"
+            :action="'available/setDefaults'"
+          )
 </template>
 
 <script>

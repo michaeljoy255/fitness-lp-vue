@@ -12,7 +12,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawerActive: false
+    drawerActive: false,
+    modalActive: false
   },
   //############################################################################
   mutations: {
@@ -24,6 +25,12 @@ export default new Vuex.Store({
     },
     DRAWER_ACTIVE_FALSE(state) {
       state.drawerActive = false;
+    },
+    MODAL_ACTIVE_TRUE(state) {
+      state.modalActive = true;
+    },
+    MODAL_ACTIVE_FALSE(state) {
+      state.modalActive = false;
     }
   },
   //############################################################################
@@ -36,6 +43,8 @@ export default new Vuex.Store({
       const servExercises = ExerciseService.getExercises();
       const servWorkouts = WorkoutService.getWorkouts();
 
+      const servActiveWorkout = WorkoutService.getActiveWorkout();
+
       // Promise all with async / await
       const measurementRecords = await servMeasurementRecs;
       const exerciseRecords = await servExerciseRecs;
@@ -44,20 +53,33 @@ export default new Vuex.Store({
       const exercises = await servExercises;
       const workouts = await servWorkouts;
 
+      const activeWorkout = await servActiveWorkout;
+
       dispatch("records/setMeasurements", measurementRecords);
       dispatch("records/setExercises", exerciseRecords);
       dispatch("records/setWorkouts", workoutRecords);
       dispatch("available/setExercises", exercises);
       dispatch("available/setWorkouts", workouts);
+      dispatch("workout/setWorkout", activeWorkout);
     },
-    setDrawer({ commit }, drawerState) {
-      commit("SET_DRAWER", drawerState);
+
+    setDrawer({ commit }, bool) {
+      commit("SET_DRAWER", bool);
     },
+
     toggleDrawer({ state, commit }) {
       if (state.drawerActive) {
         commit("DRAWER_ACTIVE_FALSE");
       } else {
         commit("DRAWER_ACTIVE_TRUE");
+      }
+    },
+
+    setModalActive({ commit }, bool) {
+      if (bool) {
+        commit("MODAL_ACTIVE_TRUE");
+      } else {
+        commit("MODAL_ACTIVE_FALSE");
       }
     }
   },

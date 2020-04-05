@@ -11,7 +11,12 @@
 
       v-card-actions
         v-container
-          v-btn(:to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" block rounded)
+          v-btn(
+            :to="{name: `ActiveWorkout`, params: { newWorkout: true, id: this.id, name: this.name, exerciseIds: this.exerciseIds}}"
+            color="primary"
+            block
+            rounded
+          )
             span Begin Workout
             v-icon(right) play_arrow
 </template>
@@ -32,6 +37,10 @@ export default {
     },
     name: {
       type: String,
+      required: true
+    },
+    exerciseIds: {
+      type: Array,
       required: true
     }
   }

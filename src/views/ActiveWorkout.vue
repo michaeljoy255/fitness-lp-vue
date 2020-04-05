@@ -20,6 +20,42 @@ export default {
     WorkoutStep,
     SummaryStep
   },
+  created() {
+    // Make sure nav drawer is closed
+    this.$store.dispatch("setDrawer", false);
+
+    /**
+     * @todo This code is messy, find a better way!!!
+     */
+    // this.$route.params.exerciseIds
+    if (this.$route.params.newWorkout) {
+      // Init new workout with provided params (id, name, exerciseIds)
+      this.$store.dispatch("workout/start", {
+        id: this.$route.params.id,
+        name: this.$route.params.name,
+        exercises: this.$store.getters["available/getExercisesByIds"](
+          this.$route.params.exerciseIds
+        ),
+        records: [] // @todo - need a getter for this
+      });
+    } else if (this.$route.params.id) {
+      // Init new workout with just provided id
+      const workout = this.$store.getters["available/getWorkoutById"](
+        this.$route.params.id
+      );
+
+      this.$store.dispatch("workout/start", {
+        id: this.$route.params.id,
+        name: workout.name,
+        exercises: this.$store.getters["available/getExercisesByIds"](
+          workout.exerciseIds
+        ),
+        records: [] // @todo - need a getter for this
+      });
+    } else {
+      // Resume the incomplete workout
+    }
+  },
   computed: {
     currentStep: {
       get() {
@@ -30,9 +66,10 @@ export default {
       }
     },
     exercises() {
-      return this.$store.getters["available/getExercisesByWorkoutId"](
-        this.$route.params.id
-      );
+      return this.$store.state.workout.exercises;
+    },
+    records() {
+      return this.$store.state.workout.records;
     }
   }
 };

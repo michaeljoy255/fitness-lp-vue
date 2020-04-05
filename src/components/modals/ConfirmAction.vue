@@ -1,17 +1,5 @@
 <template lang="pug">
   v-dialog(v-model="isActive" persistent light max-width="500")
-
-    template(v-slot:activator="{ on }")
-      v-btn(
-        v-on="on"
-        :rounded="rounded"
-        :text="text"
-        :color="color"
-        :block="block"
-      )
-        span {{ buttonText }}
-        v-icon(right) {{ buttonIcon }}
-
     v-card
       v-card-title {{ title }}
 
@@ -21,7 +9,7 @@
 
       v-card-actions
         v-spacer
-        v-btn(@click="isActive = false" text)
+        v-btn(@click="$store.dispatch('setModalActive', false)" text)
           span Cancel
         v-btn(@click="confirmModal()" color="warning")
           span Confirm
@@ -31,30 +19,6 @@
 export default {
   name: "ConfirmAction",
   props: {
-    rounded: {
-      type: Boolean,
-      default: false
-    },
-    text: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: ""
-    },
-    block: {
-      type: Boolean,
-      default: false
-    },
-    buttonText: {
-      type: String,
-      default: ""
-    },
-    buttonIcon: {
-      type: String,
-      default: ""
-    },
     title: {
       type: String,
       required: true
@@ -68,15 +32,20 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      isActive: false
-    };
-  },
   methods: {
     confirmModal() {
-      this.isActive = false;
+      this.$store.dispatch("setModalActive", false);
       this.$store.dispatch(this.action);
+    }
+  },
+  computed: {
+    isActive: {
+      get() {
+        return this.$store.state.modalActive;
+      },
+      set(bool) {
+        this.$store.dispatch("setModalActive", bool);
+      }
     }
   }
 };

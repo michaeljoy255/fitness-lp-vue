@@ -1,14 +1,16 @@
+import ExerciseService from "../../services/exercise.service";
+import WorkoutService from "../../services/workout.service";
+import { isObjectWithData, isArrayWithData } from "../../helpers";
+
 /**
  * Available module for the store is for all available exercises and workouts
  */
-import ExerciseService from "../../services/exercise.service";
-import WorkoutService from "../../services/workout.service";
 
 export const namespaced = true;
 
 export const state = {
-  exercises: [],
-  workouts: []
+  exercises: null,
+  workouts: null
 };
 
 export const mutations = {
@@ -35,18 +37,27 @@ export const actions = {
     const exercises = await servExercises;
     const workouts = await servWorkouts;
 
-    if (exercises && workouts) {
-      dispatch("setExercises", exercises);
-      dispatch("setWorkouts", workouts);
+    dispatch("setExercises", exercises);
+    dispatch("setWorkouts", workouts);
+  },
+
+  setExercises({ commit }, exercises) {
+    if (isArrayWithData(exercises)) {
+      commit("SET_EXERCISES", exercises);
+    } else {
+      commit("CLEAR_EXERCISES");
     }
   },
-  setExercises({ commit }, exercises) {
-    commit("SET_EXERCISES", exercises);
-  },
+
   setWorkouts({ commit }, workouts) {
-    commit("SET_WORKOUTS", workouts);
+    if (isArrayWithData(workouts)) {
+      commit("SET_WORKOUTS", workouts);
+    } else {
+      commit("CLEAR_WORKOUTS");
+    }
   },
-  clearAll({ commit }) {
+
+  clearAvailable({ commit }) {
     commit("CLEAR_WORKOUTS");
     commit("CLEAR_EXERCISES");
   }
@@ -56,18 +67,32 @@ export const getters = {
   getWorkoutById: state => id => {
     return state.workouts.find(workout => workout.id === id);
   },
+
   getExerciseById: state => id => {
     return state.exercises.find(exercise => exercise.id === id);
   },
-  getExercisesByWorkoutId: (state, getters) => id => {
-    let workout = {};
+
+  getExercisesByIds: (state, getters) => ids => {
     let exercises = [];
 
-    workout = getters.getWorkoutById(id);
+    if (isArrayWithData(ids)) {
+      exercises = ids.map(id => {
+        return getters.getExerciseById(id);
+      });
+    }
 
-    exercises = workout.exerciseIds.map(exerId => {
-      return getters.getExerciseById(exerId);
-    });
+    return exercises;
+  },
+
+  getExercisesByWorkoutId: (state, getters) => id => {
+    const workout = getters.getWorkoutById(id);
+    let exercises = [];
+
+    if (isObjectWithData(workout)) {
+      exercises = workout.exerciseIds.map(exerId => {
+        return getters.getExerciseById(exerId);
+      });
+    }
 
     return exercises;
   }
