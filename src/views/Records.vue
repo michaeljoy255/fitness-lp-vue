@@ -8,21 +8,22 @@
       v-card-text This area can contain all the reacords for this item (Read).
       
       v-card-actions
-        v-btn(color="success" rounded)
-          span Create
-          v-icon(right) add
+        v-container
+          v-btn(color="success" rounded)
+            span Create
+            v-icon(right) add
 
-        v-btn(color="warning" rounded)
-          span Update
-          v-icon(right) create
+          v-btn(color="warning" rounded)
+            span Update
+            v-icon(right) create
 
-        v-btn(color="error" rounded)
-          span Delete
-          v-icon(right) delete_forever
+          v-btn(color="error" rounded)
+            span Delete
+            v-icon(right) delete_forever
 
-        v-btn(color="error" rounded)
-          span Clear All Records
-          v-icon(right) delete_sweep
+          v-btn(color="error" rounded)
+            span Clear All Records
+            v-icon(right) delete_sweep
 </template>
 
 <script>

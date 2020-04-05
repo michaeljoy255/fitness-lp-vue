@@ -3,16 +3,17 @@
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle {{ new Date().toDateString() }}
+      v-card-subtitle {{ this.getLongDate() }}
 
       v-card-text
         v-icon timer
         span(v-html="this.getWorkoutTime(1, new Date())")
 
       v-card-actions
-        v-btn(:to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" block)
-          span Begin Workout
-          v-icon(right) play_arrow
+        v-container
+          v-btn(:to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" block rounded)
+            span Begin Workout
+            v-icon(right) play_arrow
 </template>
 
 <script>

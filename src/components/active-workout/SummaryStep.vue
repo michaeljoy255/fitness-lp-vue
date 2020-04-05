@@ -10,17 +10,17 @@
         v-card-title Summary of Workout
         v-card-subtitle Progress graph, current duration, etc...
         v-card-actions
-          ConfirmAction(
-            :rounded="true"
-            :text="false"
-            :color="'success'"
-            :block="true"
-            :buttonText="'Finish Workout'"
-            :buttonIcon="'check'"
-            :title="'End Workout and Save Results?'"
-            :content="'Click Confirm to save the results of this workout into your records.'"
-            :action="'workout/submitWorkout'"
-          )
+          v-container
+            ConfirmAction(
+              :rounded="true"
+              :color="'success'"
+              :block="true"
+              :buttonText="'Finish Workout'"
+              :buttonIcon="'check'"
+              :title="'Finish Workout and Save Results?'"
+              :content="'Click Confirm to save the results of this workout into your records.'"
+              :action="'workout/submitWorkout'"
+            )
 </template>
 
 <script>

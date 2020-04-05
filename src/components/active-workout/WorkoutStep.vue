@@ -1,7 +1,8 @@
 <template lang="pug">
   div
-    v-stepper-step.pa-3(
-      :complete="$store.state.workout.step > step"
+    //- Removed this attr from stepper. Could implement later though...
+    //- :complete="$store.state.workout.step > step"
+    v-stepper-step.pa-3( 
       :step="step"
       editable
     ) {{ name }}

@@ -7,7 +7,7 @@
  */
 
 /**
- * Something you expect to be an object with at least one property
+ * Variable you expect to be an object with at least one property
  * @param object
  * @returns {boolean}
  */
@@ -19,13 +19,12 @@ export function isObjectWithData(object) {
   ) {
     return true;
   } else {
-    console.warn(`Object ${object} isn't valid, or doesn't have any data.`);
     return false;
   }
 }
 
 /**
- * Something you expect to be an array with a least one element
+ * Variable you expect to be an array with a least one element
  * @param array
  * @returns {boolean}
  */
@@ -33,7 +32,6 @@ export function isArrayWithData(array) {
   if (Array.isArray(array) && array.length > 0) {
     return true;
   } else {
-    console.warn(`Array ${array} isn't valid, or doesn't have any data.`);
     return false;
   }
 }

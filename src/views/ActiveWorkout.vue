@@ -20,18 +20,6 @@ export default {
     WorkoutStep,
     SummaryStep
   },
-  created() {
-    // Get exercises using workout id from route
-    // Must be in created hook for stepper steps
-    /**
-     * @todo You need to set these exercises and other properties for the workout in the WORKOUT.js state file!!!!!!!
-     */
-    this.exercises = this.$store.getters["available/getExercisesByWorkoutId"](
-      this.$route.params.id
-    );
-
-    console.log("AW - exercises:", this.exercises);
-  },
   computed: {
     currentStep: {
       get() {

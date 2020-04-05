@@ -6,9 +6,10 @@
       v-card-subtitle Please return to the home page.
       
       v-card-actions
-        v-btn(to="/" color="primary" rounded)
-          span Home
-          v-icon(right) home
+        v-container
+          v-btn(to="/" color="primary" rounded)
+            span Home
+            v-icon(right) home
 </template>
 
 <script>

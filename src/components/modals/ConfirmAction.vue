@@ -14,12 +14,16 @@
 
     v-card
       v-card-title {{ title }}
+
       v-card-text {{ content }}
+
+      v-divider
+
       v-card-actions
         v-spacer
-        v-btn.ml-3.mb-3(@click="isActive = false" text rounded)
+        v-btn(@click="isActive = false" text)
           span Cancel
-        v-btn.ml-3.mb-3(@click="confirmModal()" color="warning" rounded)
+        v-btn(@click="confirmModal()" color="warning")
           span Confirm
 </template>
 
@@ -45,7 +49,7 @@ export default {
     },
     buttonText: {
       type: String,
-      required: true
+      default: ""
     },
     buttonIcon: {
       type: String,

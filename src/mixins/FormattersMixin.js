@@ -20,7 +20,7 @@ export const formattersMixin = {
      * @returns {String} Current calendar month
      */
     getMonth() {
-      const number = new Date().getUTCDay(new Date().toLocaleDateString());
+      const number = new Date().getUTCMonth(new Date().toLocaleDateString());
       switch (number) {
         case 1:
           return "January";

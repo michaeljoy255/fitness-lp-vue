@@ -8,9 +8,10 @@
       v-card-text Fitness Linear Progression created by Michael Joy
 
       v-card-actions
-        v-btn(href="https://github.com/michaeljoy255" target="_blank" color="primary" rounded)
-          span GitHub
-          v-icon(right) language
+        v-container
+          v-btn(href="https://github.com/michaeljoy255" target="_blank" color="primary" rounded)
+            span GitHub
+            v-icon(right) language
 </template>
 
 <script>

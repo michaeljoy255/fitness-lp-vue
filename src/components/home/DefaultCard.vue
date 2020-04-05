@@ -10,16 +10,17 @@
       | options in the menu in the top left of the screen.
       
     v-card-actions
-      ConfirmAction(
-        :rounded="true"
-        :text="false"
-        :color="'success'"
-        :buttonText="'Use Defaults'"
-        :buttonIcon="'system_update_alt'"
-        :title="'Generate Default Exercises and Workouts?'"
-        :content="'Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.'"
-        :action="'available/setDefaults'"
-      )
+      v-container
+        ConfirmAction(
+          :rounded="true"
+          :block="true"
+          :color="'success'"
+          :buttonText="'Use Defaults'"
+          :buttonIcon="'system_update_alt'"
+          :title="'Generate Default Exercises and Workouts?'"
+          :content="'Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.'"
+          :action="'available/setDefaults'"
+        )
 </template>
 
 <script>

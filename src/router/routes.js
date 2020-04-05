@@ -21,10 +21,7 @@ const routes = [
   {
     path: "/active-workout/:id",
     name: "ActiveWorkout",
-    component: () => import("../views/ActiveWorkout.vue"),
-    meta: {
-      topBar: "WorkoutBar"
-    }
+    component: () => import("../views/ActiveWorkout.vue")
   },
   {
     path: "/about",
@@ -59,10 +56,6 @@ const routes = [
 
 const router = new VueRouter({
   routes
-});
-
-router.afterEach(to => {
-  console.log("Route:", to);
 });
 
 export default router;

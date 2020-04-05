@@ -3,9 +3,11 @@ import Vue from "vue";
 /**
  * EventBusService
  *
- * Use the Event Bus Service to comunicate between parts of your code that can't
- * easily communicate with each other. Things like making route changes in the
- * store for example. However, use this as a last resort!
+ * This service creates an empty Vue instance that has access to some utilities
+ * you might find useful. Use the Event Bus Service to comunicate between parts
+ * of your code that can't easily communicate with each other. Things like
+ * making route changes in the store for example. However, you should only use
+ * this as a last resort!
  *
  * @param {string} eventChannel The channel to emit or listen to the event on
  * @param {string} payload The data being sent over the channel
