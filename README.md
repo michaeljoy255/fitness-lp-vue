@@ -4,7 +4,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-- Need solution to modal and state. May need to try dynamic modal again (check animation)
 - Implement live workout timer with your new formatted time function (1H 7M)
 - Replace the following for Toolbar
     - Date -> Live workout timer

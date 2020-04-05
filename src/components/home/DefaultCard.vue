@@ -11,23 +11,24 @@
       
     v-card-actions
         v-container
-          v-btn(@click.stop="$store.dispatch('setModalActive', true)" rounded color="success" block)
+          v-btn(@click.stop="openModal()" rounded color="success" block)
             span Use Defaults
             v-icon(right) system_update_alt
-          ConfirmAction(
-            :title="'Generate Default Exercises and Workouts?'"
-            :content="'Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.'"
-            :action="'available/setDefaults'"
-          )
 </template>
 
 <script>
-import ConfirmAction from "../modals/ConfirmAction";
-
 export default {
   name: "DefaultCard",
-  components: {
-    ConfirmAction
+  methods: {
+    openModal() {
+      this.$store.dispatch("modal/open", {
+        component: "ConfirmAction",
+        title: "Generate Default Exercises and Workouts?",
+        content:
+          "Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.",
+        action: "available/setDefaults"
+      });
+    }
   }
 };
 </script>

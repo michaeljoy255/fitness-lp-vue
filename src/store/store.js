@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import * as modal from "./modules/modal";
 import * as selected from "./modules/selected";
 import * as available from "./modules/available";
 import * as records from "./modules/records";
@@ -12,8 +13,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawerActive: false,
-    modalActive: false
+    drawerActive: false
   },
   //############################################################################
   mutations: {
@@ -25,12 +25,6 @@ export default new Vuex.Store({
     },
     DRAWER_ACTIVE_FALSE(state) {
       state.drawerActive = false;
-    },
-    MODAL_ACTIVE_TRUE(state) {
-      state.modalActive = true;
-    },
-    MODAL_ACTIVE_FALSE(state) {
-      state.modalActive = false;
     }
   },
   //############################################################################
@@ -73,19 +67,12 @@ export default new Vuex.Store({
       } else {
         commit("DRAWER_ACTIVE_TRUE");
       }
-    },
-
-    setModalActive({ commit }, bool) {
-      if (bool) {
-        commit("MODAL_ACTIVE_TRUE");
-      } else {
-        commit("MODAL_ACTIVE_FALSE");
-      }
     }
   },
   //############################################################################
   getters: {},
   modules: {
+    modal,
     selected,
     available,
     records,
