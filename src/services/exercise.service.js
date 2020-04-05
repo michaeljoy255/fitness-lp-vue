@@ -1,43 +1,42 @@
 import { DefaultExercises } from "../constants";
-import { getStorageByKey } from "../helpers";
+import { isArrayWithData } from "../helpers";
 
-/**
- * ExerciseService
- */
-export default {
+const ExerciseService = {
   /**
    * Initializes default exercises if no exercise data is present
-   * @returns {?Promise<Array>} Default exercise data
+   * @returns {Promise<Array>} Default exercise data
    * @example
    */
   initDefaultExercises() {
     return new Promise((resolve, reject) => {
-      const exercises = getStorageByKey("exercises");
+      const exercises = localStorage.getItem("exercises");
 
-      if (!exercises) {
-        // Exercise data is empty, fill with defaults
+      if (isArrayWithData(exercises)) {
+        reject(new Error("Exercise data already exists."));
+      } else {
         /**
-         * @todo Save the defaults to local storage now
+         * @todo Save the defaults to local storage
          */
         resolve(DefaultExercises.exercises);
-      } else {
-        // Exercises data already exists!
-        reject(
-          new Error(
-            "Can't initialize default exercises with previous data present."
-          )
-        );
       }
     });
   },
 
   /**
    * Fetches exercise data from storage
-   * @returns {?Promise<Array>} Exercise data
+   * @returns {Promise<Array>} Exercise data
    */
   getExercises() {
     return new Promise(resolve => {
-      resolve(getStorageByKey("exercises"));
+      const exercises = localStorage.getItem("exercises");
+
+      if (isArrayWithData(exercises)) {
+        resolve(exercises);
+      } else {
+        resolve([]);
+      }
     });
   }
 };
+
+export default ExerciseService;

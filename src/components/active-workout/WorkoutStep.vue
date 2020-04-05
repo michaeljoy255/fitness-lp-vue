@@ -1,7 +1,11 @@
 <template lang="pug">
   div
-    v-stepper-step.pa-3(:complete="getStep > step" :step="step" editable)
-      span {{ name }}
+    v-stepper-step.pa-3(
+      :complete="$store.state.workout.step > step"
+      :step="step"
+      editable
+    ) {{ name }}
+
     v-stepper-content.pl-0.pt-2(:step="step")
       ExerciseCard
 </template>
@@ -22,18 +26,6 @@ export default {
     name: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    getStep: {
-      get() {
-        return this.$store.state.workout.step;
-      },
-      set(step) {
-        if (step !== this.$store.state.workout.step) {
-          this.$store.dispatch("workout/setStep", step);
-        }
-      }
     }
   }
 };

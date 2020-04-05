@@ -1,6 +1,7 @@
 <template lang="pug">
-  v-container.mx-auto.mt-5(v-if="!workouts")
+  v-container.mx-auto(v-if="workouts.length === 0")
     DefaultCard
+    
   v-container(v-else fluid)
     v-row
       WorkoutCard(v-for="workout in workouts"

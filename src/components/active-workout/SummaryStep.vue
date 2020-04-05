@@ -1,30 +1,40 @@
 <template lang="pug">
   div
-    v-stepper-step.pa-3(:step="step" editable)
-      span Summary
+    v-stepper-step.pa-3(
+      :step="step"
+      editable
+    ) Summary
+
     v-stepper-content.pl-0.pt-2(:step="step")
       v-card
-        v-container
-          div Summary of workout: Progress image, timestamp, etc...
-          v-spacer.mb-3
-          v-btn(color="success" @click="submit" rounded)
-            span Submit
-            v-icon(right) done
+        v-card-title Summary of Workout
+        v-card-subtitle Progress graph, current duration, etc...
+        v-card-actions
+          ConfirmAction(
+            :rounded="true"
+            :text="false"
+            :color="'success'"
+            :block="true"
+            :buttonText="'Finish Workout'"
+            :buttonIcon="'check'"
+            :title="'End Workout and Save Results?'"
+            :content="'Click Confirm to save the results of this workout into your records.'"
+            :action="'workout/submitWorkout'"
+          )
 </template>
 
 <script>
+import ConfirmAction from "../modals/ConfirmAction";
+
 export default {
   name: "SummaryStep",
+  components: {
+    ConfirmAction
+  },
   props: {
     step: {
       type: Number,
       required: true
-    }
-  },
-  methods: {
-    submit() {
-      this.$router.push("/home");
-      this.$store.dispatch("workout/submitWorkout");
     }
   }
 };

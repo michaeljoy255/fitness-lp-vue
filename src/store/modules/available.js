@@ -7,8 +7,8 @@ import WorkoutService from "../../services/workout.service";
 export const namespaced = true;
 
 export const state = {
-  exercises: null,
-  workouts: null
+  exercises: [],
+  workouts: []
 };
 
 export const mutations = {
@@ -19,10 +19,10 @@ export const mutations = {
     state.workouts = workouts;
   },
   CLEAR_EXERCISES(state) {
-    state.exercises = null;
+    state.exercises = [];
   },
   CLEAR_WORKOUTS(state) {
-    state.workouts = null;
+    state.workouts = [];
   }
 };
 
@@ -52,4 +52,23 @@ export const actions = {
   }
 };
 
-export const getters = {};
+export const getters = {
+  getWorkoutById: state => id => {
+    return state.workouts.find(workout => workout.id === id);
+  },
+  getExerciseById: state => id => {
+    return state.exercises.find(exercise => exercise.id === id);
+  },
+  getExercisesByWorkoutId: (state, getters) => id => {
+    let workout = {};
+    let exercises = [];
+
+    workout = getters.getWorkoutById(id);
+
+    exercises = workout.exerciseIds.map(exerId => {
+      return getters.getExerciseById(exerId);
+    });
+
+    return exercises;
+  }
+};

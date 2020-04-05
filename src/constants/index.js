@@ -280,7 +280,7 @@ function getWorkoutExerciseIds(...args) {
 function getExerciseIdByName(name) {
   const exerciseId = DefaultExercises.exercises.find(
     exercise => exercise.name === name
-  );
+  ).id;
 
   if (exerciseId) {
     return exerciseId;

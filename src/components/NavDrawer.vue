@@ -69,25 +69,10 @@ export default {
   },
   methods: {
     testON() {
-      console.log("TEST: Modal - Remove all defaults");
-
-      this.$store.dispatch("modal/open", {
-        component: "ConfirmAction",
-        title: "Remove Workouts and Exercises?",
-        content: `Click Confirm to remove all exercises and workouts.`,
-        action: "available/clearAll"
-      });
+      console.log("TEST 1:");
     },
     testOFF() {
-      console.log("TEST: Modal - Cancel workout");
-
-      this.$store.dispatch("modal/open", {
-        component: "ConfirmAction",
-        title: "Cancel this Workout?",
-        content: `No progress will be saved by canceling a workout. Click
-                  Confirm to complete this action.`,
-        action: ""
-      });
+      console.log("TEST 2:");
     }
   }
 };

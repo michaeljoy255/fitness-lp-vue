@@ -1,14 +1,17 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
-    v-card(shaped)
-      v-card-text(align="center")
-        p.title.text--primary.mb-0 {{ name }}
-        p.text--secondary {{ new Date().toDateString() }}
-        p.text--primary
-          v-icon timer
-          span(v-html="this.getWorkoutTime(1, new Date())")
-        v-btn(@click="routeFunc" :to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" rounded)
-          span Begin
+    v-card
+      v-card-title {{ name }}
+      
+      v-card-subtitle {{ new Date().toDateString() }}
+
+      v-card-text
+        v-icon timer
+        span(v-html="this.getWorkoutTime(1, new Date())")
+
+      v-card-actions
+        v-btn(:to="{name: `ActiveWorkout`,params: {id: this.id}}" color="primary" block)
+          span Begin Workout
           v-icon(right) play_arrow
 </template>
 
@@ -29,27 +32,6 @@ export default {
     name: {
       type: String,
       required: true
-    }
-  },
-  methods: {
-    routeFunc() {
-      console.log("ROUTE FUNC");
-      // Set active workout state
-      /**
-       * @todo Need exercises(ids?) and records
-       */
-      this.$store.dispatch("workout/startWorkout", {
-        id: this.id,
-        name: this.name,
-        step: 1,
-        exercises: [
-          { name: "Warmup" },
-          { name: "Exercise" },
-          { name: "Cooldown" },
-          { name: "Stretching" }
-        ],
-        records: []
-      });
     }
   }
 };

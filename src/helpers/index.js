@@ -7,22 +7,33 @@
  */
 
 /**
- * Get local storage data with a key
- * @param {string} key
- * @returns {?Array} Array with data or null
- * @example
- * let ex = getStorageByKey("key");
+ * Something you expect to be an object with at least one property
+ * @param object
+ * @returns {boolean}
  */
-export function getStorageByKey(key) {
+export function isObjectWithData(object) {
   if (
-    !localStorage.getItem(key) ||
-    localStorage.getItem(key) === [] ||
-    localStorage.getItem(key) === {}
+    object !== null &&
+    typeof object === "object" &&
+    Object.keys(object) !== 0
   ) {
-    // Empty or invalid data
-    return null;
+    return true;
   } else {
-    // Data found
-    return localStorage.getItem(key);
+    console.warn(`Object ${object} isn't valid, or doesn't have any data.`);
+    return false;
+  }
+}
+
+/**
+ * Something you expect to be an array with a least one element
+ * @param array
+ * @returns {boolean}
+ */
+export function isArrayWithData(array) {
+  if (Array.isArray(array) && array.length > 0) {
+    return true;
+  } else {
+    console.warn(`Array ${array} isn't valid, or doesn't have any data.`);
+    return false;
   }
 }

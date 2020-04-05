@@ -1,3 +1,5 @@
+import EventBusService from "../../services/event-bus.service";
+
 /**
  * Workout module for the store is for active workouts
  */
@@ -6,12 +8,12 @@ export const namespaced = true;
 
 export const state = {
   id: null,
-  name: null,
-  step: null,
+  name: "",
+  step: 1, // 1 is the lowest valid step
   beginTime: null,
   endTime: null,
-  exercises: null,
-  records: null
+  exercises: [],
+  records: []
 };
 
 export const mutations = {
@@ -26,12 +28,12 @@ export const mutations = {
   },
   CLEAR_WORKOUT(state) {
     state.id = null;
-    state.name = null;
-    state.step = null;
+    state.name = "";
+    state.step = 1;
     state.beginTime = null;
     state.endTime = null;
-    state.exercises = null;
-    state.records = null;
+    state.exercises = [];
+    state.records = [];
   },
   SET_STEP(state, step) {
     state.step = step;
@@ -51,9 +53,11 @@ export const actions = {
     });
   },
   cancelWorkout({ commit }) {
+    EventBusService.$emit("storeChangedRoute", "/home");
     commit("CLEAR_WORKOUT");
   },
   submitWorkout({ commit }) {
+    EventBusService.$emit("storeChangedRoute", "/home");
     /**
      * @todo Save workout results to local records and local storage
      */

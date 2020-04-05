@@ -1,8 +1,12 @@
 <template lang="pug">
-  v-container.mx-auto.mt-5
-    v-stepper(v-model="step" vertical non-linear)
-      div(v-for="(exercise, i) in exercises" :key="i")
-        WorkoutStep(:step="i+1" :name="exercise.name")
+  v-container.mx-auto
+    v-stepper(v-model="currentStep" vertical non-linear)
+      WorkoutStep(
+        v-for="(exercise, i) in exercises"
+        :key="i"
+        :step="i+1"
+        :name="exercise.name"
+      )
       SummaryStep(:step="exercises.length+1")
 </template>
 
@@ -16,27 +20,31 @@ export default {
     WorkoutStep,
     SummaryStep
   },
-  data() {
-    return {
-      workout: null,
-      exercises: [
-        { name: "Warmup" },
-        { name: "Exercise" },
-        { name: "Cooldown" },
-        { name: "Stretching" }
-      ]
-    };
+  created() {
+    // Get exercises using workout id from route
+    // Must be in created hook for stepper steps
+    /**
+     * @todo You need to set these exercises and other properties for the workout in the WORKOUT.js state file!!!!!!!
+     */
+    this.exercises = this.$store.getters["available/getExercisesByWorkoutId"](
+      this.$route.params.id
+    );
+
+    console.log("AW - exercises:", this.exercises);
   },
   computed: {
-    step: {
+    currentStep: {
       get() {
         return this.$store.state.workout.step;
       },
       set(step) {
-        if (step !== this.$store.state.workout.step) {
-          this.$store.dispatch("workout/setStep", step);
-        }
+        this.$store.dispatch("workout/setStep", step);
       }
+    },
+    exercises() {
+      return this.$store.getters["available/getExercisesByWorkoutId"](
+        this.$route.params.id
+      );
     }
   }
 };

@@ -5,9 +5,9 @@
 export const namespaced = true;
 
 export const state = {
-  measurements: null,
-  exercises: null,
-  workouts: null
+  measurements: [],
+  exercises: [],
+  workouts: []
 };
 
 export const mutations = {

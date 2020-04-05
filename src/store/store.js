@@ -4,7 +4,6 @@ import * as selected from "./modules/selected";
 import * as available from "./modules/available";
 import * as records from "./modules/records";
 import * as workout from "./modules/workout";
-import * as modal from "./modules/modal";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
 import RecordService from "../services/record.service";
@@ -30,7 +29,6 @@ export default new Vuex.Store({
   //############################################################################
   actions: {
     async initApp({ dispatch }) {
-      console.info("Initializing App Data");
       const servMeasurementRecs = RecordService.getMeasurements();
       const servExerciseRecs = RecordService.getExercises();
       const servWorkoutRecs = RecordService.getWorkouts();
@@ -46,21 +44,11 @@ export default new Vuex.Store({
       const exercises = await servExercises;
       const workouts = await servWorkouts;
 
-      if (measurementRecords) {
-        dispatch("records/setMeasurements", measurementRecords);
-      }
-      if (exerciseRecords) {
-        dispatch("records/setExercises", exerciseRecords);
-      }
-      if (workoutRecords) {
-        dispatch("records/setWorkouts", workoutRecords);
-      }
-      if (exercises) {
-        dispatch("available/setExercises", exercises);
-      }
-      if (workouts) {
-        dispatch("available/setWorkouts", workouts);
-      }
+      dispatch("records/setMeasurements", measurementRecords);
+      dispatch("records/setExercises", exerciseRecords);
+      dispatch("records/setWorkouts", workoutRecords);
+      dispatch("available/setExercises", exercises);
+      dispatch("available/setWorkouts", workouts);
     },
     setDrawer({ commit }, drawerState) {
       commit("SET_DRAWER", drawerState);
@@ -79,7 +67,6 @@ export default new Vuex.Store({
     selected,
     available,
     records,
-    workout,
-    modal
+    workout
   }
 });
