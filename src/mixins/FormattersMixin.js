@@ -134,11 +134,5 @@ export const formattersMixin = {
       // Return only seconds if nothing else
       return strSecs + S;
     }
-  },
-  //############################################################################
-  computed: {
-    workoutTimer(time) {
-      return time;
-    }
   }
 };

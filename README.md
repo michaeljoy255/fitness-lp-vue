@@ -4,11 +4,42 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-- Implement live workout timer with your new formatted time function (1H 7M)
-- Replace the following for Toolbar
-    - Date -> Live workout timer
-    - App Name -> Workout Name
-    - Menu Btn -> Workout cancel btn (X) that activates a confirmation modal
+**Resume Card**
+- Implementation:
+    - Open modal for confirming the discard option
+    - Logic to decide if it gets rendered (Home view)
+    - Logic for what happens when Resume is clicked
+        - Pass data through route params?
+        - May need to change how workout data is currently loaded in Active Workout
+
+**Workout Timer**
+- Design:
+    - Temporary position in top right of App Bar
+    - Have timer icon with with Formatted Time
+    - Stretch Goal: Popup footer bar with timer on it (mobile and desktop)
+- Implementation:
+    - Set interval in Active Workout that takes Now Time - Workout Begin Time
+
+**General Design Cleanup**
+- Move cancel workout button to right side of App Bar
+- Remove style tags from components if they aren't using them (all of them?)
+- Bring nav menu back to App Bar
+    - Let users leave Active Workjout without canceling workout once Resume Card is done
+- Rename components, services, and routes based on how you think they are going to be used now
+
+**Date Storage (Local Storage)**
+- Start saving Active Workout data (easiest one to do)
+    - Save as "active"
+- Add feature to clear all stored data (currently workouts, exercises, and active)
+- Add feature that saves defaults into "available" on LS when they are created
+- Add importer feature (JSON or CSV?)
+- Add exporter feature (JSON or CSV?)
+
+**Notes**
+- Local Storage Items:
+    - ("current") === { id, name, step, beginTime, endTime, exercises, records }
+    - ("available") === { exercises: [...], workouts: [...] }
+    - ("records") === { exercises: [...], workouts: [...], measurements: [...]}
 
 # Table of Contents
 

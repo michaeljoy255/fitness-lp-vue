@@ -12,7 +12,7 @@
       v-card-actions
         v-container
           v-btn(
-            :to="{name: `ActiveWorkout`, params: { newWorkout: true, id: this.id, name: this.name, exerciseIds: this.exerciseIds}}"
+            :to="this.routeToObject()"
             color="primary"
             block
             rounded
@@ -42,6 +42,19 @@ export default {
     exerciseIds: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    routeToObject() {
+      return {
+        name: `ActiveWorkout`,
+        params: {
+          newWorkout: true,
+          id: this.id,
+          name: this.name,
+          exerciseIds: this.exerciseIds
+        }
+      };
     }
   }
 };

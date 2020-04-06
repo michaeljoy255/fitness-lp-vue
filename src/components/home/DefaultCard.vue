@@ -10,10 +10,10 @@
       | options in the menu in the top left of the screen.
       
     v-card-actions
-        v-container
-          v-btn(@click.stop="openModal()" rounded color="success" block)
-            span Use Defaults
-            v-icon(right) system_update_alt
+      v-container
+        v-btn(@click.stop="openModal()" rounded color="success" block)
+          span Use Defaults
+          v-icon(right) system_update_alt
 </template>
 
 <script>
