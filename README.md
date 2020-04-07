@@ -29,6 +29,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Add exporter feature (JSON or CSV?)
 
 **Notes**
+- Workout and exercises names CANNOT exceed 40 characters
 - Local Storage Items:
     - ("active") === { id, name, step, beginTime, endTime, exercises, records }
     - ("available") === { exercises: [...], workouts: [...] }

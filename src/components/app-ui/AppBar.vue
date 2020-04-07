@@ -12,8 +12,8 @@
     //- Active Workout
     span(v-else)
       //- Alter what is shown based on device size
-      v-toolbar-title.d-sm-none {{ workout.name }}
-      v-toolbar-title.d-none.d-sm-flex {{ workout.name }}
+      .mt-1.text-no-wrap.d-sm-none {{ workout.name }}
+      .mt-1.text-no-wrap.d-none.d-sm-flex {{ workout.name }}
 
     v-spacer
 
@@ -23,7 +23,7 @@
       span.d-none.d-sm-flex {{ this.getLongDateMixin() }}
 
     //- Active Workout
-    v-btn(v-else @click.stop="openModal()" icon)
+    v-btn(v-else @click.stop="openModal()" icon absolute right)
       v-icon clear
 </template>
 

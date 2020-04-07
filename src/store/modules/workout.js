@@ -28,8 +28,11 @@ export const mutations = {
     state.records = workout.records;
   },
   CLEAR_WORKOUT(state) {
-    state.id = "";
-    state.name = "";
+    /**
+     * @todo defaults back to "" when done testing
+     */
+    state.id = "1";
+    state.name = "Test";
     state.step = 1; // 1 is the lowest valid step for steppers
     state.beginTime = null;
     state.endTime = null;
