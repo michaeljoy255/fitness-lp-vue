@@ -30,7 +30,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 **Notes**
 - Local Storage Items:
-    - ("current") === { id, name, step, beginTime, endTime, exercises, records }
+    - ("active") === { id, name, step, beginTime, endTime, exercises, records }
     - ("available") === { exercises: [...], workouts: [...] }
     - ("records") === { exercises: [...], workouts: [...], measurements: [...]}
 

@@ -60,6 +60,14 @@ export default new Vuex.Store({
       } else {
         commit("DRAWER_ACTIVE_FALSE");
       }
+    },
+
+    toggleDrawer({ state, commit }) {
+      if (state.isDrawerActive) {
+        commit("DRAWER_ACTIVE_FALSE");
+      } else {
+        commit("DRAWER_ACTIVE_TRUE");
+      }
     }
   },
   //############################################################################

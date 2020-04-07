@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    DynamicModal
+    DismissibleModal
     NavDrawer
     AppBar
     v-content
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import DynamicModal from "./components/modals/DynamicModal";
+import DismissibleModal from "./components/modals/DismissibleModal";
 import NavDrawer from "./components/app-ui/NavDrawer";
 import AppBar from "./components/app-ui/AppBar";
 import EventBusService from "./services/event-bus.service";
@@ -16,7 +16,7 @@ import EventBusService from "./services/event-bus.service";
 export default {
   name: "App",
   components: {
-    DynamicModal,
+    DismissibleModal,
     AppBar,
     NavDrawer
   },

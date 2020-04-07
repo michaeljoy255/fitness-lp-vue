@@ -1,5 +1,5 @@
 /**
- * Modal module for the store is for dynamic modal state
+ * Modal module for the store is for Dismissible modal state
  */
 
 export const namespaced = true;

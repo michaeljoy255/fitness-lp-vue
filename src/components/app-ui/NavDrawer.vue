@@ -2,7 +2,8 @@
   v-navigation-drawer(v-model="drawerActive" app clipped)
     v-list(nav)
 
-      v-list-item
+      //- X only shows on devices smaller then large
+      v-list-item.d-lg-none
         v-spacer
         v-btn(@click="drawerActive = false" icon )
           v-icon clear

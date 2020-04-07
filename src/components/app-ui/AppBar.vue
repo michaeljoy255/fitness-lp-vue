@@ -1,7 +1,7 @@
 <template lang="pug">
   v-app-bar(app clipped-left color="secondary")
   
-    v-app-bar-nav-icon(@click="setDrawerActive(true)")
+    v-app-bar-nav-icon(@click="toggleDrawer()")
 
     //- App
     span(v-if="notActiveWorkout")
@@ -34,8 +34,8 @@ export default {
   name: "AppBar",
   mixins: [formattersMixin],
   methods: {
-    setDrawerActive(bool) {
-      this.$store.dispatch("setDrawerActive", bool);
+    toggleDrawer() {
+      this.$store.dispatch("toggleDrawer");
     },
     openModal() {
       this.$store.dispatch("modal/open", {
