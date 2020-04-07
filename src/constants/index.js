@@ -284,7 +284,5 @@ function getExerciseIdByName(name) {
 
   if (exerciseId) {
     return exerciseId;
-  } else {
-    console.error("Could not match exercise name to a default exercise!");
   }
 }

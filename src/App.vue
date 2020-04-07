@@ -1,18 +1,16 @@
 <template lang="pug">
   v-app
     DynamicModal
-    NavDrawer(v-if="this.$route.name !== 'ActiveWorkout'")
-    AppBar(v-if="this.$route.name !== 'ActiveWorkout'")
-    WorkoutBar(v-if="this.$route.name === 'ActiveWorkout'")
+    NavDrawer
+    AppBar
     v-content
       router-view
 </template>
 
 <script>
 import DynamicModal from "./components/modals/DynamicModal";
-import NavDrawer from "./components/NavDrawer";
-import AppBar from "./components/AppBar";
-import WorkoutBar from "./components/WorkoutBar";
+import NavDrawer from "./components/app-ui/NavDrawer";
+import AppBar from "./components/app-ui/AppBar";
 import EventBusService from "./services/event-bus.service";
 
 export default {
@@ -20,7 +18,6 @@ export default {
   components: {
     DynamicModal,
     AppBar,
-    WorkoutBar,
     NavDrawer
   },
   created() {
@@ -33,5 +30,3 @@ export default {
   }
 };
 </script>
-
-<style lang="stylus"></style>

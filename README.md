@@ -20,13 +20,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Implementation:
     - Set interval in Active Workout that takes Now Time - Workout Begin Time
 
-**General Design Cleanup**
-- Move cancel workout button to right side of App Bar
-- Remove style tags from components if they aren't using them (all of them?)
-- Bring nav menu back to App Bar
-    - Let users leave Active Workjout without canceling workout once Resume Card is done
-- Rename components, services, and routes based on how you think they are going to be used now
-
 **Date Storage (Local Storage)**
 - Start saving Active Workout data (easiest one to do)
     - Save as "active"

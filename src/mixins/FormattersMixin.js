@@ -7,8 +7,8 @@ export const formattersMixin = {
      * Outputs a long formatted long date string
      * @returns {string} Date string formatted to: <WeekDay Month Date, Year>
      */
-    getLongDate() {
-      return `${this.getDay()} ${this.getMonth()} ${new Date(
+    getLongDateMixin() {
+      return `${this.getDayMixin()} ${this.getMonthMixin()} ${new Date(
         new Date().toLocaleDateString()
       ).getUTCDate()}, ${new Date(
         new Date().toLocaleDateString()
@@ -19,7 +19,7 @@ export const formattersMixin = {
      * Returns the current month of the year
      * @returns {String} Current calendar month
      */
-    getMonth() {
+    getMonthMixin() {
       const number = new Date().getUTCMonth(new Date().toLocaleDateString());
       switch (number) {
         case 1:
@@ -55,7 +55,7 @@ export const formattersMixin = {
      * Returns the current day of the week
      * @returns {String} Current day of the week
      */
-    getDay() {
+    getDayMixin() {
       const number = new Date().getUTCDay(new Date().toLocaleDateString());
       switch (number) {
         case 0:
@@ -83,7 +83,7 @@ export const formattersMixin = {
      * @param {number} endTime Milliseconds from date.getTime()
      * @return {string} Formatted HTML time (1H 39M or 34M 22S)
      */
-    getWorkoutTime(beginTime, endTime) {
+    getWorkoutTimeMixin(beginTime, endTime) {
       // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
       const milsecsPerDay = 24 * 60 * 60 * 1000;
       const milsecsPerHour = 60 * 60 * 1000;

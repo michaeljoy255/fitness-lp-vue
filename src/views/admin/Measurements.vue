@@ -1,7 +1,7 @@
 <template lang="pug">
   v-container.mx-auto
     v-card(shaped)
-      v-card-title Exercises
+      v-card-title Measurements
 
       v-card-subtitle Create, Read, Update, and Delete operations to be implemented...
 
@@ -24,8 +24,8 @@
 
 <script>
 export default {
-  name: "Exercises"
+  name: "Measurements"
 };
 </script>
 
-<style></style>
+

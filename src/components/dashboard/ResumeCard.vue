@@ -3,7 +3,7 @@
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle This workout was started on {{ this.getLongDate() }}
+      v-card-subtitle This workout was started on {{ this.getLongDateMixin() }}
 
       v-card-actions
         v-container

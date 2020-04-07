@@ -1,18 +1,23 @@
 <template lang="pug">
   v-navigation-drawer(v-model="drawerActive" app clipped)
-    v-list
+    v-list(nav)
 
-      v-list-item(link to="/home")
+      v-list-item
+        v-spacer
+        v-btn(@click="drawerActive = false" icon )
+          v-icon clear
+
+      v-list-item(link to="/dashboard")
         v-list-item-action
-          v-icon home
-        v-list-item-content Home
+          v-icon dashboard
+        v-list-item-content Dashboard
+
+      v-divider
 
       v-list-item(link to="/charts")
         v-list-item-action
           v-icon timeline
         v-list-item-content Charts
-
-      v-divider
 
       v-list-item(link to="/workouts")
         v-list-item-action
@@ -41,14 +46,10 @@
           v-icon info
         v-list-item-content About
 
-      v-list-item(@click="testON")
+      v-list-item(@click="test")
         v-list-item-action
           v-icon announcement
-        v-list-item-content TESTING ON
-      v-list-item(@click="testOFF")
-        v-list-item-action
-          v-icon announcement
-        v-list-item-content TESTING OFF
+        v-list-item-content Testing
 </template>
 
 <script>
@@ -57,25 +58,23 @@ export default {
   computed: {
     drawerActive: {
       get() {
-        return this.$store.state.drawerActive;
+        return this.$store.state.isDrawerActive;
       },
-      set(payload) {
-        // This stops redundent state mutations between toggles and sets
-        if (payload !== this.$store.state.drawerActive) {
-          this.$store.dispatch("setDrawer", payload);
+      set(bool) {
+        // This stops redundent state mutations for the drawer
+        if (bool !== this.$store.state.isDrawerActive) {
+          this.$store.dispatch("setDrawerActive", bool);
         }
       }
     }
   },
+  /**
+   * @todo Remove testing methods
+   */
   methods: {
-    testON() {
-      console.log("TEST 1:");
-    },
-    testOFF() {
-      console.log("TEST 2:");
+    test(e) {
+      console.log("TEST:", e);
     }
   }
 };
 </script>
-
-<style></style>

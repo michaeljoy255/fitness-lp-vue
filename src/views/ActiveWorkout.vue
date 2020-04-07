@@ -22,7 +22,7 @@ export default {
   },
   created() {
     // Make sure nav drawer is closed
-    this.$store.dispatch("setDrawer", false);
+    this.$store.dispatch("setDrawerActive", false);
 
     /**
      * @todo This code is messy, find a better way!!!
@@ -74,5 +74,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

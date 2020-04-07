@@ -6,17 +6,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/home"
+    redirect: "/dashboard"
   },
   {
-    path: "/home",
-    name: "Home",
-    component: () => import("../views/Home.vue")
-  },
-  {
-    path: "/charts",
-    name: "Charts",
-    component: () => import("../views/Charts.vue")
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("../views/Dashboard.vue")
   },
   {
     path: "/active-workout/:id",
@@ -24,33 +19,38 @@ const routes = [
     component: () => import("../views/ActiveWorkout.vue")
   },
   {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue")
+    path: "/charts",
+    name: "Charts",
+    component: () => import("../views/admin/Charts.vue")
   },
   {
     path: "/workouts",
     name: "Workouts",
-    component: () => import("../views/Workouts.vue")
+    component: () => import("../views/admin/Workouts.vue")
   },
   {
     path: "/exercises",
     name: "Exercises",
-    component: () => import("../views/Exercises.vue")
+    component: () => import("../views/admin/Exercises.vue")
   },
   {
     path: "/measurements",
     name: "Measurements",
-    component: () => import("../views/Measurements.vue")
+    component: () => import("../views/admin/Measurements.vue")
   },
   {
     path: "/records",
     name: "Records",
-    component: () => import("../views/Records.vue")
+    component: () => import("../views/admin/Records.vue")
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: () => import("../views/general/About.vue")
   },
   {
     path: "*",
-    component: () => import("../views/NotFound.vue")
+    component: () => import("../views/general/NotFound.vue")
   }
 ];
 

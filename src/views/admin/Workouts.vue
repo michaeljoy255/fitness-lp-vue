@@ -1,7 +1,7 @@
 <template lang="pug">
   v-container.mx-auto
     v-card(shaped)
-      v-card-title Records
+      v-card-title Workouts
 
       v-card-subtitle Create, Read, Update, and Delete operations to be implemented...
 
@@ -20,16 +20,10 @@
           v-btn(color="error" rounded)
             span Delete
             v-icon(right) delete_forever
-
-          v-btn(color="error" rounded)
-            span Clear All Records
-            v-icon(right) delete_sweep
 </template>
 
 <script>
 export default {
-  name: "Records"
+  name: "Workouts"
 };
 </script>
-
-<style></style>

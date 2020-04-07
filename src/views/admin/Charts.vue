@@ -8,8 +8,8 @@
       v-card-actions
         v-container
           v-btn(to="/" color="primary" rounded)
-            span Home
-            v-icon(right) home
+            span Dashboard
+            v-icon(right) dashboard
 </template>
 
 <script>
@@ -17,5 +17,3 @@ export default {
   name: "About"
 };
 </script>
-
-<style></style>

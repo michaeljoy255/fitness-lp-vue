@@ -71,12 +71,12 @@ export const actions = {
   },
 
   cancel({ commit }) {
-    EventBusService.$emit("storeChangedRoute", "/home");
+    EventBusService.$emit("storeChangedRoute", "/dashboard");
     commit("CLEAR_WORKOUT");
   },
 
   submit({ commit }) {
-    EventBusService.$emit("storeChangedRoute", "/home");
+    EventBusService.$emit("storeChangedRoute", "/dashboard");
     /**
      * @todo Save workout results to local records and local storage
      */

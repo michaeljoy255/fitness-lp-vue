@@ -3,11 +3,11 @@
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle {{ this.getLongDate() }}
+      v-card-subtitle {{ this.getLongDateMixin() }}
 
       v-card-text
         v-icon timer
-        span(v-html="this.getWorkoutTime(1, new Date())")
+        span(v-html="this.getWorkoutTimeMixin(1, new Date())")
 
       v-card-actions
         v-container
@@ -59,5 +59,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

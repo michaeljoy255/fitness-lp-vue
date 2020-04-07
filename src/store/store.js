@@ -13,18 +13,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    drawerActive: false
+    isDrawerActive: false // Nav Drawer
   },
   //############################################################################
   mutations: {
-    SET_DRAWER(state, drawerState) {
-      state.drawerActive = drawerState;
-    },
     DRAWER_ACTIVE_TRUE(state) {
-      state.drawerActive = true;
+      state.isDrawerActive = true;
     },
     DRAWER_ACTIVE_FALSE(state) {
-      state.drawerActive = false;
+      state.isDrawerActive = false;
     }
   },
   //############################################################################
@@ -57,15 +54,11 @@ export default new Vuex.Store({
       dispatch("workout/setWorkout", activeWorkout);
     },
 
-    setDrawer({ commit }, bool) {
-      commit("SET_DRAWER", bool);
-    },
-
-    toggleDrawer({ state, commit }) {
-      if (state.drawerActive) {
-        commit("DRAWER_ACTIVE_FALSE");
-      } else {
+    setDrawerActive({ commit }, bool) {
+      if (bool) {
         commit("DRAWER_ACTIVE_TRUE");
+      } else {
+        commit("DRAWER_ACTIVE_FALSE");
       }
     }
   },

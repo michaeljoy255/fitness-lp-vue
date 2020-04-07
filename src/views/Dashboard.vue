@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import DefaultCard from "../components/home/DefaultCard";
-import ResumeCard from "../components/home/ResumeCard";
-import WorkoutCard from "../components/home/WorkoutCard";
+import DefaultCard from "../components/dashboard/DefaultCard";
+import ResumeCard from "../components/dashboard/ResumeCard";
+import WorkoutCard from "../components/dashboard/WorkoutCard";
 
 export default {
-  name: "Home",
+  name: "Dashboard",
   components: {
     DefaultCard,
     ResumeCard,
