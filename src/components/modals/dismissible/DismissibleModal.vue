@@ -12,7 +12,7 @@ export default {
    */
   name: "DismissibleModal",
   components: {
-    ConfirmAction: () => import("./dismissible/ConfirmAction")
+    ConfirmAction: () => import("./ConfirmAction")
   },
   computed: {
     modalActive: {

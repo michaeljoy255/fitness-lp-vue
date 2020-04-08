@@ -1,13 +1,13 @@
 <template lang="pug">
   v-container.mx-auto
-    v-stepper(v-model="currentStep" vertical non-linear)
+    v-stepper(v-model="step" vertical non-linear)
       WorkoutStep(
-        v-for="(exercise, i) in exercises"
+        v-for="(exercise, i) in workout.exercises"
         :key="i"
         :step="i+1"
         :name="exercise.name"
       )
-      SummaryStep(:step="exercises.length+1")
+      SummaryStep(:step="workout.exercises.length+1")
 </template>
 
 <script>
@@ -20,44 +20,26 @@ export default {
     WorkoutStep,
     SummaryStep
   },
+  /**
+   * Created hook prepares the Active Workout view
+   * - Closes the nav drawer
+   * - Fresh workouts get initialized using route params
+   * - Resumed workouts get loaded from state
+   */
   created() {
-    // Make sure nav drawer is closed
     this.$store.dispatch("setDrawerActive", false);
 
-    /**
-     * @todo This code is messy, find a better way!!!
-     */
-    // this.$route.params.exerciseIds
-    if (this.$route.params.newWorkout) {
-      // Init new workout with provided params (id, name, exerciseIds)
+    if (this.$route.params.exerciseIds) {
+      // Fresh Workout - Only has the exerciseIds ready
       this.$store.dispatch("workout/start", {
         id: this.$route.params.id,
         name: this.$route.params.name,
-        exercises: this.$store.getters["available/getExercisesByIds"](
-          this.$route.params.exerciseIds
-        ),
-        records: [] // @todo - need a getter for this
+        exerciseIds: this.$route.params.exerciseIds
       });
-    } else if (this.$route.params.id) {
-      // Init new workout with just provided id
-      const workout = this.$store.getters["available/getWorkoutById"](
-        this.$route.params.id
-      );
-
-      this.$store.dispatch("workout/start", {
-        id: this.$route.params.id,
-        name: workout.name,
-        exercises: this.$store.getters["available/getExercisesByIds"](
-          workout.exerciseIds
-        ),
-        records: [] // @todo - need a getter for this
-      });
-    } else {
-      // Resume the incomplete workout
     }
   },
   computed: {
-    currentStep: {
+    step: {
       get() {
         return this.$store.state.workout.step;
       },
@@ -65,11 +47,8 @@ export default {
         this.$store.dispatch("workout/setStep", step);
       }
     },
-    exercises() {
-      return this.$store.state.workout.exercises;
-    },
-    records() {
-      return this.$store.state.workout.records;
+    workout() {
+      return this.$store.state.workout;
     }
   }
 };

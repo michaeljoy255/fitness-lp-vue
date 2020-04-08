@@ -40,9 +40,9 @@ export default {
     openModal() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
-        title: "Cancel this Workout?",
-        content: `Click confirm to discard any exercise progress and return to
-                  the dashboard.`,
+        title: "Cancel Workout",
+        content: `Cancels and discards this workout and returns you to the
+                  Dashboard.`,
         action: "workout/cancel"
       });
     }

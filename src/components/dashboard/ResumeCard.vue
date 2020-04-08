@@ -1,14 +1,14 @@
 <template lang="pug">
-  v-card(shaped)
+  v-col.col-12.col-sm-6.col-md-4.col-xl-3
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle This workout was started on {{ this.getLongDateMixin() }}
+      v-card-subtitle.pb-1 Workout started on {{ this.getLongDateMixin() }}
 
       v-card-actions
         v-container
           v-btn(
-            :to="this.routeToObject()"
+            @click.stop="openModal()"
             color="error"
             block
             rounded
@@ -51,11 +51,19 @@ export default {
     }
   },
   methods: {
+    openModal() {
+      this.$store.dispatch("modal/open", {
+        component: "ConfirmAction",
+        title: "Discard Workout",
+        content: "Discards this workout and removes it from the Dashboard.",
+        action: "workout/cancel"
+      });
+    },
+
     routeToObject() {
       return {
         name: `ActiveWorkout`,
         params: {
-          newWorkout: true,
           id: this.id,
           name: this.name,
           exercises: this.exercises,

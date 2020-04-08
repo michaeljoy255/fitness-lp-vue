@@ -23,14 +23,12 @@ export default {
     openModal() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
-        title: "Generate Default Exercises and Workouts?",
-        content:
-          "Using defaults will overwrite any existing exercises or workouts you have created. Click Confirm to generate the defaults.",
+        title: "Generate Defaults",
+        content: `Creates default exercises and workouts for you. This will
+                  overwrite any existing exercises or workouts you have saved.`,
         action: "available/setDefaults"
       });
     }
   }
 };
 </script>
-
-

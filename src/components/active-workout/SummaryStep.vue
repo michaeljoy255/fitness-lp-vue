@@ -29,14 +29,12 @@ export default {
     openModal() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
-        title: "Finish Workout and Save Results?",
-        content:
-          "Click Confirm to save the results of this workout into your records.",
+        title: "Finish Workout",
+        content: `Saves the results of this workout into your records and
+                  returns you to the Dashboard.`,
         action: "workout/submit"
       });
     }
   }
 };
 </script>
-
-

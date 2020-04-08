@@ -4,14 +4,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**Resume Card**
-- Implementation:
-    - Open modal for confirming the discard option
-    - Logic to decide if it gets rendered (Home view)
-    - Logic for what happens when Resume is clicked
-        - Pass data through route params?
-        - May need to change how workout data is currently loaded in Active Workout
-
 **Workout Timer**
 - Design:
     - Temporary position in top right of App Bar

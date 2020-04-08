@@ -3,7 +3,7 @@
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle {{ this.getLongDateMixin() }}
+      v-card-subtitle Previously completed {{ this.getLongDateMixin() }}
 
       v-card-text
         v-icon timer
@@ -49,7 +49,6 @@ export default {
       return {
         name: `ActiveWorkout`,
         params: {
-          newWorkout: true,
           id: this.id,
           name: this.name,
           exerciseIds: this.exerciseIds

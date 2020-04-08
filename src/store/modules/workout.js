@@ -61,7 +61,13 @@ export const actions = {
     }
   },
 
-  start({ commit }, { id, name, exercises, records }) {
+  start({ commit, rootGetters }, { id, name, exerciseIds }) {
+    const exercises = rootGetters["available/getExercisesByIds"](exerciseIds);
+    /**
+     * @todo Getter for records
+     */
+    const records = [];
+
     commit("SET_WORKOUT", {
       id,
       name,
@@ -74,12 +80,12 @@ export const actions = {
   },
 
   cancel({ commit }) {
-    EventBusService.$emit("storeChangedRoute", "/dashboard");
+    EventBusService.$emit("toRoutePath", "/dashboard");
     commit("CLEAR_WORKOUT");
   },
 
   submit({ commit }) {
-    EventBusService.$emit("storeChangedRoute", "/dashboard");
+    EventBusService.$emit("toRoutePath", "/dashboard");
     /**
      * @todo Save workout results to local records and local storage
      */
