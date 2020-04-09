@@ -32,10 +32,12 @@ export default {
     ResumeCard,
     WorkoutCard
   },
+
   computed: {
     activeWorkout() {
       return this.$store.state.workout;
     },
+
     workouts() {
       return this.$store.state.available.workouts;
     }

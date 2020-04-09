@@ -56,6 +56,7 @@
 <script>
 export default {
   name: "Drawer",
+
   computed: {
     drawerActive: {
       get() {
@@ -69,6 +70,7 @@ export default {
       }
     }
   },
+
   /**
    * @todo Remove testing methods
    */

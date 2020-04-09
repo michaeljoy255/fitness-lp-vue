@@ -31,8 +31,8 @@ export const mutations = {
     /**
      * @todo defaults back to "" when done testing
      */
-    state.id = "1";
-    state.name = "Test";
+    state.id = "";
+    state.name = "";
     state.step = 1; // 1 is the lowest valid step for steppers
     state.beginTime = null;
     state.endTime = null;
@@ -41,6 +41,9 @@ export const mutations = {
   },
   SET_STEP(state, step) {
     state.step = step;
+  },
+  SET_END_TIME(state) {
+    state.endTime = new Date().getTime();
   }
 };
 
@@ -66,7 +69,7 @@ export const actions = {
     /**
      * @todo Getter for records
      */
-    const records = [];
+    const records = []; // temp
 
     commit("SET_WORKOUT", {
       id,
@@ -86,6 +89,7 @@ export const actions = {
 
   submit({ commit }) {
     EventBusService.$emit("toRoutePath", "/dashboard");
+    commit("SET_END_TIME");
     /**
      * @todo Save workout results to local records and local storage
      */

@@ -20,6 +20,7 @@ export default {
     AppBar,
     NavDrawer
   },
+
   created() {
     // Get all data for app ASAP
     this.$store.dispatch("initApp");
@@ -30,6 +31,12 @@ export default {
         this.$router.push(path);
       }
     });
+  },
+
+  computed: {
+    isActiveWorkout() {
+      return this.$route.name === "ActiveWorkout";
+    }
   }
 };
 </script>

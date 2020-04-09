@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import { formattersMixin } from "../../mixins/FormattersMixin";
+import { datesMixin } from "../../mixins/datesMixin";
 
 export default {
   name: "ResumeCard",
-  mixins: [formattersMixin],
+  mixins: [datesMixin],
   props: {
     id: {
       type: String,
@@ -50,6 +50,7 @@ export default {
       required: true
     }
   },
+
   methods: {
     openModal() {
       this.$store.dispatch("modal/open", {

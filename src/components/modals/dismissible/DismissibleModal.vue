@@ -14,6 +14,7 @@ export default {
   components: {
     ConfirmAction: () => import("./ConfirmAction")
   },
+
   computed: {
     modalActive: {
       get() {
@@ -23,6 +24,7 @@ export default {
         this.$store.dispatch("modal/close");
       }
     },
+
     modalComponent() {
       return this.$store.state.modal.component;
     }

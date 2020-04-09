@@ -4,7 +4,7 @@
     v-app-bar-nav-icon(@click="toggleDrawer()")
 
     //- App
-    span(v-if="notActiveWorkout")
+    span(v-if="isNotActiveWorkout")
       //- Alter what is shown based on device size
       v-toolbar-title.d-sm-none Fitness LP
       v-toolbar-title.d-none.d-sm-flex Fitness Linear Progression
@@ -18,7 +18,7 @@
     v-spacer
 
     //- App
-    span(v-if="notActiveWorkout")
+    span(v-if="isNotActiveWorkout")
       span.d-sm-none {{ new Date().toLocaleDateString() }}
       span.d-none.d-sm-flex {{ this.getLongDateMixin() }}
 
@@ -28,15 +28,17 @@
 </template>
 
 <script>
-import { formattersMixin } from "../../mixins/FormattersMixin";
+import { datesMixin } from "../../mixins/datesMixin";
 
 export default {
   name: "AppBar",
-  mixins: [formattersMixin],
+  mixins: [datesMixin],
+
   methods: {
     toggleDrawer() {
       this.$store.dispatch("toggleDrawer");
     },
+
     openModal() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
@@ -47,10 +49,12 @@ export default {
       });
     }
   },
+
   computed: {
-    notActiveWorkout() {
+    isNotActiveWorkout() {
       return this.$route.name !== "ActiveWorkout";
     },
+
     workout() {
       return this.$store.state.workout;
     }

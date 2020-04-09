@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "DefaultCard",
+
   methods: {
     openModal() {
       this.$store.dispatch("modal/open", {

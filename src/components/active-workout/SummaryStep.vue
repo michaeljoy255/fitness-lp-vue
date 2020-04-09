@@ -5,7 +5,7 @@
       editable
     ) Summary
 
-    v-stepper-content.pl-0.pt-2(:step="step")
+    v-stepper-content.pl-0.pt-2.ml-6(:step="step")
       v-card
         v-card-title Summary of Workout
         v-card-subtitle Progress graph, current duration, etc...
@@ -25,6 +25,7 @@ export default {
       required: true
     }
   },
+
   methods: {
     openModal() {
       this.$store.dispatch("modal/open", {

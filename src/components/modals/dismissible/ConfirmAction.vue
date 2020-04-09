@@ -17,21 +17,22 @@
 <script>
 export default {
   name: "ConfirmAction",
+
   methods: {
     confirmModal() {
       this.$store.dispatch(this.$store.state.modal.action);
       this.$store.dispatch("modal/close");
     }
   },
+
   computed: {
     title() {
       return this.$store.state.modal.title;
     },
+
     content() {
       return this.$store.state.modal.content;
     }
   }
 };
 </script>
-
-

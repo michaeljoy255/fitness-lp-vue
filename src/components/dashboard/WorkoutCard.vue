@@ -6,8 +6,7 @@
       v-card-subtitle Previously completed {{ this.getLongDateMixin() }}
 
       v-card-text
-        v-icon timer
-        span(v-html="this.getWorkoutTimeMixin(1, new Date())")
+        Timer(:beginTime="1" :endTime="new Date().getTime()")
 
       v-card-actions
         v-container
@@ -25,11 +24,15 @@
 /**
  * @todo Remember to un-hardcode the time for workout cards
  */
-import { formattersMixin } from "../../mixins/FormattersMixin";
+import { datesMixin } from "../../mixins/datesMixin";
+import Timer from "../miscellaneous/Timer";
 
 export default {
   name: "WorkoutCard",
-  mixins: [formattersMixin],
+  mixins: [datesMixin],
+  components: {
+    Timer
+  },
   props: {
     id: {
       type: String,
@@ -44,6 +47,7 @@ export default {
       required: true
     }
   },
+
   methods: {
     routeToObject() {
       return {

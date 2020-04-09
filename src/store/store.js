@@ -15,7 +15,7 @@ export default new Vuex.Store({
   state: {
     isDrawerActive: false // Nav Drawer
   },
-  //############################################################################
+
   mutations: {
     DRAWER_ACTIVE_TRUE(state) {
       state.isDrawerActive = true;
@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.isDrawerActive = false;
     }
   },
-  //############################################################################
+
   actions: {
     async initApp({ dispatch }) {
       const servMeasurementRecs = RecordService.getMeasurements();
@@ -70,8 +70,9 @@ export default new Vuex.Store({
       }
     }
   },
-  //############################################################################
+
   getters: {},
+
   modules: {
     modal,
     selected,

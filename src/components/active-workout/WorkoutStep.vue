@@ -7,7 +7,7 @@
       editable
     ) {{ name }}
 
-    v-stepper-content.pl-0.pt-2(:step="step")
+    v-stepper-content.pl-0.pt-2.ml-6(:step="step")
       ExerciseCard
 </template>
 
@@ -31,5 +31,3 @@ export default {
   }
 };
 </script>
-
-

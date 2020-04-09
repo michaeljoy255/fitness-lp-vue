@@ -4,14 +4,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**Workout Timer**
-- Design:
-    - Temporary position in top right of App Bar
-    - Have timer icon with with Formatted Time
-    - Stretch Goal: Popup footer bar with timer on it (mobile and desktop)
-- Implementation:
-    - Set interval in Active Workout that takes Now Time - Workout Begin Time
-
 **Date Storage (Local Storage)**
 - Start saving Active Workout data (easiest one to do)
     - Save as "active"
@@ -21,7 +13,8 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Add exporter feature (JSON or CSV?)
 
 **Notes**
-- Workout and exercises names CANNOT exceed 40 characters
+- Workout names CANNOT exceed 40 characters
+- Exercise names CANNOT exceed 50 characters
 - Local Storage Items:
     - ("active") === { id, name, step, beginTime, endTime, exercises, records }
     - ("available") === { exercises: [...], workouts: [...] }
