@@ -1,23 +1,21 @@
 <template lang="pug">
   div
-    //- Removed this attr from stepper. Could implement later though...
-    //- :complete="$store.state.workout.step > step"
     v-stepper-step.pa-3( 
       :step="step"
       editable
     ) {{ name }}
 
-    v-stepper-content.pl-0.pt-2.ml-6(:step="step")
-      ExerciseCard
+    v-stepper-content.pl-0.pt-2.pr-12.ml-3(:step="step")
+      ExerciseInputs
 </template>
 
 <script>
-import ExerciseCard from "./ExerciseCard";
+import ExerciseInputs from "./ExerciseInputs";
 
 export default {
   name: "WorkoutStep",
   components: {
-    ExerciseCard
+    ExerciseInputs
   },
   props: {
     step: {

@@ -4,6 +4,7 @@
 
   v-container.mx-auto(v-else)
     v-row
+
       ResumeCard(
         v-if="active.id"
         :id="active.id"
@@ -11,6 +12,7 @@
         :exercises="active.exercises"
         :records="active.records"
       )
+      
       WorkoutCard(
         v-for="workout in workouts"
         :key="workout.id"

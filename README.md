@@ -6,7 +6,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 **Refactor Getters**
 - Refactor Getters: See if you can find a better way to do the getters
-- Research usage of and including moment.js into your project
 
 **Active Workout Design**
 - What data is needed on Exercises and Workouts?
@@ -42,6 +41,8 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Exercise names CANNOT exceed 50 characters
 
 **Backlog**
+- Research usage of and including moment.js into your project
+- Automated unit testing with Jest
 - SummaryCard for Active Workout provides a nice summary
 - Exercises CRUD
 - Workouts CRUD

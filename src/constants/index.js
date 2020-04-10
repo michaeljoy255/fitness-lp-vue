@@ -10,6 +10,7 @@ export const Category = Object.freeze({
   BICEPS: "Biceps",
   CARDIO: "Cardio",
   CHEST: "Chest",
+  COMPOUND: "Compound",
   CORE: "Core",
   EVENT: "Event",
   LEGS: "Legs",
