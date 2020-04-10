@@ -85,5 +85,5 @@ export default {
 
 <style lang="stylus" scoped>
 .vertical-middle
-  vertical-align middle
+  vertical-align sub
 </style>

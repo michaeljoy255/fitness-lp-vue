@@ -33,7 +33,7 @@ export default {
         title: "Finish Workout",
         content: `Saves the results of this workout into your records and
                   returns you to the Dashboard.`,
-        action: "workout/submit"
+        action: "active/submit"
       });
     }
   }

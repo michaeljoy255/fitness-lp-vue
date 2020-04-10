@@ -1,5 +1,5 @@
 /**
- * Selected module for the store is for single data selections for CRUD operations
+ * Selected module is for single data selections for CRUD operations
  */
 
 export const namespaced = true;

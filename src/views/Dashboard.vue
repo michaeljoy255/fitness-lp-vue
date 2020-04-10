@@ -5,11 +5,11 @@
   v-container.mx-auto(v-else)
     v-row
       ResumeCard(
-        v-if="activeWorkout.id"
-        :id="activeWorkout.id"
-        :name="activeWorkout.name"
-        :exercises="activeWorkout.exercises"
-        :records="activeWorkout.records"
+        v-if="active.id"
+        :id="active.id"
+        :name="active.name"
+        :exercises="active.exercises"
+        :records="active.records"
       )
       WorkoutCard(
         v-for="workout in workouts"
@@ -34,12 +34,12 @@ export default {
   },
 
   computed: {
-    activeWorkout() {
-      return this.$store.state.workout;
+    active() {
+      return this.$store.state.active;
     },
 
     workouts() {
-      return this.$store.state.available.workouts;
+      return this.$store.state.workout.workouts;
     }
   }
 };

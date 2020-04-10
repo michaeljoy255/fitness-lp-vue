@@ -2,12 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 import * as modal from "./modules/modal";
 import * as selected from "./modules/selected";
-import * as available from "./modules/available";
-import * as records from "./modules/records";
+import * as record from "./modules/record";
 import * as workout from "./modules/workout";
+import * as exercise from "./modules/exercise";
+import * as active from "./modules/active";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
-import RecordService from "../services/record.service";
+import ActiveService from "../services/active.service";
+// import RecordService from "../services/record.service";
 
 Vue.use(Vuex);
 
@@ -17,56 +19,69 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    DRAWER_ACTIVE_TRUE(state) {
+    DRAWER_TRUE(state) {
       state.isDrawerActive = true;
     },
-    DRAWER_ACTIVE_FALSE(state) {
+    DRAWER_FALSE(state) {
       state.isDrawerActive = false;
     }
   },
 
   actions: {
     async initApp({ dispatch }) {
-      const servMeasurementRecs = RecordService.getMeasurements();
-      const servExerciseRecs = RecordService.getExercises();
-      const servWorkoutRecs = RecordService.getWorkouts();
+      console.log("Initializing App Data...");
+      // const servMeasurementRecs = RecordService.getMeasurements();
+      // const servExerciseRecs = RecordService.getExercises();
+      // const servWorkoutRecs = RecordService.getWorkouts();
 
-      const servExercises = ExerciseService.getExercises();
-      const servWorkouts = WorkoutService.getWorkouts();
+      const servExercises = ExerciseService.get();
+      const servWorkouts = WorkoutService.get();
 
-      const servActiveWorkout = WorkoutService.getActiveWorkout();
+      const servActiveWorkout = ActiveService.get();
 
       // Promise all with async / await
-      const measurementRecords = await servMeasurementRecs;
-      const exerciseRecords = await servExerciseRecs;
-      const workoutRecords = await servWorkoutRecs;
+      // const measurementRecords = await servMeasurementRecs;
+      // const exerciseRecords = await servExerciseRecs;
+      // const workoutRecords = await servWorkoutRecs;
 
       const exercises = await servExercises;
       const workouts = await servWorkouts;
 
       const activeWorkout = await servActiveWorkout;
 
-      dispatch("records/setMeasurements", measurementRecords);
-      dispatch("records/setExercises", exerciseRecords);
-      dispatch("records/setWorkouts", workoutRecords);
-      dispatch("available/setExercises", exercises);
-      dispatch("available/setWorkouts", workouts);
-      dispatch("workout/setWorkout", activeWorkout);
+      // dispatch("records/setMeasurements", measurementRecords);
+      // dispatch("records/setExercises", exerciseRecords);
+      // dispatch("records/setWorkouts", workoutRecords);
+      dispatch("exercise/init", exercises);
+      dispatch("workout/init", workouts);
+      dispatch("active/init", activeWorkout);
+    },
+
+    initDefaults({ dispatch }) {
+      dispatch("exercise/defaults");
+      dispatch("workout/defaults");
+    },
+
+    deleteStorage({ dispatch }) {
+      dispatch("exercise/delete");
+      dispatch("workout/delete");
+      dispatch("active/delete");
+      // dispatch("records/delete");
     },
 
     setDrawerActive({ commit }, bool) {
       if (bool) {
-        commit("DRAWER_ACTIVE_TRUE");
+        commit("DRAWER_TRUE");
       } else {
-        commit("DRAWER_ACTIVE_FALSE");
+        commit("DRAWER_FALSE");
       }
     },
 
     toggleDrawer({ state, commit }) {
       if (state.isDrawerActive) {
-        commit("DRAWER_ACTIVE_FALSE");
+        commit("DRAWER_FALSE");
       } else {
-        commit("DRAWER_ACTIVE_TRUE");
+        commit("DRAWER_TRUE");
       }
     }
   },
@@ -76,8 +91,9 @@ export default new Vuex.Store({
   modules: {
     modal,
     selected,
-    available,
-    records,
-    workout
+    exercise,
+    workout,
+    record,
+    active
   }
 });

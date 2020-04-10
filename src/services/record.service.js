@@ -1,31 +1,12 @@
 const RecordService = {
   /**
-   * Fetches measurement records from storage
-   * @returns {Promise<Array>} Measurement records
+   * Get records from storage
+   * @returns {Promise<Array>} Records
    */
-  getMeasurements() {
+  get() {
     return new Promise(resolve => {
-      resolve(localStorage.getItem("measurements"));
-    });
-  },
-
-  /**
-   * Fetches exercise records from storage
-   * @returns {Promise<Array>} Exercise records
-   */
-  getExercises() {
-    return new Promise(resolve => {
-      resolve(localStorage.getItem("exercises"));
-    });
-  },
-
-  /**
-   * Fetches workout records from storage
-   * @returns {Promise<Array>} Workout records
-   */
-  getWorkouts() {
-    return new Promise(resolve => {
-      resolve(localStorage.getItem("workouts"));
+      console.error("@todo: RecordService not implmented!");
+      resolve(true);
     });
   }
 };

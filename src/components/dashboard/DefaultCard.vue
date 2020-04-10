@@ -27,7 +27,7 @@ export default {
         title: "Generate Defaults",
         content: `Creates default exercises and workouts for you. This will
                   overwrite any existing exercises or workouts you have saved.`,
-        action: "available/setDefaults"
+        action: "initDefaults"
       });
     }
   }

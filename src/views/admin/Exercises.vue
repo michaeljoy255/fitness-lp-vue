@@ -27,5 +27,3 @@ export default {
   name: "Exercises"
 };
 </script>
-
-

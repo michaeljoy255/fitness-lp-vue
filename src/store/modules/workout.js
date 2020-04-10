@@ -1,104 +1,63 @@
-import EventBusService from "../../services/event-bus.service";
-import { isObjectWithData } from "../../helpers";
+import WorkoutService from "../../services/workout.service";
+import { isObjectWithData, isArrayWithData } from "../../helpers";
 
 /**
- * Workout module for the store is for active workouts
+ * Workout module is for all available workouts
  */
 
 export const namespaced = true;
 
 export const state = {
-  id: null,
-  name: null,
-  step: null,
-  beginTime: null,
-  endTime: null,
-  exercises: null,
-  records: null
+  workouts: null
 };
 
 export const mutations = {
-  SET_WORKOUT(state, workout) {
-    state.id = workout.id;
-    state.name = workout.name;
-    state.step = workout.step;
-    state.beginTime = workout.beginTime;
-    state.endTime = workout.endTime;
-    state.exercises = workout.exercises;
-    state.records = workout.records;
+  SET(state, workouts) {
+    state.workouts = workouts;
   },
-  CLEAR_WORKOUT(state) {
-    /**
-     * @todo defaults back to "" when done testing
-     */
-    state.id = "";
-    state.name = "";
-    state.step = 1; // 1 is the lowest valid step for steppers
-    state.beginTime = null;
-    state.endTime = null;
-    state.exercises = [];
-    state.records = [];
-  },
-  SET_STEP(state, step) {
-    state.step = step;
-  },
-  SET_END_TIME(state) {
-    state.endTime = new Date().getTime();
+  CLEAR(state) {
+    state.workouts = [];
   }
 };
 
 export const actions = {
-  setWorkout({ commit }, workout) {
-    if (isObjectWithData(workout)) {
-      commit("SET_WORKOUT", {
-        id: workout.id,
-        name: workout.name,
-        step: workout.step,
-        beginTime: workout.beginTime,
-        endTime: workout.endTime,
-        exercises: workout.exercises,
-        records: workout.records
-      });
+  async defaults({ commit }) {
+    const workouts = await WorkoutService.initDefaults();
+    commit("SET", workouts);
+  },
+
+  init({ commit }, workouts) {
+    if (isArrayWithData(workouts)) {
+      commit("SET", workouts);
     } else {
-      commit("CLEAR_WORKOUT");
+      commit("CLEAR");
     }
   },
 
-  start({ commit, rootGetters }, { id, name, exerciseIds }) {
-    const exercises = rootGetters["available/getExercisesByIds"](exerciseIds);
-    /**
-     * @todo Getter for records
-     */
-    const records = []; // temp
-
-    commit("SET_WORKOUT", {
-      id,
-      name,
-      step: 1,
-      beginTime: new Date().getTime(),
-      endTime: null,
-      exercises,
-      records
-    });
-  },
-
-  cancel({ commit }) {
-    EventBusService.$emit("toRoutePath", "/dashboard");
-    commit("CLEAR_WORKOUT");
-  },
-
-  submit({ commit }) {
-    EventBusService.$emit("toRoutePath", "/dashboard");
-    commit("SET_END_TIME");
-    /**
-     * @todo Save workout results to local records and local storage
-     */
-    commit("CLEAR_WORKOUT");
-  },
-
-  setStep({ commit }, step) {
-    commit("SET_STEP", step);
+  async delete({ commit }) {
+    const workRemove = await WorkoutService.delete();
+    // Making sure storage data is gone before clearing state data
+    if (workRemove) {
+      commit("CLEAR");
+    }
   }
 };
 
-export const getters = {};
+export const getters = {
+  getWorkoutById: state => id => {
+    return state.workouts.find(workout => workout.id === id);
+  },
+
+  getExercisesByWorkoutId: (state, getters) => id => {
+    const workout = getters.getWorkoutById(id);
+    let exercises = [];
+
+    if (isObjectWithData(workout)) {
+      exercises = workout.exerciseIds.map(exerId => {
+        return getters.getExerciseById(exerId);
+      });
+    }
+
+    return exercises;
+  }
+};

@@ -5,20 +5,39 @@ Web app that helps you keep track of your exercise performances so you can impro
 # TODO
 
 **Date Storage (Local Storage)**
-- Start saving Active Workout data (easiest one to do)
-    - Save as "active"
-- Add feature to clear all stored data (currently workouts, exercises, and active)
-- Add feature that saves defaults into "available" on LS when they are created
-- Add importer feature (JSON or CSV?)
-- Add exporter feature (JSON or CSV?)
+- Start saving Active Workout state as "active" in local storage
+    - Includes things like the current step
+    - Decide when to call the method (whenever you change steps?)
 
-**Notes**
+**Validation**
 - Workout names CANNOT exceed 40 characters
 - Exercise names CANNOT exceed 50 characters
-- Local Storage Items:
-    - ("active") === { id, name, step, beginTime, endTime, exercises, records }
-    - ("available") === { exercises: [...], workouts: [...] }
-    - ("records") === { exercises: [...], workouts: [...], measurements: [...]}
+
+**Local Storage**
+- ("active") === { id, name, step, beginTime, endTime, exercises, records }
+- ("exercises") === [...]
+- ("workouts") === [...]
+- ("records") === { exercises: [...], workouts: [...], measurements: [...]}
+    - records_2020: {...}
+
+**Active Workout Design**
+- What data is needed on Exercises and Workouts?
+    - weight, reps, duration, distance, etc.
+    - isSimple, hasReps, etc. (just examples)
+    - Overall schema for data (local storage)
+- ExerciseCard layout design
+- Exercise input validation (weights, reps, etc.)
+
+**Backlog**
+- SummaryCard for Active Workout provides a nice summary
+- Exercises CRUD
+- Workouts CRUD
+- Measurements CRUD
+- Records CRUD
+- Add importer feature (JSON or CSV?)
+- Add exporter feature (JSON or CSV?)
+- Settings ("settings" in local storage)
+    - What kind of user settings and options (metric / imperial maybe)?
 
 # Table of Contents
 

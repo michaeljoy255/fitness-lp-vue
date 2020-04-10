@@ -57,7 +57,7 @@ export default {
         component: "ConfirmAction",
         title: "Discard Workout",
         content: "Discards this workout and removes it from the Dashboard.",
-        action: "workout/cancel"
+        action: "active/cancel"
       });
     },
 

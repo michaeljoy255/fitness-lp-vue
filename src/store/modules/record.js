@@ -1,7 +1,7 @@
 import { isArrayWithData } from "../../helpers";
 
 /**
- * Records module for the store is for records of measurements, exercises, and workouts
+ * Records module is for records of measurements, exercises, and workouts
  */
 
 export const namespaced = true;

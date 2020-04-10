@@ -1,5 +1,5 @@
 /**
- * Modal module for the store is for Dismissible modal state
+ * Modal module is for a dynamic global dismissible modal state
  */
 
 export const namespaced = true;
@@ -13,35 +13,35 @@ export const state = {
 };
 
 export const mutations = {
-  ACTIVE_TRUE(state) {
-    state.isActive = true;
-  },
-  ACTIVE_FALSE(state) {
-    state.isActive = false;
-  },
-  SET_MODAL(state, modal) {
+  SET(state, modal) {
     state.component = modal.component;
     state.title = modal.title;
     state.content = modal.content;
     state.action = modal.action;
   },
-  CLEAR_MODAL(state) {
-    state.component = null;
-    state.title = null;
-    state.content = null;
-    state.action = null;
+  CLEAR(state) {
+    state.component = "";
+    state.title = "";
+    state.content = "";
+    state.action = "";
+  },
+  MODAL_TRUE(state) {
+    state.isActive = true;
+  },
+  MODAL_FALSE(state) {
+    state.isActive = false;
   }
 };
 
 export const actions = {
   open({ commit }, modal) {
-    commit("SET_MODAL", modal);
-    commit("ACTIVE_TRUE");
+    commit("SET", modal);
+    commit("MODAL_TRUE");
   },
 
   close({ commit }) {
-    commit("ACTIVE_FALSE");
-    commit("CLEAR_MODAL");
+    commit("MODAL_FALSE");
+    commit("CLEAR");
   }
 };
 

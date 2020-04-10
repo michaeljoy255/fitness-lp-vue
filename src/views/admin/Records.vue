@@ -21,13 +21,25 @@
             span Delete
             v-icon(right) delete_forever
 
-          v-btn(color="error" rounded)
-            span Clear All Records
+          v-btn(@click="openModal()" color="error" rounded)
+            span Clear All Data
             v-icon(right) delete_sweep
 </template>
 
 <script>
 export default {
-  name: "Records"
+  name: "Records",
+
+  methods: {
+    openModal() {
+      this.$store.dispatch("modal/open", {
+        component: "ConfirmAction",
+        title: "Delete Stored Data",
+        content: `This will remove all stored data for exercises, workouts, and
+                  any current workout.`,
+        action: "deleteStorage"
+      });
+    }
+  }
 };
 </script>

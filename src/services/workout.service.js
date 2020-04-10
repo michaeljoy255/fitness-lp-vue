@@ -1,43 +1,49 @@
 import { DefaultWorkouts } from "../constants";
-import { isArrayWithData } from "../helpers";
 
 const WorkoutService = {
   /**
-   * Initializes default workouts if no workout data is present
-   * @returns {Promise<Array>} Default workout data
+   * Initializes default workouts - overwrites existing data!
+   * @returns {Promise<Array>} Default workouts
    */
-  initDefaultWorkouts() {
-    return new Promise((resolve, reject) => {
-      const workouts = localStorage.getItem("workouts");
-
-      if (isArrayWithData(workouts)) {
-        reject(new Error("Workout data already exists."));
-      } else {
-        /**
-         * @todo Save the defaults to local storage
-         */
-        resolve(DefaultWorkouts.workouts);
-      }
+  initDefaults() {
+    return new Promise(resolve => {
+      localStorage.setItem(
+        "workouts",
+        JSON.stringify(DefaultWorkouts.workouts)
+      );
+      resolve(DefaultWorkouts.workouts); // Don't need to JSON parse this
     });
   },
 
   /**
-   * Fetches workout data from storage
-   * @returns {Promise<Array>} Workout data
+   * Get workouts from storage
+   * @returns {Promise<Array>} Workouts
    */
-  getWorkouts() {
+  get() {
     return new Promise(resolve => {
-      resolve(localStorage.getItem("workouts"));
+      resolve(JSON.parse(localStorage.getItem("workouts")));
     });
   },
 
   /**
-   * Fetches active workout data from storage
-   * @returns {Promise<Array>} Active workout data
+   * Update workouts in storage
+   * @returns {Promise<string>} true
    */
-  getActiveWorkout() {
+  update() {
     return new Promise(resolve => {
-      resolve(localStorage.getItem("workout"));
+      console.error("@todo: WorkoutService update not implmented!");
+      resolve(true);
+    });
+  },
+
+  /**
+   * Delete workouts from storage
+   * @returns {Promise<string>} true
+   */
+  delete() {
+    return new Promise(resolve => {
+      localStorage.removeItem("workouts");
+      resolve(true);
     });
   }
 };

@@ -3,14 +3,14 @@
     v-stepper(v-model="step" vertical non-linear)
     
       WorkoutStep(
-        v-for="(exercise, i) in workout.exercises"
+        v-for="(exercise, i) in active.exercises"
         :key="i"
         :step="i+1"
         :name="exercise.name"
       )
-      SummaryStep(:step="workout.exercises.length+1")
+      SummaryStep(:step="active.exercises.length+1")
 
-    WorkoutFooter(:beginTime="workout.beginTime")
+    WorkoutFooter(:beginTime="active.beginTime")
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
   created() {
     if (this.$route.params.exerciseIds) {
       // Fresh Workout - Only has the exerciseIds ready
-      this.$store.dispatch("workout/start", {
+      this.$store.dispatch("active/start", {
         id: this.$route.params.id,
         name: this.$route.params.name,
         exerciseIds: this.$route.params.exerciseIds
@@ -48,7 +48,7 @@ export default {
    * - Closes the nav drawer
    */
   mounted() {
-    if (!this.$store.state.workout.id) {
+    if (!this.$store.state.active.id) {
       // No workout id found, return to Dashboard
       this.$router.push("/dashboard");
     }
@@ -59,15 +59,15 @@ export default {
   computed: {
     step: {
       get() {
-        return this.$store.state.workout.step;
+        return this.$store.state.active.step;
       },
       set(step) {
-        this.$store.dispatch("workout/setStep", step);
+        this.$store.dispatch("active/setStep", step);
       }
     },
 
-    workout() {
-      return this.$store.state.workout;
+    active() {
+      return this.$store.state.active;
     }
   }
 };
