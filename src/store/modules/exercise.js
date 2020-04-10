@@ -34,12 +34,9 @@ export const actions = {
     }
   },
 
-  async delete({ commit }) {
-    const exerRemove = await ExerciseService.delete();
-    // Making sure storage data is gone before clearing state data
-    if (exerRemove) {
-      commit("CLEAR");
-    }
+  delete({ commit }) {
+    commit("CLEAR");
+    ExerciseService.delete(); // Don't need to await
   }
 };
 

@@ -34,12 +34,9 @@ export const actions = {
     }
   },
 
-  async delete({ commit }) {
-    const workRemove = await WorkoutService.delete();
-    // Making sure storage data is gone before clearing state data
-    if (workRemove) {
-      commit("CLEAR");
-    }
+  delete({ commit }) {
+    commit("CLEAR");
+    WorkoutService.delete(); // Don't need to await
   }
 };
 

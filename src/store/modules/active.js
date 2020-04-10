@@ -19,14 +19,14 @@ export const state = {
 };
 
 export const mutations = {
-  SET(state, workout) {
-    state.id = workout.id;
-    state.name = workout.name;
-    state.step = workout.step;
-    state.beginTime = workout.beginTime;
-    state.endTime = workout.endTime;
-    state.exercises = workout.exercises;
-    state.records = workout.records;
+  SET(state, active) {
+    state.id = active.id;
+    state.name = active.name;
+    state.step = active.step;
+    state.beginTime = active.beginTime;
+    state.endTime = active.endTime;
+    state.exercises = active.exercises;
+    state.records = active.records;
   },
   CLEAR(state) {
     state.id = "";
@@ -46,66 +46,60 @@ export const mutations = {
 };
 
 export const actions = {
-  init({ commit }, workout) {
-    if (isObjectWithData(workout)) {
+  init({ commit }, active) {
+    if (isObjectWithData(active)) {
       commit("SET", {
-        id: workout.id,
-        name: workout.name,
-        step: workout.step,
-        beginTime: workout.beginTime,
-        endTime: workout.endTime,
-        exercises: workout.exercises,
-        records: workout.records
+        id: active.id,
+        name: active.name,
+        step: active.step,
+        beginTime: active.beginTime,
+        endTime: active.endTime,
+        exercises: active.exercises,
+        records: active.records
       });
     } else {
       commit("CLEAR");
     }
   },
 
-  /**
-   * @todo Getter for records
-   */
   start({ commit, rootGetters }, { id, name, exerciseIds }) {
-    const exercises = rootGetters["exercise/getExercisesByIds"](exerciseIds);
-    const records = []; // ***
-
-    commit("SET", {
+    const startState = {
       id,
       name,
       step: 1,
       beginTime: new Date().getTime(),
       endTime: null,
-      exercises,
-      records
-    });
+      exercises: rootGetters["exercise/getExercisesByIds"](exerciseIds),
+      records: []
+    };
+
+    commit("SET", startState);
+    ActiveService.update(startState); // Don't need to await
   },
 
-  cancel({ commit }) {
+  cancel({ dispatch }) {
     EventBusService.$emit("toRoutePath", "/dashboard");
-    commit("CLEAR");
+    dispatch("delete");
   },
 
   /**
    * @todo Save workout results to records and storage
    */
-  submit({ commit }) {
-    EventBusService.$emit("toRoutePath", "/dashboard");
+  submit({ commit, dispatch }) {
     commit("SET_END");
-    // ***
+    // Save records seperate from active here...
+    EventBusService.$emit("toRoutePath", "/dashboard");
+    dispatch("delete");
+  },
+
+  delete({ commit }) {
     commit("CLEAR");
+    ActiveService.delete(); // Don't need to await
   },
 
-  async delete({ commit }) {
-    const activeDelete = await ActiveService.delete();
-
-    // Making sure storage data is gone before clearing state data
-    if (activeDelete) {
-      commit("CLEAR");
-    }
-  },
-
-  setStep({ commit }, step) {
+  setStep({ state, commit }, step) {
     commit("SET_STEP", step);
+    ActiveService.update(state); // Don't need to await
   }
 };
 

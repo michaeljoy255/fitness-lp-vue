@@ -8,6 +8,7 @@ const ExerciseService = {
    */
   initDefaults() {
     return new Promise(resolve => {
+      console.log("Getting default exercises...");
       localStorage.setItem(
         "exercises",
         JSON.stringify(DefaultExercises.exercises)
@@ -22,6 +23,7 @@ const ExerciseService = {
    */
   get() {
     return new Promise(resolve => {
+      console.log("Getting exercises...");
       resolve(JSON.parse(localStorage.getItem("exercises")));
     });
   },
@@ -30,9 +32,9 @@ const ExerciseService = {
    * Update exercises in storage
    * @returns {Promise<string>} true
    */
-  update() {
+  update(data) {
     return new Promise(resolve => {
-      console.error("@todo: ExerciseService update not implmented!");
+      console.log("@todo: Updated exercises:", data);
       resolve(true);
     });
   },
@@ -43,6 +45,7 @@ const ExerciseService = {
    */
   delete() {
     return new Promise(resolve => {
+      console.log("Deleting exercises...");
       localStorage.removeItem("exercises");
       resolve(true);
     });

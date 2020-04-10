@@ -7,6 +7,7 @@ const WorkoutService = {
    */
   initDefaults() {
     return new Promise(resolve => {
+      console.log("Getting default workouts...");
       localStorage.setItem(
         "workouts",
         JSON.stringify(DefaultWorkouts.workouts)
@@ -21,6 +22,7 @@ const WorkoutService = {
    */
   get() {
     return new Promise(resolve => {
+      console.log("Getting workouts...");
       resolve(JSON.parse(localStorage.getItem("workouts")));
     });
   },
@@ -29,9 +31,9 @@ const WorkoutService = {
    * Update workouts in storage
    * @returns {Promise<string>} true
    */
-  update() {
+  update(data) {
     return new Promise(resolve => {
-      console.error("@todo: WorkoutService update not implmented!");
+      console.error("@todo: Updated workouts:", data);
       resolve(true);
     });
   },
@@ -42,6 +44,7 @@ const WorkoutService = {
    */
   delete() {
     return new Promise(resolve => {
+      console.log("Deleting workouts...");
       localStorage.removeItem("workouts");
       resolve(true);
     });

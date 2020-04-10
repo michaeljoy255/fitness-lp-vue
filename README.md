@@ -4,29 +4,42 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**Date Storage (Local Storage)**
-- Start saving Active Workout state as "active" in local storage
-    - Includes things like the current step
-    - Decide when to call the method (whenever you change steps?)
-
-**Validation**
-- Workout names CANNOT exceed 40 characters
-- Exercise names CANNOT exceed 50 characters
-
-**Local Storage**
-- ("active") === { id, name, step, beginTime, endTime, exercises, records }
-- ("exercises") === [...]
-- ("workouts") === [...]
-- ("records") === { exercises: [...], workouts: [...], measurements: [...]}
-    - records_2020: {...}
+**Refactor Getters**
+- Refactor Getters: See if you can find a better way to do the getters
+- Research usage of and including moment.js into your project
 
 **Active Workout Design**
 - What data is needed on Exercises and Workouts?
     - weight, reps, duration, distance, etc.
-    - isSimple, hasReps, etc. (just examples)
+    - isSimple, hasReps, hideNotes, etc. (just examples)
     - Overall schema for data (local storage)
 - ExerciseCard layout design
-- Exercise input validation (weights, reps, etc.)
+- Input field validation
+- More default exercises and workouts
+
+**Local Storage**
+- "records"
+    - exercises: [...]
+    - workouts: [...]
+    - measurements: [...]
+- "settings"
+    - metric: boolean
+    - ???
+
+**Exercise Records Format**
+```
+{
+  id: string,
+  createdAt: date,
+  distance: number,
+  duration: number,
+  ...
+}
+```
+
+**Input Validation**
+- Workout names CANNOT exceed 40 characters
+- Exercise names CANNOT exceed 50 characters
 
 **Backlog**
 - SummaryCard for Active Workout provides a nice summary

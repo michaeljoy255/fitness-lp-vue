@@ -5,6 +5,7 @@ const ActiveService = {
    */
   get() {
     return new Promise(resolve => {
+      console.log("Getting active...");
       resolve(JSON.parse(localStorage.getItem("active")));
     });
   },
@@ -13,9 +14,10 @@ const ActiveService = {
    * Update active workout in storage
    * @returns {Promise<string>} true
    */
-  update() {
+  update(data) {
     return new Promise(resolve => {
-      console.error("@todo: ActiveService update not implmented!");
+      localStorage.setItem("active", JSON.stringify(data));
+      console.log("Updated active:", data);
       resolve(true);
     });
   },
@@ -26,6 +28,7 @@ const ActiveService = {
    */
   delete() {
     return new Promise(resolve => {
+      console.log("Deleting active...");
       localStorage.removeItem("active");
       resolve(true);
     });
