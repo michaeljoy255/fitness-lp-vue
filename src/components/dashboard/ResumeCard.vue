@@ -45,6 +45,10 @@ export default {
       type: Array,
       required: true
     },
+    previous: {
+      type: Array,
+      required: true
+    },
     records: {
       type: Array,
       required: true
@@ -68,6 +72,7 @@ export default {
           id: this.id,
           name: this.name,
           exercises: this.exercises,
+          previous: this.previous,
           records: this.records
         }
       };

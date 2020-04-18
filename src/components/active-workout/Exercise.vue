@@ -2,6 +2,7 @@
 div
   v-container Description: Exercise description if its set to be viewable...
   v-container Notes: Place to add notes about the exercises?
+  v-container {{ exerciseId }}
   v-expansion-panels(popout dense)
     v-expansion-panel(v-for="(item, i) in this.len" :key="i")
       v-expansion-panel-header Set {{ i+1 }}
@@ -25,10 +26,16 @@ div
 
 <script>
 export default {
-  name: "ExerciseCard",
+  name: "Exercise",
+  props: {
+    exerciseId: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-      len: 3
+      len: 1
     };
   }
 };

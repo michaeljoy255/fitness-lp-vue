@@ -35,3 +35,81 @@ export function isArrayWithData(array) {
     return false;
   }
 }
+
+/**
+ * Object constructor for an Exercise record - Uses destructured defaults
+ * @param {Object} obj
+ * @param {string} obj.exerciseId
+ * @param {string} obj.notes
+ * @param {boolean} obj.isConfirmed
+ * @param {Array} obj.sets
+ * @returns {Object} Exercise record object
+ */
+export function ExerciseRecord({
+  createdAt = new Date().toISOString(),
+  exerciseId = null,
+  notes = "",
+  isConfirmed = null,
+  sets = []
+} = {}) {
+  this.createdAt = createdAt;
+  this.exerciseId = exerciseId;
+  this.notes = notes;
+  this.isConfirmed = isConfirmed;
+  this.sets = sets;
+}
+
+/**
+ * Object constructor for a Workout record - Uses destructured defaults
+ * @param {Object} obj
+ * @param {string} obj.workoutId
+ * @param {number} obj.duration
+ * @returns {Object} Workout record object
+ */
+export function WorkoutRecord({
+  createdAt = new Date().toISOString(),
+  workoutId = null,
+  duration = null
+} = {}) {
+  this.createdAt = createdAt;
+  this.workoutId = workoutId;
+  this.duration = duration;
+}
+
+/**
+ * Object constructor for a Measurement record - Uses destructured defaults
+ * @param {Object} obj
+ * @param {number} obj.bodyWeight
+ * @param {number} obj.bodyFat
+ * @returns {Object} Measurement record object
+ */
+export function MeasurementRecord({
+  createdAt = new Date().toISOString(),
+  bodyWeight = null,
+  bodyFat = null
+} = {}) {
+  this.createdAt = createdAt;
+  this.bodyWeight = bodyWeight;
+  this.bodyFat = bodyFat;
+}
+
+/**
+ * Object constructor for a Set - Uses destructured defaults
+ * @param {Object} obj
+ * @param {number} obj.duration
+ * @param {number} obj.distance
+ * @param {number} obj.weight
+ * @param {number} obj.reps
+ * @returns {Object} A single set object
+ */
+export function ASet({
+  duration = null,
+  distance = null,
+  weight = null,
+  reps = null
+} = {}) {
+  this.duration = duration;
+  this.distance = distance;
+  this.weight = weight;
+  this.reps = reps;
+}

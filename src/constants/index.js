@@ -2,8 +2,6 @@ import { v4 as uuidv4 } from "uuid";
 
 /**
  * Constant workout categories this app recognizes
- * @example
- * let ex = Category.LEGS; // "Legs"
  */
 export const Category = Object.freeze({
   BACK: "Back",
@@ -23,174 +21,145 @@ export const Category = Object.freeze({
  * Constant default exercises the app can initialize for the user
  */
 export const DefaultExercises = Object.freeze({
+  // New up additional default exercises in this array
   exercises: [
-    // Cardio
-    {
-      id: uuidv4(),
+    // Cardio ------------------------------------------------------------------
+    new Exercise({
       name: "Cardio & Conditioning",
       category: Category.CARDIO,
-      isSimple: true,
-      notes:
+      desc:
         "Jogging, jumping jacks, mountain climbers, air squats and any other suitable cardio exercise with or without weights."
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Exercise({
       name: "Warmup",
       category: Category.CARDIO,
-      isSimple: true,
-      notes: "Spend a few minutes warming up."
-    },
-    {
-      id: uuidv4(),
+      desc: "Spend a few minutes warming up."
+    }),
+    new Exercise({
       name: "Cooldown",
       category: Category.CARDIO,
-      isSimple: true,
-      notes: "Spend a few minutes cooling down."
-    },
-    // Miscellaneous
-    {
-      id: uuidv4(),
+      desc: "Spend a few minutes cooling down."
+    }),
+    // Miscellaneous -----------------------------------------------------------
+    new Exercise({
       name: "Stretching",
       category: Category.MISC,
-      isSimple: true,
-      notes: "Spend a few minutes stretching recently used muscles."
-    },
-    // Chest
-    {
-      id: uuidv4(),
+      desc: "Spend a few minutes stretching recently used muscles."
+    }),
+    // Chest -------------------------------------------------------------------
+    new Exercise({
       name: "Flat Press, Barbell",
       category: Category.CHEST,
-      notes: "Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Incline Press, Barbell",
       category: Category.CHEST,
-      notes: "Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Decline Press, Barbell",
       category: Category.CHEST,
-      notes: "Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Pushups",
       category: Category.CHEST,
-      notes: "Do 3-5 sets of 10-20 reps."
-    },
-
-    // Shoulders
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 10-20 reps."
+    }),
+    // Shoulders ---------------------------------------------------------------
+    new Exercise({
       name: "Front and Side Raises, Dumbbell",
       category: Category.SHOULDERS,
-      notes: "Extend arms forward then outward. Do 3 sets of 8-10 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Extend arms forward then outward. Do 3 sets of 8-10 reps."
+    }),
+    new Exercise({
       name: "Seated Military Press, Barbell",
       category: Category.SHOULDERS,
-      notes: "Sit nearly upright and weight up. Do 3 sets of 5-8 reps."
-    },
-    // Triceps
-    {
-      id: uuidv4(),
+      desc: "Sit nearly upright and weight up. Do 3 sets of 5-8 reps."
+    }),
+    // Triceps -----------------------------------------------------------------
+    new Exercise({
       name: "Skull Crushers",
       category: Category.TRICEPS,
-      notes:
+      desc:
         "Lower weight behind head using elbows while laying down. Do 3 sets of 8 reps."
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Exercise({
       name: "Tricep Kickbacks, Dumbbell",
       category: Category.TRICEPS,
-      notes: "Lean over and straigthen elbos back. Do 3 sets of 8 reps."
-    },
-    // Back
-    {
-      id: uuidv4(),
+      desc: "Lean over and straigthen elbos back. Do 3 sets of 8 reps."
+    }),
+    // Back --------------------------------------------------------------------
+    new Exercise({
       name: "Bent Over Rows, Barbell",
       category: Category.BACK,
-      notes: "Brace hard! Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Brace hard! Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Shrugs, Barbell",
       category: Category.BACK,
-      notes: "Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Deadlifts, Barbell",
       category: Category.BACK,
-      notes: "Brace hard! Do 3-5 sets of 5 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Brace hard! Do 3-5 sets of 5 reps."
+    }),
+    new Exercise({
       name: "Stiff Leg Deadlifts, Barbell",
       category: Category.BACK,
-      notes: "Brace hard! Do 3-5 sets of 5-8 reps"
-    },
-    {
-      id: uuidv4(),
+      desc: "Brace hard! Do 3-5 sets of 5-8 reps"
+    }),
+    new Exercise({
       name: "Pullups",
       category: Category.BACK,
-      notes: "Do 3-5 sets of 8-10 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 8-10 reps."
+    }),
+    new Exercise({
       name: "Standing T-Rows, Barbell",
       category: Category.BACK,
-      notes: "Do 3-5 sets of 8-10 reps."
-    },
-    // Biceps
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 8-10 reps."
+    }),
+    // Biceps ------------------------------------------------------------------
+    new Exercise({
       name: "Overhand Curls, Dumbbell",
       category: Category.BICEPS,
-      notes: "Do 3-5 sets of 8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 8 reps."
+    }),
+    new Exercise({
       name: "Underhand Curls, Dumbbell",
       category: Category.BICEPS,
-      notes: "Do 3-5 sets of 8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 8 reps."
+    }),
+    new Exercise({
       name: "Hammer Curls, Dumbbell",
       category: Category.BICEPS,
-      notes: "Do 3-5 sets of 8 reps."
-    },
-    // Legs
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 8 reps."
+    }),
+    // Legs --------------------------------------------------------------------
+    new Exercise({
       name: "Squats, Barbell",
       category: Category.LEGS,
-      notes: "Brace hard! Do 3-5 sets of 5-8 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Brace hard! Do 3-5 sets of 5-8 reps."
+    }),
+    new Exercise({
       name: "Hip Thrusters, Barbell",
       category: Category.LEGS,
-      notes: "Do 3-5 sets of 5-8 reps."
-    },
-    // Core
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 5-8 reps."
+    }),
+    // Core --------------------------------------------------------------------
+    new Exercise({
       name: "Russian Twist, Dumbell",
       category: Category.LEGS,
-      notes: "Do 3-5 sets of 20-30 reps."
-    },
-    {
-      id: uuidv4(),
+      desc: "Do 3-5 sets of 20-30 reps."
+    }),
+    new Exercise({
       name: "Oblique Side Bends, Dumbell",
       category: Category.LEGS,
-      notes:
+      desc:
         "Lower and lift weight along side of body with arms straight. Do 3-5 sets of 20-30 reps."
-    }
+    })
   ]
 });
 
@@ -198,9 +167,9 @@ export const DefaultExercises = Object.freeze({
  * Constant default workouts the app can initialize for the user
  */
 export const DefaultWorkouts = Object.freeze({
+  // New up additional default workouts in this array
   workouts: [
-    {
-      id: uuidv4(),
+    new Workout({
       name: "Cardio",
       exerciseIds: getWorkoutExerciseIds(
         "Warmup",
@@ -208,9 +177,8 @@ export const DefaultWorkouts = Object.freeze({
         "Cooldown",
         "Stretching"
       )
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Workout({
       name: "Chest",
       exerciseIds: getWorkoutExerciseIds(
         "Warmup",
@@ -220,9 +188,8 @@ export const DefaultWorkouts = Object.freeze({
         "Cooldown",
         "Stretching"
       )
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Workout({
       name: "Back",
       exerciseIds: getWorkoutExerciseIds(
         "Warmup",
@@ -232,9 +199,8 @@ export const DefaultWorkouts = Object.freeze({
         "Cooldown",
         "Stretching"
       )
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Workout({
       name: "Arms & Shoulders",
       exerciseIds: getWorkoutExerciseIds(
         "Warmup",
@@ -244,9 +210,8 @@ export const DefaultWorkouts = Object.freeze({
         "Cooldown",
         "Stretching"
       )
-    },
-    {
-      id: uuidv4(),
+    }),
+    new Workout({
       name: "Legs & Core",
       exerciseIds: getWorkoutExerciseIds(
         "Warmup",
@@ -256,9 +221,80 @@ export const DefaultWorkouts = Object.freeze({
         "Cooldown",
         "Stretching"
       )
-    }
+    })
   ]
 });
+
+//##############################################################################
+//##############################################################################
+//###############   Helper Functions for Constants Below   #####################
+//##############################################################################
+//##############################################################################
+
+/**
+ * Object contructor for an Exercise - Uses destructured defaults
+ * @param {Object} obj
+ * @param {string} obj.name
+ * @param {string} obj.category
+ * @param {string} obj.desc
+ * @param {boolean} obj.showDesc
+ * @param {boolean} obj.hasConfirmation
+ * @param {boolean} obj.hasSets
+ * @param {boolean} obj.hasDuration
+ * @param {boolean} obj.hasDistance
+ * @param {boolean} obj.hasWeight
+ * @param {boolean} obj.hasReps
+ * @param {boolean} obj.hasNotes
+ * @returns {Object} Exercise object
+ */
+function Exercise({
+  name = "",
+  category = Category.MISC,
+  desc = "",
+  showDesc = true,
+  hasConfirmation = true,
+  hasSets = true,
+  hasDuration = true,
+  hasDistance = true,
+  hasWeight = true,
+  hasReps = true,
+  hasNotes = true
+} = {}) {
+  this.id = uuidv4();
+  this.name = name;
+  this.category = category;
+  this.desc = desc;
+  this.showDesc = showDesc;
+  this.hasConfirmation = hasConfirmation;
+  this.hasSets = hasSets;
+  this.hasDuration = hasDuration;
+  this.hasDistance = hasDistance;
+  this.hasWeight = hasWeight;
+  this.hasReps = hasReps;
+  this.hasNotes = hasNotes;
+}
+
+/**
+ * Object contructor for a Workout - Uses destructured defaults
+ * @param {Object} obj
+ * @param {string} obj.name
+ * @param {string} obj.desc
+ * @param {boolean} obj.showDesc
+ * @param {Array} obj.exerciseIds
+ * @returns {Object} Workout object
+ */
+function Workout({
+  name = "",
+  desc = "",
+  showDesc = true,
+  exerciseIds = []
+} = {}) {
+  this.id = uuidv4();
+  this.name = name;
+  this.desc = desc;
+  this.showDesc = showDesc;
+  this.exerciseIds = exerciseIds;
+}
 
 /**
  * Constants helper function - Populates exerciseIds for default workouts

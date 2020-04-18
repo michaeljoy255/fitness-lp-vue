@@ -3,7 +3,7 @@
     v-card
       v-card-title {{ name }}
       
-      v-card-subtitle Previously completed {{ this.getLongDateMixin() }}
+      v-card-subtitle Previously completed {{ this.getLongDateMixin($store.getters["workoutRecord/getPreviousRecordById"](id)) }}
 
       v-card-text
         Timer(:beginTime="1" :endTime="new Date().getTime()")
@@ -24,6 +24,10 @@
 /**
  * @todo Remember to un-hardcode the time for workout cards
  */
+/**
+ * @todo try using Luxon!!!
+ */
+// import { DateTime } from "luxon";
 import { datesMixin } from "../../mixins/datesMixin";
 import Timer from "../miscellaneous/Timer";
 

@@ -6,6 +6,7 @@
         v-for="(exercise, i) in active.exercises"
         :key="i"
         :step="i+1"
+        :exerciseId="exercise.id"
         :name="exercise.name"
       )
 

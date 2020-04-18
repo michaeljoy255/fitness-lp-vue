@@ -1,6 +1,7 @@
 import ActiveService from "../../services/active.service";
+import WorkoutRecordService from "../../services/workout-record.service";
 import EventBusService from "../../services/event-bus.service";
-import { isObjectWithData } from "../../helpers";
+import { isObjectWithData, WorkoutRecord } from "../../helpers";
 
 /**
  * Active module is for active workouts
@@ -13,8 +14,8 @@ export const state = {
   name: null,
   step: null,
   beginTime: null,
-  endTime: null,
   exercises: null,
+  previous: null,
   records: null
 };
 
@@ -24,8 +25,8 @@ export const mutations = {
     state.name = active.name;
     state.step = active.step;
     state.beginTime = active.beginTime;
-    state.endTime = active.endTime;
     state.exercises = active.exercises;
+    state.previous = active.previous;
     state.records = active.records;
   },
   CLEAR(state) {
@@ -33,15 +34,12 @@ export const mutations = {
     state.name = "";
     state.step = 1; // 1 is the lowest valid step for steppers
     state.beginTime = null;
-    state.endTime = null;
     state.exercises = [];
+    state.previous = [];
     state.records = [];
   },
   SET_STEP(state, step) {
     state.step = step;
-  },
-  SET_END(state) {
-    state.endTime = new Date().getTime();
   }
 };
 
@@ -53,8 +51,8 @@ export const actions = {
         name: active.name,
         step: active.step,
         beginTime: active.beginTime,
-        endTime: active.endTime,
         exercises: active.exercises,
+        previous: active.previous,
         records: active.records
       });
     } else {
@@ -68,8 +66,8 @@ export const actions = {
       name,
       step: 1,
       beginTime: new Date().getTime(),
-      endTime: null,
       exercises: rootGetters["exercise/getExercisesByIds"](exerciseIds),
+      previous: [],
       records: []
     };
 
@@ -82,12 +80,13 @@ export const actions = {
     dispatch("delete");
   },
 
-  /**
-   * @todo Save workout results to records and storage
-   */
-  submit({ commit, dispatch }) {
-    commit("SET_END");
-    // Save records seperate from active here...
+  submit({ state, dispatch }) {
+    WorkoutRecordService.create(
+      new WorkoutRecord({
+        workoutId: state.id,
+        duration: new Date().getTime() - state.beginTime
+      })
+    );
     EventBusService.$emit("toRoutePath", "/dashboard");
     dispatch("delete");
   },

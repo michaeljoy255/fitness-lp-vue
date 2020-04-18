@@ -6,20 +6,24 @@
     ) {{ name }}
 
     v-stepper-content.pl-0.pt-2.pr-12.ml-3(:step="step")
-      ExerciseInputs
+      Exercise(:exerciseId="exerciseId")
 </template>
 
 <script>
-import ExerciseInputs from "./ExerciseInputs";
+import Exercise from "./Exercise";
 
 export default {
   name: "WorkoutStep",
   components: {
-    ExerciseInputs
+    Exercise
   },
   props: {
     step: {
       type: Number,
+      required: true
+    },
+    exerciseId: {
+      type: String,
       required: true
     },
     name: {

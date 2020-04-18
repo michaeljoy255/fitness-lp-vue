@@ -2,14 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 import * as modal from "./modules/modal";
 import * as selected from "./modules/selected";
-import * as record from "./modules/record";
+import * as workoutRecord from "./modules/workout-record";
+import * as exerciseRecord from "./modules/exercise-record";
+import * as measurementRecord from "./modules/measurement-record";
 import * as workout from "./modules/workout";
 import * as exercise from "./modules/exercise";
 import * as active from "./modules/active";
 import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
 import ActiveService from "../services/active.service";
-// import RecordService from "../services/record.service";
+import WorkoutRecordService from "../services/workout-record.service";
 
 Vue.use(Vuex);
 
@@ -30,9 +32,10 @@ export default new Vuex.Store({
   actions: {
     async initApp({ dispatch }) {
       console.log("Initializing App Data...");
-      // const servMeasurementRecs = RecordService.getMeasurements();
-      // const servExerciseRecs = RecordService.getExercises();
-      // const servWorkoutRecs = RecordService.getWorkouts();
+      /**
+       * @todo get records...
+       */
+      const servWorkRecs = WorkoutRecordService.get();
 
       const servExercises = ExerciseService.get();
       const servWorkouts = WorkoutService.get();
@@ -40,18 +43,20 @@ export default new Vuex.Store({
       const servActiveWorkout = ActiveService.get();
 
       // Promise all with async / await
-      // const measurementRecords = await servMeasurementRecs;
-      // const exerciseRecords = await servExerciseRecs;
-      // const workoutRecords = await servWorkoutRecs;
+      /**
+       * @todo await records...
+       */
+      const workRecs = await servWorkRecs;
 
       const exercises = await servExercises;
       const workouts = await servWorkouts;
 
       const activeWorkout = await servActiveWorkout;
 
-      // dispatch("records/setMeasurements", measurementRecords);
-      // dispatch("records/setExercises", exerciseRecords);
-      // dispatch("records/setWorkouts", workoutRecords);
+      /**
+       * @todo dispatch records...
+       */
+      dispatch("workoutRecord/initWorkouts", workRecs);
       dispatch("exercise/init", exercises);
       dispatch("workout/init", workouts);
       dispatch("active/init", activeWorkout);
@@ -66,7 +71,10 @@ export default new Vuex.Store({
       dispatch("exercise/delete");
       dispatch("workout/delete");
       dispatch("active/delete");
-      // dispatch("records/delete");
+      /**
+       * @todo delete records...
+       */
+      dispatch("workoutRecord/delete");
     },
 
     setDrawerActive({ commit }, bool) {
@@ -93,7 +101,9 @@ export default new Vuex.Store({
     selected,
     exercise,
     workout,
-    record,
+    workoutRecord,
+    exerciseRecord,
+    measurementRecord,
     active
   }
 });

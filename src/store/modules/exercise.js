@@ -1,5 +1,5 @@
 import ExerciseService from "../../services/exercise.service";
-import { isObjectWithData, isArrayWithData } from "../../helpers";
+import { isArrayWithData } from "../../helpers";
 
 /**
  * Exercise module is for all available exercises
@@ -45,25 +45,12 @@ export const getters = {
     return state.exercises.find(exercise => exercise.id === id);
   },
 
-  getExercisesByIds: (state, getters) => ids => {
+  getExercisesByIds: state => ids => {
     let exercises = [];
 
     if (isArrayWithData(ids)) {
       exercises = ids.map(id => {
-        return getters.getExerciseById(id);
-      });
-    }
-
-    return exercises;
-  },
-
-  getExercisesByWorkoutId: (state, getters) => id => {
-    const workout = getters.getWorkoutById(id);
-    let exercises = [];
-
-    if (isObjectWithData(workout)) {
-      exercises = workout.exerciseIds.map(exerId => {
-        return getters.getExerciseById(exerId);
+        return state.exercises.find(exercise => exercise.id === id);
       });
     }
 

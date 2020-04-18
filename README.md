@@ -4,17 +4,25 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**Refactor Getters**
-- Refactor Getters: See if you can find a better way to do the getters
+**Recording**
+- Phase 0 - Moment.js:
+    - Research Moment.js for dealing with record and visual dates in the app
+    - Best format to save the date as?
+    - Best way to determine which record is the most recent?
+    - Best way to convert a saved date to a local date for visual display?
+    - Plan out what files need to change (helpers, mixins, components, state, etc.)
+- Phase 1:
+    - Pull the date completed and duration for the Dashboard workout cards
+    - Split record module into workout-record, exercise-record, and measurement-record
+- Phase 2:
+    - Record (add or update) exercise records in an active workout when you click next step
+    - Record all exercise data in records on workout submit
+    - Pull exercise data for hints in workout
 
 **Active Workout Design**
-- What data is needed on Exercises and Workouts?
-    - weight, reps, duration, distance, etc.
-    - isSimple, hasReps, hideNotes, etc. (just examples)
-    - Overall schema for data (local storage)
-- ExerciseCard layout design
 - Input field validation
 - More default exercises and workouts
+- Have set inputs show up in expansion panel header
 
 **Local Storage**
 - "records"
@@ -41,7 +49,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Exercise names CANNOT exceed 50 characters
 
 **Backlog**
-- Research usage of and including moment.js into your project
 - Automated unit testing with Jest
 - SummaryCard for Active Workout provides a nice summary
 - Exercises CRUD
