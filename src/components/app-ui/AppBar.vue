@@ -19,8 +19,8 @@
 
     //- App
     span(v-if="!isActiveWorkout")
-      span.d-sm-none {{ new Date().toLocaleDateString() }}
-      span.d-none.d-sm-flex {{ this.getLongDateMixin() }}
+      span.d-sm-none {{ DateTime.local().toLocaleString() }}
+      span.d-none.d-sm-flex {{ DateTime.local().toLocaleString(DateTime.DATE_HUGE) }}
 
     //- Active Workout
     v-btn(v-else @click.stop="openModal()" icon absolute right)
@@ -28,11 +28,15 @@
 </template>
 
 <script>
-import { datesMixin } from "../../mixins/datesMixin";
+import { DateTime } from "luxon";
 
 export default {
   name: "AppBar",
-  mixins: [datesMixin],
+  data() {
+    return {
+      DateTime
+    };
+  },
 
   methods: {
     toggleDrawer() {

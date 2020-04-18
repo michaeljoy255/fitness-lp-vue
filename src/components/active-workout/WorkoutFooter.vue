@@ -1,12 +1,13 @@
 <template lang="pug">
   v-footer(app color="primary")
       v-spacer
-      Timer(:beginTime="beginTime")
+      Timer(:begin="begin")
       v-spacer
 </template>
 
 <script>
 import Timer from "../miscellaneous/Timer";
+import { DateTime } from "luxon";
 
 export default {
   name: "WorkoutFooter",
@@ -14,9 +15,9 @@ export default {
     Timer
   },
   props: {
-    beginTime: {
-      type: Number,
-      default: new Date().getTime()
+    begin: {
+      type: String,
+      default: DateTime.local().toISO()
     }
   }
 };

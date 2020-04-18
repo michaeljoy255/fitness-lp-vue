@@ -2,6 +2,7 @@ import ActiveService from "../../services/active.service";
 import WorkoutRecordService from "../../services/workout-record.service";
 import EventBusService from "../../services/event-bus.service";
 import { isObjectWithData, WorkoutRecord } from "../../helpers";
+import { DateTime, Interval } from "luxon";
 
 /**
  * Active module is for active workouts
@@ -13,7 +14,7 @@ export const state = {
   id: null,
   name: null,
   step: null,
-  beginTime: null,
+  begin: null,
   exercises: null,
   previous: null,
   records: null
@@ -24,7 +25,7 @@ export const mutations = {
     state.id = active.id;
     state.name = active.name;
     state.step = active.step;
-    state.beginTime = active.beginTime;
+    state.begin = active.begin;
     state.exercises = active.exercises;
     state.previous = active.previous;
     state.records = active.records;
@@ -33,7 +34,7 @@ export const mutations = {
     state.id = "";
     state.name = "";
     state.step = 1; // 1 is the lowest valid step for steppers
-    state.beginTime = null;
+    state.begin = null;
     state.exercises = [];
     state.previous = [];
     state.records = [];
@@ -50,7 +51,7 @@ export const actions = {
         id: active.id,
         name: active.name,
         step: active.step,
-        beginTime: active.beginTime,
+        begin: active.begin,
         exercises: active.exercises,
         previous: active.previous,
         records: active.records
@@ -65,7 +66,7 @@ export const actions = {
       id,
       name,
       step: 1,
-      beginTime: new Date().getTime(),
+      begin: DateTime.local().toISO(),
       exercises: rootGetters["exercise/getExercisesByIds"](exerciseIds),
       previous: [],
       records: []
@@ -80,13 +81,26 @@ export const actions = {
     dispatch("delete");
   },
 
-  submit({ state, dispatch }) {
+  async submit({ state, dispatch }) {
+    const endTime = DateTime.local(); // Not from ISO
+    const beginTime = DateTime.fromISO(state.begin);
+
+    const timeObject = Interval.fromDateTimes(beginTime, endTime)
+      .toDuration(["hours", "minutes", "seconds"])
+      .toObject();
+
     WorkoutRecordService.create(
       new WorkoutRecord({
         workoutId: state.id,
-        duration: new Date().getTime() - state.beginTime
+        duration: timeObject
       })
     );
+
+    // Update state with newly submitted record
+    const servWorkRecs = WorkoutRecordService.get();
+    const workRecs = await servWorkRecs;
+    dispatch("workoutRecord/initWorkouts", workRecs, { root: true });
+
     EventBusService.$emit("toRoutePath", "/dashboard");
     dispatch("delete");
   },

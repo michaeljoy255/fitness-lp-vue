@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import { DateTime, Interval } from "luxon";
+
 export default {
   name: "Drawer",
 
@@ -69,8 +71,14 @@ export default {
    * @todo Remove testing methods
    */
   methods: {
-    test(e) {
-      console.log("TEST:", e);
+    test() {
+      const dt1 = DateTime.fromISO(DateTime.local(2020, 4, 17).toISO());
+      const dt2 = DateTime.fromISO(DateTime.local().toISO());
+      const i = Interval.fromDateTimes(dt1, dt2)
+        .toDuration(["hours", "minutes", "seconds"])
+        .toObject();
+
+      console.log(dt1, dt2, i);
     }
   }
 };

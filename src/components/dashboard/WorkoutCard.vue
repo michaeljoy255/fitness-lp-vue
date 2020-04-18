@@ -1,12 +1,12 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
-    v-card
+    v-card(min-height="214")
       v-card-title {{ name }}
       
-      v-card-subtitle Previously completed {{ this.getLongDateMixin($store.getters["workoutRecord/getPreviousRecordById"](id)) }}
+      v-card-subtitle {{ displayDate }}
 
       v-card-text
-        Timer(:beginTime="1" :endTime="new Date().getTime()")
+        Timer(:duration="duration")
 
       v-card-actions
         v-container
@@ -24,16 +24,11 @@
 /**
  * @todo Remember to un-hardcode the time for workout cards
  */
-/**
- * @todo try using Luxon!!!
- */
-// import { DateTime } from "luxon";
-import { datesMixin } from "../../mixins/datesMixin";
+import { DateTime } from "luxon";
 import Timer from "../miscellaneous/Timer";
 
 export default {
   name: "WorkoutCard",
-  mixins: [datesMixin],
   components: {
     Timer
   },
@@ -51,6 +46,11 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      DateTime
+    };
+  },
 
   methods: {
     routeToObject() {
@@ -62,6 +62,35 @@ export default {
           exerciseIds: this.exerciseIds
         }
       };
+    }
+  },
+
+  computed: {
+    mostRecentRecord() {
+      console.log("update recent record");
+      return this.$store.getters["workoutRecord/getMostRecentById"](this.id);
+    },
+
+    duration() {
+      const record = this.mostRecentRecord;
+      console.log("update duration ");
+      if (record) {
+        return record.duration;
+      } else {
+        return null;
+      }
+    },
+
+    displayDate() {
+      if (!this.mostRecentRecord) {
+        return "No previous records found";
+      } else {
+        const time = DateTime.fromISO(this.mostRecentRecord.createdAt);
+
+        return `Previously completed ${time.toLocaleString(
+          DateTime.DATE_HUGE
+        )}`;
+      }
     }
   }
 };

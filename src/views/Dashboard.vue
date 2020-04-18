@@ -6,6 +6,7 @@
         v-if="active.id"
         :id="active.id"
         :name="active.name"
+        :begin="active.begin"
         :exercises="active.exercises"
         :previous="active.previous"
         :records="active.records"

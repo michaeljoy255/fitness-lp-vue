@@ -1,7 +1,9 @@
 <template lang="pug">
   div.my-1
     v-icon timer
-    span.vertical-middle
+    span.lower-text(v-if="!begin && !duration")
+      span &nbsp; -
+    span.lower-text(v-else)
       span(v-show="hours > 0") &nbsp; {{ hours }}
       span(v-show="hours > 0").overline H
       span(v-show="minutes > 0") &nbsp; {{ minutes }}
@@ -11,27 +13,26 @@
 </template>
 
 <script>
+import { DateTime, Interval } from "luxon";
+
 /**
- * Provide props endTime and beginTime if you want a static time display
- * Provide prop endTime only if you want a live timer
+ * Provide begin prop for a live timer
+ * Provide duration prop for a static duration time display
  */
 export default {
   name: "Timer",
   props: {
-    beginTime: {
-      type: Number,
-      default: new Date().getTime()
+    begin: {
+      type: String,
+      default: null
     },
-    endTime: {
-      type: Number,
+    duration: {
+      type: Object,
       default: null
     }
   },
   data() {
     return {
-      // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
-      milsecsPerDay: 24 * 60 * 60 * 1000,
-      milsecsPerHour: 60 * 60 * 1000,
       timerId: null,
       hours: 0,
       minutes: 0,
@@ -40,50 +41,39 @@ export default {
   },
 
   created() {
-    if (this.endTime) {
-      // end time given, so time is a static display
-      this.getTime(this.beginTime, this.endTime);
-    } else {
-      // No end time given, so its a live timer
+    const beginTime = DateTime.fromISO(this.begin);
+
+    if (this.duration) {
+      // Display the provided static duration
+      const { hours, minutes, seconds } = this.duration;
+      this.hours = hours;
+      this.minutes = minutes;
+      this.seconds = seconds.toString().split(".")[0];
+    } else if (this.begin) {
+      // Setting an interval for a live timer with provided begin time
       this.timerId = setInterval(() => {
-        this.getTime(this.beginTime, new Date().getTime());
-      });
+        const now = DateTime.local(); // Not from ISO
+
+        const timeObject = Interval.fromDateTimes(beginTime, now)
+          .toDuration(["hours", "minutes", "seconds"])
+          .toObject();
+
+        this.hours = timeObject.hours;
+        this.minutes = timeObject.minutes;
+        this.seconds = timeObject.seconds.toString().split(".")[0];
+      }, 1000);
+    } else {
+      // Do nothing
     }
   },
 
   destroyed() {
     clearInterval(this.timerId);
-  },
-
-  methods: {
-    /**
-     * Calculates the hours, minutes, and seconds from a begin time and end time
-     * @param {number} beginTime Milliseconds from date.getTime()
-     * @param {number} endTime Milliseconds from date.getTime()
-     */
-    getTime(beginTime, endTime) {
-      const timeDiff = endTime - beginTime;
-
-      this.hours = Math.floor(
-        ((timeDiff % this.milsecsPerDay) / this.milsecsPerHour) * 1
-      );
-      this.minutes = Math.floor(
-        (((timeDiff % this.milsecsPerDay) % this.milsecsPerHour) /
-          (60 * 1000)) *
-          1
-      );
-      this.seconds = Math.floor(
-        ((((timeDiff % this.milsecsPerDay) % this.milsecsPerHour) %
-          (60 * 1000)) /
-          1000) *
-          1
-      );
-    }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-.vertical-middle
+.lower-text
   vertical-align sub
 </style>

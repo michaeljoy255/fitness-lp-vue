@@ -5,6 +5,7 @@
  *
  * NOTE: Avoid using helpers in Vue components. Use Mixins instead.
  */
+import { DateTime } from "luxon";
 
 /**
  * Variable you expect to be an object with at least one property
@@ -46,7 +47,7 @@ export function isArrayWithData(array) {
  * @returns {Object} Exercise record object
  */
 export function ExerciseRecord({
-  createdAt = new Date().toISOString(),
+  createdAt = DateTime.local().toISO(),
   exerciseId = null,
   notes = "",
   isConfirmed = null,
@@ -67,7 +68,7 @@ export function ExerciseRecord({
  * @returns {Object} Workout record object
  */
 export function WorkoutRecord({
-  createdAt = new Date().toISOString(),
+  createdAt = DateTime.local().toISO(),
   workoutId = null,
   duration = null
 } = {}) {
@@ -84,7 +85,7 @@ export function WorkoutRecord({
  * @returns {Object} Measurement record object
  */
 export function MeasurementRecord({
-  createdAt = new Date().toISOString(),
+  createdAt = DateTime.local().toISO(),
   bodyWeight = null,
   bodyFat = null
 } = {}) {

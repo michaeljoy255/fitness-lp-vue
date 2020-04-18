@@ -19,7 +19,7 @@
           v-icon(right) check
         v-spacer
 
-    WorkoutFooter(:beginTime="active.beginTime")
+    WorkoutFooter(:begin="active.begin")
 </template>
 
 <script>

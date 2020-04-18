@@ -1,11 +1,13 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
-    v-card
+    v-card(min-height="214")
       v-card-title {{ name }}
       
-      v-card-subtitle.pb-1 Workout started on {{ this.getLongDateMixin() }}
+      v-card-subtitle.pb-1
+        | Workout started on
+        | {{ DateTime.fromISO(this.begin).toLocaleString(DateTime.DATE_HUGE) }}
 
-      v-card-actions
+      v-card-actions.mt-3
         v-container
           v-btn(
             @click.stop="openModal()"
@@ -27,17 +29,23 @@
 </template>
 
 <script>
-import { datesMixin } from "../../mixins/datesMixin";
+/**
+ * @todo need to pull start date from active workout
+ */
+import { DateTime } from "luxon";
 
 export default {
   name: "ResumeCard",
-  mixins: [datesMixin],
   props: {
     id: {
       type: String,
       required: true
     },
     name: {
+      type: String,
+      required: true
+    },
+    begin: {
       type: String,
       required: true
     },
@@ -53,6 +61,11 @@ export default {
       type: Array,
       required: true
     }
+  },
+  data() {
+    return {
+      DateTime
+    };
   },
 
   methods: {
