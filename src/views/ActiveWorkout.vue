@@ -14,7 +14,7 @@
 
       v-container.d-flex
         v-spacer
-        v-btn(@click.stop="openModal()" rounded color="success" width="240")
+        v-btn(@click.stop="confirm" rounded color="success" width="240")
           span Finish Workout
           v-icon(right) check
         v-spacer
@@ -66,7 +66,7 @@ export default {
   },
 
   methods: {
-    openModal() {
+    confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
         title: "Finish Workout",

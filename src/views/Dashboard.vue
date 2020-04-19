@@ -43,11 +43,6 @@ export default {
     };
   },
 
-  created() {
-    // Get all data for app ASAP
-    this.$store.dispatch("initApp");
-  },
-
   computed: {
     active() {
       return this.$store.state.active;

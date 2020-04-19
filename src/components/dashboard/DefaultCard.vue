@@ -11,7 +11,7 @@
       
     v-card-actions
       v-container
-        v-btn(@click.stop="openModal()" rounded color="success" block)
+        v-btn(@click.stop="confirm" rounded color="success" block)
           span Use Defaults
           v-icon(right) system_update_alt
 </template>
@@ -21,7 +21,7 @@ export default {
   name: "DefaultCard",
 
   methods: {
-    openModal() {
+    confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
         title: "Generate Defaults",

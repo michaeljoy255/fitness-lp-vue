@@ -1,7 +1,7 @@
 <template lang="pug">
   v-app-bar(app clipped-left color="secondary")
   
-    v-app-bar-nav-icon(@click="toggleDrawer()")
+    v-app-bar-nav-icon(@click="toggleDrawer")
 
     //- App
     span(v-if="!isActiveWorkout")
@@ -23,7 +23,7 @@
       span.d-none.d-sm-flex {{ DateTime.local().toLocaleString(DateTime.DATE_HUGE) }}
 
     //- Active Workout
-    v-btn(v-else @click.stop="openModal()" icon absolute right)
+    v-btn(v-else @click.stop="confirm" icon absolute right)
       v-icon clear
 </template>
 
@@ -43,7 +43,7 @@ export default {
       this.$store.dispatch("toggleDrawer");
     },
 
-    openModal() {
+    confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
         title: "Cancel Workout",

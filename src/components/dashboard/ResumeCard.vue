@@ -1,16 +1,16 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
-    v-card(min-height="214")
+    v-card
       v-card-title {{ name }}
       
       v-card-subtitle.pb-1
         | Workout started on
         | {{ DateTime.fromISO(this.begin).toLocaleString(DateTime.DATE_HUGE) }}
 
-      v-card-actions.mt-3
+      v-card-actions
         v-container
           v-btn(
-            @click.stop="openModal()"
+            @click.stop="confirm"
             color="error"
             block
             rounded
@@ -19,7 +19,7 @@
             v-icon(right) delete
 
           v-btn.mt-4(
-            :to="this.routeToObject()"
+            :to="routeToObject()"
             color="success"
             block
             rounded
@@ -69,7 +69,7 @@ export default {
   },
 
   methods: {
-    openModal() {
+    confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
         title: "Discard Workout",

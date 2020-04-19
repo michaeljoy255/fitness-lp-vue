@@ -21,7 +21,7 @@
             span Delete
             v-icon(right) delete_forever
 
-          v-btn(@click="openModal()" color="error" rounded)
+          v-btn(@click="confirm" color="error" rounded)
             span Clear All Data
             v-icon(right) delete_sweep
 </template>
@@ -31,7 +31,7 @@ export default {
   name: "Records",
 
   methods: {
-    openModal() {
+    confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",
         title: "Delete Stored Data",

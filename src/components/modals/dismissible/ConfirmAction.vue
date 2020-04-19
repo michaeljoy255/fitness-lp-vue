@@ -10,7 +10,7 @@
       v-spacer
       v-btn(@click="$store.dispatch('modal/close')" text)
         span Cancel
-      v-btn(@click="confirmModal()" color="warning")
+      v-btn(@click="confirm" color="warning")
         span Confirm
 </template>
 
@@ -19,7 +19,7 @@ export default {
   name: "ConfirmAction",
 
   methods: {
-    confirmModal() {
+    confirm() {
       this.$store.dispatch(this.$store.state.modal.action);
       this.$store.dispatch("modal/close");
     }

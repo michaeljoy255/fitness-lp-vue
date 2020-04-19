@@ -1,6 +1,6 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
-    v-card(min-height="214")
+    v-card
       v-card-title {{ name }}
       
       v-card-subtitle {{ displayDate }}
@@ -11,7 +11,7 @@
       v-card-actions
         v-container
           v-btn(
-            :to="this.routeToObject()"
+            :to="routeToObject()"
             color="primary"
             block
             rounded
@@ -67,13 +67,12 @@ export default {
 
   computed: {
     mostRecentRecord() {
-      console.log("update recent record");
       return this.$store.getters["workoutRecord/getMostRecentById"](this.id);
     },
 
     duration() {
       const record = this.mostRecentRecord;
-      console.log("update duration ");
+
       if (record) {
         return record.duration;
       } else {
