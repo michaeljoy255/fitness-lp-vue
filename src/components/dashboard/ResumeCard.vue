@@ -1,11 +1,11 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
     v-card
-      v-card-title {{ name }}
+      v-card-title {{ active.name }}
       
       v-card-subtitle.pb-1
         | Workout started on
-        | {{ DateTime.fromISO(this.begin).toLocaleString(DateTime.DATE_HUGE) }}
+        | {{ DateTime.fromISO(active.begin).toLocaleString(DateTime.DATE_HUGE) }}
 
       v-card-actions
         v-container
@@ -19,7 +19,7 @@
             v-icon(right) delete
 
           v-btn.mt-4(
-            :to="routeToObject()"
+            :to="route"
             color="success"
             block
             rounded
@@ -29,42 +29,29 @@
 </template>
 
 <script>
-/**
- * @todo need to pull start date from active workout
- */
 import { DateTime } from "luxon";
 
 export default {
   name: "ResumeCard",
   props: {
-    id: {
-      type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    begin: {
-      type: String,
-      required: true
-    },
-    exercises: {
-      type: Array,
-      required: true
-    },
-    previous: {
-      type: Array,
-      required: true
-    },
-    records: {
-      type: Array,
+    active: {
+      type: Object,
       required: true
     }
   },
   data() {
     return {
-      DateTime
+      DateTime,
+      route: {
+        name: `ActiveWorkout`,
+        params: {
+          id: this.active.id,
+          name: this.active.name,
+          exercises: this.active.exercises,
+          previous: this.active.previous,
+          records: this.active.records
+        }
+      }
     };
   },
 
@@ -76,19 +63,6 @@ export default {
         content: "Discards this workout and removes it from the Dashboard.",
         action: "active/cancel"
       });
-    },
-
-    routeToObject() {
-      return {
-        name: `ActiveWorkout`,
-        params: {
-          id: this.id,
-          name: this.name,
-          exercises: this.exercises,
-          previous: this.previous,
-          records: this.records
-        }
-      };
     }
   }
 };

@@ -4,20 +4,13 @@
 
       ResumeCard(
         v-if="active.id"
-        :id="active.id"
-        :name="active.name"
-        :begin="active.begin"
-        :exercises="active.exercises"
-        :previous="active.previous"
-        :records="active.records"
+        :active="active"
       )
       
       WorkoutCard(
         v-for="workout in workouts"
         :key="workout.id"
-        :id="workout.id"
-        :name="workout.name"
-        :exerciseIds="workout.exerciseIds"
+        :workout="workout"
       )
 
   v-container.mx-auto(v-else)

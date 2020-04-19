@@ -22,7 +22,7 @@ export default {
   },
 
   created() {
-    // Get all data for app ASAP
+    // Get all initial data for app ASAP
     this.$store.dispatch("initApp");
 
     EventBusService.$on("toRoutePath", path => {

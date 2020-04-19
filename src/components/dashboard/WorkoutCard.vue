@@ -1,7 +1,7 @@
 <template lang="pug">
   v-col.col-12.col-sm-6.col-md-4.col-xl-3
     v-card
-      v-card-title {{ name }}
+      v-card-title {{ workout.name }}
       
       v-card-subtitle {{ displayDate }}
 
@@ -11,7 +11,7 @@
       v-card-actions
         v-container
           v-btn(
-            :to="routeToObject()"
+            :to="route"
             color="primary"
             block
             rounded
@@ -33,41 +33,33 @@ export default {
     Timer
   },
   props: {
-    id: {
-      type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    exerciseIds: {
-      type: Array,
+    workout: {
+      type: Object,
       required: true
     }
   },
   data() {
     return {
-      DateTime
+      DateTime,
+      route: {
+        name: `ActiveWorkout`,
+        params: {
+          id: this.workout.id,
+          name: this.workout.name,
+          exerciseIds: this.workout.exerciseIds
+        }
+      }
     };
   },
 
-  methods: {
-    routeToObject() {
-      return {
-        name: `ActiveWorkout`,
-        params: {
-          id: this.id,
-          name: this.name,
-          exerciseIds: this.exerciseIds
-        }
-      };
-    }
-  },
-
   computed: {
+    /**
+     * @todo Refactor how most recent record information is found (include in state or use more getters?)
+     */
     mostRecentRecord() {
-      return this.$store.getters["workoutRecord/getMostRecentById"](this.id);
+      return this.$store.getters["workoutRecord/getMostRecentById"](
+        this.workout.id
+      );
     },
 
     duration() {
