@@ -44,9 +44,7 @@ export default {
       route: {
         name: `ActiveWorkout`,
         params: {
-          id: this.workout.id,
-          name: this.workout.name,
-          exerciseIds: this.workout.exerciseIds
+          workout: this.workout
         }
       }
     };

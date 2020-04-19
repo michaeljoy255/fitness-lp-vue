@@ -35,33 +35,26 @@ export default {
     WorkoutFooter
   },
 
-  /**
-   * Created hook prepares the Active Workout view
-   * - Fresh workouts get initialized using route params
-   * - Resumed workouts get loaded from state
-   */
   created() {
-    if (this.$route.params.exerciseIds) {
-      // Fresh Workout - Only has the exerciseIds ready
+    const { workout, active } = this.$route.params;
+
+    if (workout) {
+      // Starting new workout by setting the active state
       this.$store.dispatch("active/start", {
-        id: this.$route.params.id,
-        name: this.$route.params.name,
-        exerciseIds: this.$route.params.exerciseIds
+        id: this.$route.params.workout.id,
+        name: this.$route.params.workout.name,
+        exerciseIds: this.$route.params.workout.exerciseIds
       });
+    } else if (active) {
+      // Resuming existing workout from active state
+    } else {
+      // No workouts found, returning to Dashboard
+      this.$router.push("/dashboard");
     }
   },
 
-  /**
-   * Mounted hook handles the page loading with no workout and shuts the nav
-   * - Return user to Dashboard if a workout isn't loaded
-   * - Closes the nav drawer
-   */
   mounted() {
-    if (!this.$store.state.active.id) {
-      // No workout id found, return to Dashboard
-      this.$router.push("/dashboard");
-    }
-
+    // Shuts the nav when starting a workout
     this.$store.dispatch("setDrawerActive", false);
   },
 

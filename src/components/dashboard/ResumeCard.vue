@@ -45,11 +45,7 @@ export default {
       route: {
         name: `ActiveWorkout`,
         params: {
-          id: this.active.id,
-          name: this.active.name,
-          exercises: this.active.exercises,
-          previous: this.active.previous,
-          records: this.active.records
+          active: true
         }
       }
     };
