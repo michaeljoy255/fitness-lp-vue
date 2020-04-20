@@ -4,9 +4,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 
 # TODO
 
-**Recording**
-- Refactor how most recent record information is found (include in state or use more getters?)
-- Split record module into workout-record, exercise-record, and measurement-record
+**Recording Exercises**
 - Record (add or update) exercise records in an active workout when you click next step
 - Record all exercise data in records on workout submit
 - Pull exercise data for hints in workout
