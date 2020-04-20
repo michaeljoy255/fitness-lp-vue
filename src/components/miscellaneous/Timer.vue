@@ -41,7 +41,7 @@ export default {
   },
 
   created() {
-    const beginTime = DateTime.fromISO(this.begin);
+    const beginDT = DateTime.fromISO(this.begin);
 
     if (this.duration) {
       // Display the provided static duration
@@ -52,9 +52,9 @@ export default {
     } else if (this.begin) {
       // Setting an interval for a live timer with provided begin time
       this.timerId = setInterval(() => {
-        const now = DateTime.local(); // Not from ISO
+        const nowDT = DateTime.local(); // Not from ISO
 
-        const timeObject = Interval.fromDateTimes(beginTime, now)
+        const timeObject = Interval.fromDateTimes(beginDT, nowDT)
           .toDuration(["hours", "minutes", "seconds"])
           .toObject();
 

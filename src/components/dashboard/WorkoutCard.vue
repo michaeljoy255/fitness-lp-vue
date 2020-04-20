@@ -11,7 +11,7 @@
       v-card-actions
         v-container
           v-btn(
-            :to="route"
+            @click="startWorkout"
             color="primary"
             block
             rounded
@@ -21,9 +21,6 @@
 </template>
 
 <script>
-/**
- * @todo Remember to un-hardcode the time for workout cards
- */
 import { DateTime } from "luxon";
 import Timer from "../miscellaneous/Timer";
 
@@ -40,20 +37,28 @@ export default {
   },
   data() {
     return {
-      DateTime,
-      route: {
-        name: `ActiveWorkout`,
-        params: {
-          workout: this.workout
-        }
-      }
+      DateTime
     };
   },
 
+  methods: {
+    startWorkout() {
+      this.$store.dispatch("active/start", {
+        id: this.workout.id,
+        name: this.workout.name,
+        exerciseIds: this.workout.exerciseIds
+      });
+
+      this.$router.push({
+        name: "ActiveWorkout",
+        params: {
+          workoutName: this.workout.name.toLowerCase().replace(/ /g, "-")
+        }
+      });
+    }
+  },
+
   computed: {
-    /**
-     * @todo Refactor how most recent record information is found (include in state or use more getters?)
-     */
     mostRecentRecord() {
       return this.$store.getters["workoutRecord/getMostRecentById"](
         this.workout.id
@@ -62,24 +67,18 @@ export default {
 
     duration() {
       const record = this.mostRecentRecord;
-
-      if (record) {
-        return record.duration;
-      } else {
-        return null;
-      }
+      return record ? record.duration : null;
     },
 
     displayDate() {
-      if (!this.mostRecentRecord) {
-        return "No previous records found";
-      } else {
-        const time = DateTime.fromISO(this.mostRecentRecord.createdAt);
+      const record = this.mostRecentRecord;
+      const beginDT = record
+        ? DateTime.fromISO(this.mostRecentRecord.createdAt)
+        : null;
 
-        return `Previously completed ${time.toLocaleString(
-          DateTime.DATE_HUGE
-        )}`;
-      }
+      return record && beginDT
+        ? `Previously completed ${beginDT.toLocaleString(DateTime.DATE_HUGE)}`
+        : "No previous records found";
     }
   }
 };

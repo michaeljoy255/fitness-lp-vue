@@ -2,7 +2,7 @@
 // import { isArrayWithData } from "../../helpers";
 
 /**
- * Exercise record module is for records of exercises
+ * Exercise Records Module
  */
 
 export const namespaced = true;

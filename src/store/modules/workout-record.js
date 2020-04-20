@@ -3,7 +3,7 @@ import { isArrayWithData } from "../../helpers";
 import { DateTime } from "luxon";
 
 /**
- * Workout record module is for records of workouts
+ * Workout Records Module
  */
 
 export const namespaced = true;
@@ -37,6 +37,11 @@ export const actions = {
 };
 
 export const getters = {
+  /**
+   * Get the most recent workout record by workout id
+   * @example
+   * let ex = this.$store.getters["workoutRecord/getMostRecentById"](id);
+   */
   getMostRecentById: state => id => {
     // Find workouts with matching id
     const filteredWorkouts = state.workouts.filter(

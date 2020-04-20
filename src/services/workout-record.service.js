@@ -1,4 +1,5 @@
-import { isArrayWithData } from "../helpers";
+import { isArrayWithData, WorkoutRecord } from "../helpers";
+import { DateTime, Interval } from "luxon";
 
 const WorkoutRecordService = {
   /**
@@ -14,20 +15,34 @@ const WorkoutRecordService = {
 
   /**
    * Create workout record in storage
+   * @param {string} begin ISO formatted date
+   * @param {string} end ISO formatted date
    * @returns {Promise<string>} true
    */
-  create(data) {
+  create({
+    workoutId = null,
+    begin = DateTime.local().toISO(),
+    end = DateTime.local().toISO()
+  }) {
     return new Promise(resolve => {
+      const beginDT = DateTime.fromISO(begin);
+      const endDT = DateTime.fromISO(end);
+
+      const duration = Interval.fromDateTimes(beginDT, endDT)
+        .toDuration(["hours", "minutes", "seconds"])
+        .toObject();
+
+      const newWorkoutRecord = new WorkoutRecord({ workoutId, duration });
       let workoutRecords = JSON.parse(localStorage.getItem("workoutRecords"));
 
       if (isArrayWithData(workoutRecords)) {
         // Storage already has data
-        workoutRecords.push(data);
+        workoutRecords.push(newWorkoutRecord);
         localStorage.setItem("workoutRecords", JSON.stringify(workoutRecords));
       } else {
         // Empty or no valid data
         workoutRecords = [];
-        workoutRecords.push(data);
+        workoutRecords.push(newWorkoutRecord);
         localStorage.setItem("workoutRecords", JSON.stringify(workoutRecords));
       }
 

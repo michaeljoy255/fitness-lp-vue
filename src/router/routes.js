@@ -14,7 +14,7 @@ const routes = [
     component: () => import("../views/Dashboard.vue")
   },
   {
-    path: "/active-workout/:id",
+    path: "/active-workout/:workoutName",
     name: "ActiveWorkout",
     component: () => import("../views/ActiveWorkout.vue")
   },

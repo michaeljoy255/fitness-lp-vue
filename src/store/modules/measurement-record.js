@@ -2,7 +2,7 @@
 // import { isArrayWithData } from "../../helpers";
 
 /**
- * Measurment record module is for records of measurements
+ * Measurement Records Module
  */
 
 export const namespaced = true;

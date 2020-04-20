@@ -2,7 +2,7 @@ import ExerciseService from "../../services/exercise.service";
 import { isArrayWithData } from "../../helpers";
 
 /**
- * Exercise module is for all available exercises
+ * Available Exercises Module
  */
 
 export const namespaced = true;

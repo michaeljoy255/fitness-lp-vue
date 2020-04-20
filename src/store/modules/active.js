@@ -1,11 +1,11 @@
 import ActiveService from "../../services/active.service";
 import WorkoutRecordService from "../../services/workout-record.service";
 import EventBusService from "../../services/event-bus.service";
-import { isObjectWithData, WorkoutRecord } from "../../helpers";
-import { DateTime, Interval } from "luxon";
+import { isObjectWithData } from "../../helpers";
+import { DateTime } from "luxon";
 
 /**
- * Active module is for active workouts
+ * Active Workout Module
  */
 
 export const namespaced = true;
@@ -77,31 +77,23 @@ export const actions = {
   },
 
   cancel({ dispatch }) {
-    EventBusService.$emit("toRoutePath", "/dashboard");
+    EventBusService.$emit("routeTo", "/dashboard");
     dispatch("delete");
   },
 
   async submit({ state, dispatch }) {
-    const endTime = DateTime.local(); // Not from ISO
-    const beginTime = DateTime.fromISO(state.begin);
-
-    const timeObject = Interval.fromDateTimes(beginTime, endTime)
-      .toDuration(["hours", "minutes", "seconds"])
-      .toObject();
-
-    WorkoutRecordService.create(
-      new WorkoutRecord({
-        workoutId: state.id,
-        duration: timeObject
-      })
-    );
+    WorkoutRecordService.create({
+      workoutId: state.id,
+      begin: state.begin
+    });
 
     // Update state with newly submitted record
     const servWorkRecs = WorkoutRecordService.get();
     const workRecs = await servWorkRecs;
     dispatch("workoutRecord/initWorkouts", workRecs, { root: true });
 
-    EventBusService.$emit("toRoutePath", "/dashboard");
+    EventBusService.$emit("routeTo", "/dashboard");
+
     dispatch("delete");
   },
 

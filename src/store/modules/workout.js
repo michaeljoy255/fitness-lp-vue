@@ -2,7 +2,7 @@ import WorkoutService from "../../services/workout.service";
 import { isArrayWithData } from "../../helpers";
 
 /**
- * Workout module is for all available workouts
+ * Available Workouts Module
  */
 
 export const namespaced = true;

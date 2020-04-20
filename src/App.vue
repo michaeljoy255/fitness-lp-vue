@@ -25,7 +25,7 @@ export default {
     // Get all initial data for app ASAP
     this.$store.dispatch("initApp");
 
-    EventBusService.$on("toRoutePath", path => {
+    EventBusService.$on("routeTo", path => {
       // Fix for dupelicated route bug
       if (this.$route.path !== path) {
         this.$router.push(path);

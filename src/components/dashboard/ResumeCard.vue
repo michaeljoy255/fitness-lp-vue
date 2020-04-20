@@ -19,7 +19,7 @@
             v-icon(right) delete
 
           v-btn.mt-4(
-            :to="route"
+            @click="resumeWorkout"
             color="success"
             block
             rounded
@@ -41,17 +41,20 @@ export default {
   },
   data() {
     return {
-      DateTime,
-      route: {
-        name: `ActiveWorkout`,
-        params: {
-          active: true
-        }
-      }
+      DateTime
     };
   },
 
   methods: {
+    resumeWorkout() {
+      this.$router.push({
+        name: "ActiveWorkout",
+        params: {
+          workoutName: this.active.name.toLowerCase().replace(/ /g, "-")
+        }
+      });
+    },
+
     confirm() {
       this.$store.dispatch("modal/open", {
         component: "ConfirmAction",

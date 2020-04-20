@@ -1,5 +1,5 @@
 /**
- * Modal module is for a dynamic global dismissible modal state
+ * Dismissible Modal Module
  */
 
 export const namespaced = true;

@@ -35,25 +35,12 @@ export default {
     WorkoutFooter
   },
 
-  created() {
-    const { workout, active } = this.$route.params;
-
-    if (workout) {
-      // Starting new workout by setting the active state
-      this.$store.dispatch("active/start", {
-        id: this.$route.params.workout.id,
-        name: this.$route.params.workout.name,
-        exerciseIds: this.$route.params.workout.exerciseIds
-      });
-    } else if (active) {
-      // Resuming existing workout from active state
-    } else {
-      // No workouts found, returning to Dashboard
+  mounted() {
+    if (!this.$store.state.active.id) {
+      // No active workout to load, sending user back to Dashboard
       this.$router.push("/dashboard");
     }
-  },
 
-  mounted() {
     // Shuts the nav when starting a workout
     this.$store.dispatch("setDrawerActive", false);
   },
