@@ -23,17 +23,6 @@ Web app that helps you keep track of your exercise performances so you can impro
     - metric: boolean
     - ???
 
-**Exercise Records Format**
-```
-{
-  id: string,
-  createdAt: date,
-  distance: number,
-  duration: number,
-  ...
-}
-```
-
 **Input Validation**
 - Workout names CANNOT exceed 40 characters
 - Exercise names CANNOT exceed 50 characters

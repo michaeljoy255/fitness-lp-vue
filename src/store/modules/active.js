@@ -1,6 +1,5 @@
 import ActiveService from "../../services/active.service";
 import WorkoutRecordService from "../../services/workout-record.service";
-import EventBusService from "../../services/event-bus.service";
 import { isObjectWithData } from "../../helpers";
 import { DateTime } from "luxon";
 
@@ -77,7 +76,6 @@ export const actions = {
   },
 
   cancel({ dispatch }) {
-    EventBusService.$emit("routeTo", "/dashboard");
     dispatch("delete");
   },
 
@@ -90,10 +88,8 @@ export const actions = {
     // Update state with newly submitted record
     const servWorkRecs = WorkoutRecordService.get();
     const workRecs = await servWorkRecs;
+
     dispatch("workoutRecord/initWorkouts", workRecs, { root: true });
-
-    EventBusService.$emit("routeTo", "/dashboard");
-
     dispatch("delete");
   },
 

@@ -1,5 +1,13 @@
 /**
  * Dismissible Modal Module
+ * @example
+ * this.$store.dispatch("modal/open", {
+ *    component: "ConfirmAction",
+ *    title: "Text for modal title",
+ *    content: `Test for modal body.`,
+ *    action: "store/action",
+ *    route: { name: "OptionalReplaceRoute" }
+ * });
  */
 
 export const namespaced = true;
@@ -9,7 +17,8 @@ export const state = {
   component: null,
   title: null,
   content: null,
-  action: null
+  action: null,
+  route: null // Can use a route object is desired
 };
 
 export const mutations = {
@@ -18,12 +27,14 @@ export const mutations = {
     state.title = modal.title;
     state.content = modal.content;
     state.action = modal.action;
+    state.route = modal.route;
   },
   CLEAR(state) {
     state.component = "";
     state.title = "";
     state.content = "";
     state.action = "";
+    state.route = null;
   },
   MODAL_TRUE(state) {
     state.isActive = true;

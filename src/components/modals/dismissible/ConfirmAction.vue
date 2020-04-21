@@ -20,7 +20,15 @@ export default {
 
   methods: {
     confirm() {
-      this.$store.dispatch(this.$store.state.modal.action);
+      // Modal confirmed by user
+      const { modal } = this.$store.state;
+
+      this.$store.dispatch(modal.action);
+
+      if (modal.route) {
+        this.$router.replace(modal.route);
+      }
+
       this.$store.dispatch("modal/close");
     }
   },

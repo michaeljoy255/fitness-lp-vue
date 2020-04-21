@@ -49,7 +49,8 @@ export default {
         title: "Cancel Workout",
         content: `Cancels and discards this workout and returns you to the
                   Dashboard.`,
-        action: "active/cancel"
+        action: "active/cancel",
+        route: { name: "Dashboard" }
       });
     }
   },

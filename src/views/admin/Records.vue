@@ -37,7 +37,8 @@ export default {
         title: "Delete Stored Data",
         content: `This will remove all stored data for exercises, workouts, and
                   any current workout.`,
-        action: "deleteStorage"
+        action: "deleteStorage",
+        route: { name: "Dashboard" }
       });
     }
   }
