@@ -22,7 +22,7 @@ const WorkoutService = {
    */
   get() {
     return new Promise(resolve => {
-      console.log("Getting workouts...");
+      console.log("Getting available workouts...");
       resolve(JSON.parse(localStorage.getItem("workouts")));
     });
   },
@@ -44,7 +44,7 @@ const WorkoutService = {
    */
   delete() {
     return new Promise(resolve => {
-      console.log("Deleting workouts...");
+      console.log("Deleting available workouts...");
       localStorage.removeItem("workouts");
       resolve(true);
     });

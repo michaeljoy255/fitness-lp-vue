@@ -5,7 +5,7 @@ const ActiveService = {
    */
   get() {
     return new Promise(resolve => {
-      console.log("Getting active...");
+      console.log("Getting active workout...");
       resolve(JSON.parse(localStorage.getItem("active")));
     });
   },
@@ -28,7 +28,7 @@ const ActiveService = {
    */
   delete() {
     return new Promise(resolve => {
-      console.log("Deleting active...");
+      console.log("Deleting active workout...");
       localStorage.removeItem("active");
       resolve(true);
     });

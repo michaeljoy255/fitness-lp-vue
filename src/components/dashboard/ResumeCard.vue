@@ -50,7 +50,7 @@ export default {
       this.$router.push({
         name: "ActiveWorkout",
         params: {
-          workoutName: this.active.name.toLowerCase().replace(/ /g, "-")
+          name: this.active.name.toLowerCase().replace(/ /g, "-")
         }
       });
     },

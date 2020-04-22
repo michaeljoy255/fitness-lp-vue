@@ -46,6 +46,7 @@ export default {
     if (this.duration) {
       // Display the provided static duration
       const { hours, minutes, seconds } = this.duration;
+
       this.hours = hours;
       this.minutes = minutes;
       this.seconds = seconds.toString().split(".")[0];

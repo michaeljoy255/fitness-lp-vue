@@ -14,7 +14,8 @@ const WorkoutRecordService = {
   },
 
   /**
-   * Create workout record in storage
+   * Create workout record in storage - Will default the begin or end times to
+   * the current local time as an ISO and calculate the duration from them
    * @param {string} begin ISO formatted date
    * @param {string} end ISO formatted date
    * @returns {Promise<string>} true
@@ -25,6 +26,7 @@ const WorkoutRecordService = {
     end = DateTime.local().toISO()
   }) {
     return new Promise(resolve => {
+      // Calculate the duration for the workout record
       const beginDT = DateTime.fromISO(begin);
       const endDT = DateTime.fromISO(end);
 

@@ -14,9 +14,9 @@ export const state = {
   name: null,
   step: null,
   begin: null,
-  exercises: null,
-  previous: null,
-  records: null
+  exercises: null, // Data for the workout exercises
+  previous: null, // Previous exercise records for this workout
+  records: null // Any new exercise records for the in progress workout
 };
 
 export const mutations = {

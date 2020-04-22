@@ -14,15 +14,6 @@ Web app that helps you keep track of your exercise performances so you can impro
 - More default exercises and workouts
 - Have set inputs show up in expansion panel header
 
-**Local Storage**
-- "records"
-    - exercises: [...]
-    - workouts: [...]
-    - measurements: [...]
-- "settings"
-    - metric: boolean
-    - ???
-
 **Input Validation**
 - Workout names CANNOT exceed 40 characters
 - Exercise names CANNOT exceed 50 characters
@@ -34,6 +25,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 - Workouts CRUD
 - Measurements CRUD
 - Records CRUD
+- LocalStorage for "settings" like metric?
 - Add importer feature (JSON or CSV?)
 - Add exporter feature (JSON or CSV?)
 - Settings ("settings" in local storage)

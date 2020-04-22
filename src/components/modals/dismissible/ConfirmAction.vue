@@ -21,15 +21,14 @@ export default {
   methods: {
     confirm() {
       // Modal confirmed by user
-      const { modal } = this.$store.state;
+      const { action, route } = this.$store.state.modal;
 
-      this.$store.dispatch(modal.action);
-
-      if (modal.route) {
-        this.$router.replace(modal.route);
-      }
-
+      this.$store.dispatch(action);
       this.$store.dispatch("modal/close");
+
+      if (route) {
+        this.$router.replace(route);
+      }
     }
   },
 

@@ -43,40 +43,39 @@ export default {
 
   methods: {
     startWorkout() {
+      this.$router.push({
+        name: "ActiveWorkout",
+        params: {
+          name: this.workout.name.toLowerCase().replace(/ /g, "-")
+        }
+      });
+
+      // Load workout after setting the route so you don't see the display swap
       this.$store.dispatch("active/start", {
         id: this.workout.id,
         name: this.workout.name,
         exerciseIds: this.workout.exerciseIds
       });
-
-      this.$router.push({
-        name: "ActiveWorkout",
-        params: {
-          workoutName: this.workout.name.toLowerCase().replace(/ /g, "-")
-        }
-      });
     }
   },
 
   computed: {
-    mostRecentRecord() {
+    mostRecent() {
       return this.$store.getters["workoutRecord/getMostRecentById"](
         this.workout.id
       );
     },
 
     duration() {
-      const record = this.mostRecentRecord;
-      return record ? record.duration : null;
+      return this.mostRecent ? this.mostRecent.duration : null;
     },
 
     displayDate() {
-      const record = this.mostRecentRecord;
-      const beginDT = record
-        ? DateTime.fromISO(this.mostRecentRecord.createdAt)
+      const beginDT = this.mostRecent
+        ? DateTime.fromISO(this.mostRecent.createdAt)
         : null;
 
-      return record && beginDT
+      return this.mostRecent && beginDT
         ? `Previously completed ${beginDT.toLocaleString(DateTime.DATE_HUGE)}`
         : "No previous records found";
     }
