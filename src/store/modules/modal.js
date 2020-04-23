@@ -1,5 +1,5 @@
 /**
- * Dismissible Modal Module
+ * Modal module
  * @example
  * this.$store.dispatch("modal/open", {
  *    component: "ConfirmAction",

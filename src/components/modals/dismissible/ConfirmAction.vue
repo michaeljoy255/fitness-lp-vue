@@ -8,9 +8,9 @@
 
     v-card-actions
       v-spacer
-      v-btn(@click="$store.dispatch('modal/close')" text)
+      v-btn(@click.stop="$store.dispatch('modal/close')" text)
         span Cancel
-      v-btn(@click="confirm" color="warning")
+      v-btn(@click.stop="confirm" color="warning")
         span Confirm
 </template>
 
