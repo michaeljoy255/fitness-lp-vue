@@ -1,5 +1,6 @@
 import ActiveService from "../../services/active.service";
 import WorkoutRecordService from "../../services/workout-record.service";
+import ExerciseRecordService from "../../services/exercise-record.service";
 import { isObjectWithData } from "../../helpers";
 import { DateTime } from "luxon";
 
@@ -16,7 +17,7 @@ export const state = {
   begin: null,
   exercises: null, // Data for the workout exercises
   previous: null, // Previous exercise records for this workout
-  records: null // Any new exercise records for the in progress workout
+  records: null // Any new exercise records for the active workout
 };
 
 export const mutations = {
@@ -85,10 +86,18 @@ export const actions = {
       begin: state.begin
     });
 
+    /**
+     * @todo Save new exercise records in storage (Q: Link exercise records to a workout Id???)
+     */
+    ExerciseRecordService.create(null);
+
     // Update state with newly submitted record
+    const servExerRecs = ExerciseRecordService.get();
     const servWorkRecs = WorkoutRecordService.get();
+    const exerRecs = await servExerRecs;
     const workRecs = await servWorkRecs;
 
+    dispatch("exerciseRecord/initExercises", exerRecs, { root: true });
     dispatch("workoutRecord/initWorkouts", workRecs, { root: true });
     dispatch("delete");
   },
