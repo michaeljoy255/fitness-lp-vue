@@ -5,8 +5,7 @@ Web app that helps you keep track of your exercise performances so you can impro
 # TODO
 
 **IDEAS**
-- Slot based components for easier reuse?
-- Possible redo of ConfirmAction using slots and data versus state?
+- WIP
 
 **Recording Exercises**
 - Record (add or update) exercise records in an active workout when you click next step

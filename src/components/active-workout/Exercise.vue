@@ -1,7 +1,7 @@
 <template lang="pug">
 div
-  v-container Description: Exercise description if its set to be viewable...
-  v-container Notes: Place to add notes about the exercises?
+  v-container Exercise description...
+  v-container Notes section for user...
   v-container {{ exerciseId }}
   v-expansion-panels(popout dense)
     v-expansion-panel(v-for="(item, i) in this.len" :key="i")

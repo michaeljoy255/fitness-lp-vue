@@ -12,6 +12,8 @@ import ExerciseService from "../services/exercise.service";
 import WorkoutService from "../services/workout.service";
 import ActiveService from "../services/active.service";
 import WorkoutRecordService from "../services/workout-record.service";
+import ExerciseRecordService from "../services/exercise-record.service";
+import MeasurementRecordService from "../services/measurement-record.service";
 
 Vue.use(Vuex);
 
@@ -32,30 +34,24 @@ export default new Vuex.Store({
   actions: {
     async initApp({ dispatch }) {
       console.log("Initializing App Data...");
-      /**
-       * @todo get records...
-       */
-      const servWorkRecs = WorkoutRecordService.get();
 
+      const servMeasureRecs = MeasurementRecordService.get();
+      const servExerRecs = ExerciseRecordService.get();
+      const servWorkRecs = WorkoutRecordService.get();
       const servExercises = ExerciseService.get();
       const servWorkouts = WorkoutService.get();
-
       const servActiveWorkout = ActiveService.get();
 
       // Promise all with async / await
-      /**
-       * @todo await records...
-       */
+      const measureRecs = await servMeasureRecs;
+      const exerRecs = await servExerRecs;
       const workRecs = await servWorkRecs;
-
       const exercises = await servExercises;
       const workouts = await servWorkouts;
-
       const activeWorkout = await servActiveWorkout;
 
-      /**
-       * @todo dispatch records...
-       */
+      dispatch("measurementRecord/initMeasurements", measureRecs);
+      dispatch("exerciseRecord/initExercises", exerRecs);
       dispatch("workoutRecord/initWorkouts", workRecs);
       dispatch("exercise/init", exercises);
       dispatch("workout/init", workouts);
@@ -71,9 +67,8 @@ export default new Vuex.Store({
       dispatch("exercise/delete");
       dispatch("workout/delete");
       dispatch("active/delete");
-      /**
-       * @todo delete records...
-       */
+      dispatch("measurementRecord/delete");
+      dispatch("exerciseRecord/delete");
       dispatch("workoutRecord/delete");
     },
 
