@@ -5,7 +5,10 @@ Web app that helps you keep track of your exercise performances so you can impro
 # TODO
 
 **IDEAS**
-- WIP
+- Progress loaders for each view
+- isLoading, hasError, statusMessage
+- Empty, Success, Error components?
+- Base Components?
 
 **Recording Exercises**
 - Record (add or update) exercise records in an active workout when you click next step
