@@ -5,11 +5,11 @@ Web app that helps you keep track of your exercise performances so you can impro
 # TODO
 
 **IDEAS**
-- BaseEmpty, BaseSuccess, BaseError, BaseLoading, BaseButton
-- Progress loaders for each view
+- BaseEmpty, BaseSuccess, BaseError, BaseLoading (added!)
+- Error with new ExerciseRecord createdAt!!!
+- Progress loaders for each view (use data property for loading)
 - DON'T have each view use it's own status state
 - Determine view status from data it uses!
-- Modals container component with lazy loading using v-if
 
 **Recording Exercises**
 - Record (add or update) exercise records in an active workout when you click next step

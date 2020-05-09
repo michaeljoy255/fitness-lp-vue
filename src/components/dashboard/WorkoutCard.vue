@@ -22,7 +22,7 @@
 
 <script>
 import { DateTime } from "luxon";
-import Timer from "../miscellaneous/Timer";
+import Timer from "../general-ui/Timer";
 
 export default {
   name: "WorkoutCard",

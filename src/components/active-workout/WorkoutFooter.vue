@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Timer from "../miscellaneous/Timer";
+import Timer from "../general-ui/Timer";
 import { DateTime } from "luxon";
 
 export default {
