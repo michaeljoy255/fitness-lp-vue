@@ -1,11 +1,13 @@
 # Fitness Linear Progression - VUE
 
+_NOTE: Archiving Summer 2020. Rebuilding it in Nuxt!_
+
 Web app that helps you keep track of your exercise performances so you can improve.
 
 # TODO
 
 **IDEAS**
-- BaseEmpty, BaseSuccess, BaseError, BaseLoading (added!)
+- BaseEmpty, BaseSuccess, BaseError, BaseLoading (added!) 
 - Error with new ExerciseRecord createdAt!!!
 - Progress loaders for each view (use data property for loading)
 - DON'T have each view use it's own status state
