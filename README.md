@@ -1,6 +1,6 @@
 # Fitness Linear Progression - VUE
 
-_NOTE: Archiving Summer 2020. Rebuilding it in Nuxt!_
+_NOTE: Rebuilding it in Nuxt!_
 
 Web app that helps you keep track of your exercise performances so you can improve.
 
